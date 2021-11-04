@@ -17,11 +17,21 @@
 
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <unistd.h>
+# include <stdlib.h>
 
+/*structures*/
+
+typedef struct s_comm {
+	char	*comm;
+	char	**args;
+}	t_comm;
 
 /*lexer*/
 
 /*parser*/
+
+int		ft_parser(char *line);
 
 /*expander*/
 
@@ -31,5 +41,11 @@
 
 /*errors*/
 
+/*utils*/
+
+char	**ft_split(char *str);
+void	ft_strcpy(char *dst, char *src);
+void	ft_freetab(char **tab);
+int		ft_strlen(char *str);
 
 #endif

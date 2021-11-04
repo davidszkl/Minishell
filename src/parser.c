@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/04 12:10:28 by dszklarz         ###   ########.fr       */
+/*   Created: 2021/11/04 12:17:23 by dszklarz          #+#    #+#             */
+/*   Updated: 2021/11/04 12:17:27 by dszklarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-int	main(int argc, char **argv)
+int	ft_parser(char *line)
 {
-	static char	*line;
+	char	**tab;
 
-	(void)argc;
-	(void)argv;
-	while (1)
-	{
-		line = readline(PROMPT);
-		ft_parser(line);
-	}
+	tab = ft_split(line);
+	ft_freetab(tab);
 	return (1);
 }

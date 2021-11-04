@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/04 12:10:28 by dszklarz         ###   ########.fr       */
+/*   Created: 2021/11/04 13:51:41 by dszklarz          #+#    #+#             */
+/*   Updated: 2021/11/04 13:51:42 by dszklarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-int	main(int argc, char **argv)
+int	ft_strlen(char *str)
 {
-	static char	*line;
+	int	len;
 
-	(void)argc;
-	(void)argv;
-	while (1)
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
+
+void	ft_strcpy(char *dst, char *src)
+{
+	int	n;
+
+	n = 0;
+	while (src[n])
 	{
-		line = readline(PROMPT);
-		ft_parser(line);
+		dst[n] = src[n];
+		n++;
 	}
-	return (1);
+	dst[n] = '\0';
 }
