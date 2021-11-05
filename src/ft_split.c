@@ -18,7 +18,6 @@ void	ft_freetab(char **tab)
 	n = 0;
 	while (tab[n])
 	{
-		//write(1, "1\n", 2);
 		free(tab[n]);
 		n++;
 	}
@@ -26,7 +25,7 @@ void	ft_freetab(char **tab)
 	free(tab);
 }
 
-static int	ft_getcount(char *str)
+static int	ft_getcount(char *str, char c)
 {
 	int	count;
 	int	n;
@@ -35,25 +34,25 @@ static int	ft_getcount(char *str)
 	n = 0;
 	while (str[n])
 	{
-		while (str[n] && str[n] == ' ')
+		while (str[n] && str[n] == c)
 			n++;
 		if (str[n])
 			count++;
-		while (str[n] && str[n] != ' ')
+		while (str[n] && str[n] != c)
 			n++;
-		if (str[n] && str[n] != ' ')
+		if (str[n] && str[n] != c)
 			return (-1);
 	}
 	return (count);
 }
 
-static char	*ft_getword(char *str, int index)
+static char	*ft_getword(char *str, int index, char c)
 {
 	char	*word;
 	int		n;
 
 	n = 0;
-	while (str[index] && str[index] != ' ')
+	while (str[index] && str[index] != c)
 	{
 		index++;
 		n++;
@@ -63,21 +62,21 @@ static char	*ft_getword(char *str, int index)
 	if (!word)
 		return (NULL);
 	n = 0;
-	while (str[index] && str[index] != ' ')
+	while (str[index] && str[index] != c)
 		word[n++] = str[index++];
 	word[n] = '\0';
 	return (word);
 }
 
-static int	ft_fill(char **tab, char *str, int index, int argc)
+static int	ft_fill(char **tab, char *str, int index, int argc, char c)
 {
 	char	*word;
 	int		size;
 
 	size = 0;
-	while (str[index] == ' ' && size++ >= 0)
+	while (str[index] == c && size++ >= 0)
 		index++;
-	word = ft_getword(str, index);
+	word = ft_getword(str, index, c);
 	size += ft_strlen(word);
 	tab[argc] = (char *)malloc(sizeof(char) * (ft_strlen(word) + 1));
 	if (!tab[argc])
@@ -87,14 +86,14 @@ static int	ft_fill(char **tab, char *str, int index, int argc)
 	return (size);
 }
 
-char	**ft_split(char *str)
+char	**ft_split(char *str, char c)
 {
 	char	**tab;
 	int		count;
 	int		n;
 	int		j;
 
-	count = ft_getcount(str);
+	count = ft_getcount(str, c);
 	n = 0;
 	j = 0;
 	if (count < 0)
@@ -104,7 +103,7 @@ char	**ft_split(char *str)
 		return (NULL);
 	while (str[j] && n < count)
 	{
-		j += ft_fill(tab, str, j, n);
+		j += ft_fill(tab, str, j, n, c);
 		n++;
 	}
 	tab[count] = 0;

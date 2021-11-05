@@ -23,15 +23,26 @@
 /*structures*/
 
 typedef struct s_comm {
-	char	*comm;
-	char	**args;
+	char 	*line;
+	char	**argv;
+	int		pipe_in;
+	int		pipe_out;
+	int		*file_in;
+	int		*file_out;
+	int		redircount;
 }	t_comm;
+
+typedef struct s_main {
+	t_comm	*cline;
+	char	*line;
+	int		pipecount;
+}	t_main;
 
 /*lexer*/
 
 /*parser*/
 
-int		ft_parser(char *line);
+int		ft_parser(char *line, t_main *main);
 
 /*expander*/
 
@@ -43,9 +54,13 @@ int		ft_parser(char *line);
 
 /*utils*/
 
-char	**ft_split(char *str);
+char	**ft_split(char *str, char c);
 void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
 int		ft_strlen(char *str);
+
+/*erase*/
+
+void	ft_showtab(char **tab);
 
 #endif

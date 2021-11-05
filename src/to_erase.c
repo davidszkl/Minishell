@@ -10,3 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
+
+void	ft_showtab(char **tab)
+{
+	int	n;
+
+	n = 0;
+	while (tab[n])
+	{
+		write(1, tab[n], ft_strlen(tab[n]));
+		write(1, "\n", 1);
+		n++;
+	}
+}
