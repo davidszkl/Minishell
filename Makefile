@@ -10,7 +10,7 @@ OBJS	= $(subst $(SRCDIR), $(OBJDIR), $(SRCS:.c=.o))
 
 INCDIR	= inc
 
-CC		= gcc
+CC		= cc
 
 RM		= rm -f
 
