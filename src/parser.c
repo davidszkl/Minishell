@@ -24,7 +24,7 @@ static int	ft_getpipecount(char *line)
 	return (count);
 }
 
-int	ft_insert_space3(char *str, int index, int t, int mod)
+static int	ft_insert_space3(char *str, int index, int t, int mod)
 {
 	if (mod == 1)
 	{
@@ -47,7 +47,6 @@ int	ft_insert_space3(char *str, int index, int t, int mod)
 static char	*ft_insert_space2(char *new, char *str)
 {
 	int		n;
-	int		t;
 	int		j;
 
 	n = 0;
@@ -57,19 +56,11 @@ static char	*ft_insert_space2(char *new, char *str)
 		if (str[n] == '<' && str[n - 1] != '<' && str[n + 1] != '<')
 			j += ft_insert_space3(new, j, str[n], 1);
 		else if (str[n] == '<' && str[n - 1] != '<' && str[n + 1] == '<')
-		{
-			j += ft_insert_space3(new, j, str[n], 2);
-			n++;
-		}
+			j += ft_insert_space3(new, j, str[n++], 2);
 		else if (str[n] == '>' && str[n - 1] != '>' && str[n + 1] != '>')
-		{
 			j += ft_insert_space3(new, j, str[n], 1);
-		}
 		else if (str[n] == '>' && str[n - 1] != '>' && str[n + 1] == '>')
-		{
-			j += ft_insert_space3(new, j, str[n], 2);
-			n++;
-		}
+			j += ft_insert_space3(new, j, str[n++], 2);
 		else if (str[n] == '|')
 			j += ft_insert_space3(new, j, str[n], 1);
 		else
@@ -89,6 +80,8 @@ static char	*ft_insert_space(char *str)
 
 	n = 0;
 	count = 0;
+	if (!str)
+		return (ft_strdup(""));
 	while (str[n])
 	{
 		if (str[n] == '<' && str[n - 1] != '<')
@@ -111,22 +104,22 @@ int	ft_parser(char *line, t_main *main)
 	char	**tab;
 	int		n;
 
+	n = 0;
 	main->pipecount = ft_getpipecount(line);
-	tab = malloc(sizeof(char *) * (main->pipecount + 1));
-	if (!tab)
-		return (-1);
-	main->cline = malloc(sizeof(t_comm) * main->pipecount);
+	main->cline = malloc(sizeof(t_comm) * (main->pipecount + 2));
 	if (!main->cline)
 		return (-1);
-	tab = ft_split(line, '|');
-	ft_showtab(tab);
-	n = 0;
-	while (n < main->pipecount)
+	main->line = ft_insert_space(line);
+	free(line);
+	tab = ft_split(main->line, '|');
+	while (n < main->pipecount + 1)
 	{
-		main->cline[n].line = ft_insert_space(tab[n]);
-		//main->cline[n].argv = ft_split(main->cline[n].line, ' ');
+		main->cline[n].line = tab[n];
+		main->cline[n].argv = ft_split(main->cline[n].line, ' ');
+		ft_showtab(main->cline[n].argv);
 		n++;
 	}
+	main->cline[n].line = NULL;
 	ft_freetab(tab);
 	return (1);
 }

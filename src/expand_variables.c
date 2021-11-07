@@ -9,13 +9,7 @@
 /*   Updated: 2021/11/06 21:36:28 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stddef.h>
-
-size_t	ft_strlen(const char *str);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-
+#include "../inc/minishell.h"
 /*
 Returns value of environment
 variable name in envp NULL in

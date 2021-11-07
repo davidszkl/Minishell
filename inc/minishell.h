@@ -19,11 +19,12 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stddef.h>
 
 /*structures*/
 
 typedef struct s_comm {
-	char 	*line;
+	char	*line;
 	char	**argv;
 	int		pipe_in;
 	int		pipe_out;
@@ -52,12 +53,17 @@ int		ft_parser(char *line, t_main *main);
 
 /*errors*/
 
+void	ft_freeshell(t_main *main);
+
 /*utils*/
 
-char	**ft_split(char *str, char c);
 void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
-int		ft_strlen(char *str);
+char	**ft_split(char *str, char c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s1);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlen(const char *str);
 
 /*erase*/
 

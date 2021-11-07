@@ -14,7 +14,7 @@ CC		= cc
 
 RM		= rm -f
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -g
 
 LIB		= -lreadline
 
@@ -27,7 +27,7 @@ $(OBJDIR):
 			mkdir -p $(OBJDIR) 
 
 $(NAME):        $(OBJDIR) $(OBJS)
-			$(CC) $(CFLAGS)  $(LIB) $(OBJS) -o $(NAME)
+			$(CC) $(CFLAGS) $(LIB) $(OBJS) -o $(NAME)
 
 install:
 			mkdir $(OBJDIR) $(SRCDIR) $(INCDIR)

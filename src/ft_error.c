@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/04 12:10:28 by dszklarz         ###   ########.fr       */
+/*   Created: 2021/11/07 12:04:06 by dszklarz          #+#    #+#             */
+/*   Updated: 2021/11/07 12:04:08 by dszklarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-int	main(int argc, char **argv)
+/* int	ft_error(char *str)
 {
-	t_main		main;
-	char		*line;
+	int	n;
 
-	(void)argc;
-	(void)argv;
-	while (1)
+	n = 0;
+	while (str[n])
 	{
-		line = readline(PROMPT);
-		ft_parser(line, &main);
-		ft_freeshell(&main);
 	}
-	return (1);
+} */
+
+void	ft_freeshell(t_main *main)
+{
+	int	n;
+
+	n = 0;
+	while (n < main->pipecount + 1)
+	{
+		ft_freetab(main->cline[n].argv);
+		n++;
+	}
+	free(main->line);
+	free(main->cline);
 }

@@ -32,6 +32,8 @@ static int	ft_getcount(char *str, char c)
 
 	count = 0;
 	n = 0;
+	if (!str)
+		return (0);
 	while (str[n])
 	{
 		while (str[n] && str[n] == c)
@@ -101,6 +103,11 @@ char	**ft_split(char *str, char c)
 	tab = (char **)malloc(sizeof(char *) * (count + 1));
 	if (!tab)
 		return (NULL);
+	if (!str)
+	{
+		tab[0] = 0;
+		return (tab);
+	}
 	while (str[j] && n < count)
 	{
 		j += ft_fill(tab, str, j, n, c);
