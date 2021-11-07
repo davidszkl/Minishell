@@ -21,6 +21,20 @@
 	}
 } */
 
+void	ft_freetab(char **tab)
+{
+	int	n;
+
+	n = 0;
+	while (tab[n])
+	{
+		free(tab[n]);
+		n++;
+	}
+	free(tab[n]);
+	free(tab);
+}
+
 void	ft_freeshell(t_main *main)
 {
 	int	n;
