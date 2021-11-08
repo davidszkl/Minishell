@@ -39,7 +39,10 @@ typedef struct s_main {
 	int		pipecount;
 }	t_main;
 
-/*lexer*/
+/*checker*/
+
+int		ft_check_cmd(char *str);
+int		ft_check_echo(char *str);
 
 /*parser*/
 
@@ -48,6 +51,8 @@ int		ft_parser(char *line, t_main *main);
 /*expander*/
 
 /*executor*/
+
+void	ft_execute(void);
 
 /*functions*/
 
@@ -62,6 +67,7 @@ void	ft_freetab(char **tab);
 char	**ft_split(char *str, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
+char	*ft_tolower(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *str);
 
