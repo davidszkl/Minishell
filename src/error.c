@@ -11,16 +11,6 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-/* int	ft_error(char *str)
-{
-	int	n;
-
-	n = 0;
-	while (str[n])
-	{
-	}
-} */
-
 void	ft_freetab(char **tab)
 {
 	int	n;

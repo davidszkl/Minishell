@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
+
 /*
 Returns value of environment
 variable name in envp NULL in

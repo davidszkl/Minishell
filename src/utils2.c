@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/04 12:10:28 by dszklarz         ###   ########.fr       */
+/*   Created: 2021/11/08 09:09:45 by dszklarz          #+#    #+#             */
+/*   Updated: 2021/11/08 09:09:46 by dszklarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-int	main(int argc, char **argv)
+char	*ft_tolower(char *str)
 {
-	t_main		main;
-	char		*line;
+	int	n;
 
-	(void)argc;
-	(void)argv;
-	while (1)
+	n = 0;
+	while (str[n])
 	{
-		line = readline(PROMPT);
-		ft_parser(line, &main);
-		e
-		//ft_exec(&main);
-		ft_freeshell(&main);
+		if (str[n] >= 'A' && str[n] <= 'Z')
+			str[n] += 32;
+		n++;
 	}
-	return (1);
+	return (str);
 }
