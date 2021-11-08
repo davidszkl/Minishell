@@ -43,6 +43,7 @@ Returns new string with all variables
 in s expanded. NULL in case of error.
 (envp for exported variables, locals for the rest)
 */
+
 char	*expand_variables(const char *s, char **envp, char **locals)
 {
 	(void)envp;

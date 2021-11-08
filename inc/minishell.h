@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# define PROMPT "minishell>"
+# define PROMPT "minishell> "
 
 /*includes*/
 
@@ -33,8 +33,16 @@ typedef struct s_comm {
 	int		redircount;
 }	t_comm;
 
+typedef struct s_chev {
+	char	*file;
+	char	*term;
+	char	*nbrs;
+	int		nbr;
+}	t_chev;
+
 typedef struct s_main {
 	t_comm	*cline;
+	t_chev	chev;
 	char	*line;
 	int		pipecount;
 }	t_main;
@@ -46,6 +54,7 @@ int		ft_check_echo(char *str);
 
 /*parser*/
 
+void	ft_read_chev(char *line, t_main *main);
 int		ft_parser(char *line, t_main *main);
 
 /*expander*/
@@ -62,14 +71,21 @@ void	ft_freeshell(t_main *main);
 
 /*utils*/
 
+size_t	ft_strlen(const char *str);
 void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
 char	**ft_split(char *str, char c);
+char    *ft_replace_str(char *s, int start, int n, char *sub);
+char	*ft_strjoin(char *str, char *buff);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
+char	*ft_itoas(int nbr);
+char	*ft_getword(char *str);
 char	*ft_tolower(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-size_t	ft_strlen(const char *str);
+int		ft_isspace(char c);
+int		ft_isalnumx(char c);
+int		ft_spwordcount(char *str);
 
 /*erase*/
 
