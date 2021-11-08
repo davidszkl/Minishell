@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/08 12:53:43 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:49:09 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -59,11 +59,16 @@ int		ft_parser(char *line, t_main *main);
 
 /*expander*/
 
+char	*expand_variables(const char *str, const char **envp,
+		const char **locals);
+
 /*executor*/
 
 void	ft_execute(void);
 
 /*functions*/
+
+char	*get_envp_val(const char *name, const char **envp);
 
 /*errors*/
 

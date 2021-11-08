@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:58:35 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/08 17:37:52 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:49:09 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ Returns new string with all variables
 in s expanded. NULL in case of error.
 (envp for exported variables, locals for the rest)
 */
-
 char	*expand_variables(const char *str, const char **envp,
 		const char **locals)
 {
