@@ -30,13 +30,10 @@ void	ft_freeshell(t_main *main)
 	int	n;
 
 	n = 0;
-	while (n < main->pipecount + 1)
-	{
-		ft_freetab(main->cline[n].argv);
-		n++;
-	}
+	while(main->cline[n].line)
+		ft_freetab(main->cline[n++].argv);
 	free(main->line);
-	//free(main->cline);
-	free(main->chev.nbrs);
-	free(main->chev.term);
+	free(main->cline);
+	//free(main->chev.nbrs);
+	//free(main->chev.term);
 }

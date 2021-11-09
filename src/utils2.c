@@ -35,6 +35,7 @@ char	*ft_strjoin(char *str, char *buff)
 	while (buff[j] != '\0')
 		line[i++] = buff[j++];
 	line[ft_strlen(str) + ft_strlen(buff)] = '\0';
+	free(buff);
 	return (line);
 }
 
@@ -90,7 +91,7 @@ char	*ft_getword(char *str)
 		j++;
 		n++;
 	}
-	while (str[n] && ft_isalnumx(str[n] == 1))
+	while (str[n] && ft_isalnumx(str[n]) == 1)
 		n++;
 	new = malloc(sizeof(char) * (n + 1));
 	if (!new)

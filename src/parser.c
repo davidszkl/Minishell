@@ -11,17 +11,22 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-static int	ft_getpipecount(char *line)
+void	ft_getcount(char *line, t_main *main)
 {
-	int	count;
-	int	n;
+	size_t	n;
 
-	count = 0;
 	n = 0;
+	main->pipecount = 0;
+	main->dchevcount = 0;
 	while (line[n])
-		if (line[n++] == '|')
-			count++;
-	return (count);
+	{
+		if (line[n] == '|')
+			main->pipecount++;
+		if (ft_is_dchev(line, n) == 1)
+			main->dchevcount++;
+		n++;
+	}
+	printf("chevcount = %d\n", main->dchevcount);
 }
 
 static int	ft_insert_space3(char *str, int index, int t, int mod)
@@ -53,7 +58,7 @@ static char	*ft_insert_space2(char *new, char *str)
 	j = 0;
 	while (str[n])
 	{
-		if (str[n] == '<' && str[n - 1] != '<' && str[n + 1] != '<')
+		if (ft_is_dchev(str, n) == 0)
 			j += ft_insert_space3(new, j, str[n], 1);
 		else if (str[n] == '<' && str[n - 1] != '<' && str[n + 1] == '<')
 			j += ft_insert_space3(new, j, str[n++], 2);
@@ -84,11 +89,11 @@ static char	*ft_insert_space(char *str)
 		return (ft_strdup(""));
 	while (str[n])
 	{
-		if (str[n] == '<' && str[n - 1] != '<')
+		if ((n == 0 && str[n] == '<') || str[n] == '|'
+			|| (n > 0 && str[n] == '<' && str[n - 1] != '<'))
 			count += 2;
-		else if (str[n] == '>' && str[n - 1] != '>')
-			count += 2;
-		else if (str[n] == '|')
+		else if ((n == 0 && str[n] == '>')
+			|| (n > 0 && str[n] == '>' && str[n - 1] != '>'))
 			count += 2;
 		n++;
 	}
@@ -96,6 +101,7 @@ static char	*ft_insert_space(char *str)
 	if (!new)
 		return (NULL);
 	new = ft_insert_space2(new, str);
+	free(str);
 	return (new);
 }
 
@@ -105,12 +111,10 @@ int	ft_parser(t_main *main)
 	int		n;
 
 	n = 0;
-	main->pipecount = ft_getpipecount(main->line);
 	main->cline = malloc(sizeof(t_comm) * (main->pipecount + 2));
 	if (!main->cline)
-		return (-1);
+		return (1);
 	main->line = ft_insert_space(main->line);
-	free(main->line);
 	tab = ft_split(main->line, '|');
 	while (n < main->pipecount + 1)
 	{
@@ -121,5 +125,5 @@ int	ft_parser(t_main *main)
 	}
 	main->cline[n].line = NULL;
 	ft_freetab(tab);
-	return (1);
+	return (0);
 }

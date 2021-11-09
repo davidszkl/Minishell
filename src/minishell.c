@@ -21,12 +21,13 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		line = readline(PROMPT);
+		ft_getcount(line, &main);
 		ft_read_chev(line, &main);
 		//expand_variables(line);
 		//pipe_de_fin();
 		ft_parser(&main);
 		//ft_exec(&main);
-		//ft_freeshell(&main);
+		ft_freeshell(&main);
 	}
 	return (1);
 }
