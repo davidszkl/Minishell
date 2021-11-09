@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/08 17:49:09 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/09 11:53:02 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -69,6 +69,8 @@ void	ft_execute(void);
 /*functions*/
 
 char	*get_envp_val(const char *name, const char **envp);
+char	**init_locals(void);
+char	**init_envp(const char **envp);
 
 /*errors*/
 
@@ -77,6 +79,7 @@ void	ft_freeshell(t_main *main);
 /*utils*/
 
 size_t	ft_strlen(const char *str);
+size_t	get_envp_size(const char **envp);
 void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
 char	**ft_split(char *str, char c);
@@ -91,6 +94,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isspace(char c);
 int		ft_isalnumx(char c);
 int		ft_spwordcount(char *str);
+int		sort_envp(const char **envp);
 
 /*erase*/
 
