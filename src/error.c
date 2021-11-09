@@ -36,5 +36,7 @@ void	ft_freeshell(t_main *main)
 		n++;
 	}
 	free(main->line);
-	free(main->cline);
+	//free(main->cline);
+	free(main->chev.nbrs);
+	free(main->chev.term);
 }

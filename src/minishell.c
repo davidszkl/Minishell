@@ -22,12 +22,11 @@ int	main(int argc, char **argv)
 	{
 		line = readline(PROMPT);
 		ft_read_chev(line, &main);
-		ft_parser(main.line, &main);
-		//double_chevrons(line);
 		//expand_variables(line);
 		//pipe_de_fin();
+		ft_parser(&main);
 		//ft_exec(&main);
-		ft_freeshell(&main);
+		//ft_freeshell(&main);
 	}
 	return (1);
 }
@@ -49,29 +48,3 @@ int	main(int argc, char **argv)
 			remplacer << truc par < temp/fichier
 		}
 } */
-
-void	ft_read_chev(char *line, t_main *main)
-{
-	int		n;
-	int		j;
-
-	n = 0;
-	main->chev.nbr = 0;
-	while(line[n])
-	{
-		if (line[n] == '|')
-			main->chev.nbr++;
-		if (line[n] == '<' && line[n + 1] == '<' && line[n - 1] != '<')
-		{
-			n += 2;
-			main->chev.nbrs = ft_strjoin("temp/", ft_itoas(main->chev.nbr));
-			main->chev.term = ft_strjoin(main->chev.nbrs, ft_getword(&line[n]));
-			j = ft_spwordcount(&line[n]);
-			main->line = ft_replace_str(line, n - 1, j + 1, main->chev.term);
-			//printf("%s\n", main->line);
-		}
-		n++;
-	}
-	main->line = line;
-	//free(line);
-}

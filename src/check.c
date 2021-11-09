@@ -20,7 +20,7 @@ int	ft_check_cmd(char *str)
 	else if (ft_strncmp(ft_tolower(str), "pwd", ft_strlen(str)) == 0)
 		return (3);
 	else if (ft_strncmp(ft_tolower(str), "export", ft_strlen(str)) == 0)
-		return (4);	
+		return (4);
 	else if (ft_strncmp(ft_tolower(str), "unset", ft_strlen(str)) == 0)
 		return (5);
 	else if (ft_strncmp(ft_tolower(str), "env", ft_strlen(str)) == 0)

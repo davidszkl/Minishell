@@ -18,8 +18,8 @@ CFLAGS	= -Wall -Werror -Wextra -g
 
 LIB		= -lreadline
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-			$(CC) $(CFLAGS) -I$(INCDIR) -c $^ -o $@
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/*.h
+			$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
                 
 all:	$(NAME)
 

@@ -99,18 +99,18 @@ static char	*ft_insert_space(char *str)
 	return (new);
 }
 
-int	ft_parser(char *line, t_main *main)
+int	ft_parser(t_main *main)
 {
 	char	**tab;
 	int		n;
 
 	n = 0;
-	main->pipecount = ft_getpipecount(line);
+	main->pipecount = ft_getpipecount(main->line);
 	main->cline = malloc(sizeof(t_comm) * (main->pipecount + 2));
 	if (!main->cline)
 		return (-1);
-	main->line = ft_insert_space(line);
-	free(line);
+	main->line = ft_insert_space(main->line);
+	free(main->line);
 	tab = ft_split(main->line, '|');
 	while (n < main->pipecount + 1)
 	{
