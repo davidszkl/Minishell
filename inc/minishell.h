@@ -60,7 +60,7 @@ int		ft_parser(char *line, t_main *main);
 /*expander*/
 
 char	*expand_variables(const char *str, const char **envp,
-		const char **locals);
+			const char **locals);
 
 /*executor*/
 
@@ -80,7 +80,7 @@ size_t	ft_strlen(const char *str);
 void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
 char	**ft_split(char *str, char c);
-char    *ft_replace_str(char *s, int start, int n, char *sub);
+char	*ft_replace_str(char *s, int start, int n, char *sub);
 char	*ft_strjoin(char *str, char *buff);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
@@ -88,6 +88,8 @@ char	*ft_itoas(int nbr);
 char	*ft_getword(char *str);
 char	*ft_tolower(char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
 int		ft_isspace(char c);
 int		ft_isalnumx(char c);
 int		ft_spwordcount(char *str);

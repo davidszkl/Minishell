@@ -9,12 +9,8 @@
 /*   Updated: 2021/11/08 17:29:50 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdlib.h>
-#include "../inc/expand_variables_args.h"
-
-int		ft_isdigit(int c);
-int		ft_isalpha(int c);
+#include "../inc/minishell.h"
+#include "expand_variables_args.h"
 
 size_t	var_len(const char *s)
 {

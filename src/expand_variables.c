@@ -9,9 +9,8 @@
 /*   Updated: 2021/11/08 17:49:09 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../inc/minishell.h"
-#include "../inc/expand_variables_args.h"
+#include "expand_variables_args.h"
 
 /*
 Returns value of environment

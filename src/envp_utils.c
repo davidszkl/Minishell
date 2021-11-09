@@ -9,11 +9,7 @@
 /*   Updated: 2021/11/09 09:11:24 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stddef.h>
-
-char	*ft_strdup(const char *s);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+#include "../inc/minishell.h"
 
 size_t	get_envp_size(const char **envp)
 {

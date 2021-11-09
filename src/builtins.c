@@ -13,25 +13,20 @@
 
 void	ft_echo(void)
 {
-
 }
 
 void	ft_pwd(void)
 {
-
 }
 
 void	ft_cd(void)
 {
-
 }
 
 void	ft_export(void)
 {
-
 }
 
 void	ft_unset(void)
 {
-	
 }

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-static size_t	nextc(char const *s, char c)
+static size_t	ft_nextc(char const *s, char c)
 {
 	size_t	i;
 
@@ -21,7 +21,7 @@ static size_t	nextc(char const *s, char c)
 	return (i);
 }
 
-static size_t	nextnotc(char const *s, char c)
+static size_t	ft_nextnotc(char const *s, char c)
 {
 	size_t	i;
 
@@ -31,7 +31,7 @@ static size_t	nextnotc(char const *s, char c)
 	return (i);
 }
 
-static size_t	getnum(char const *s, char c)
+static size_t	ft_getnum(char const *s, char c)
 {
 	int		onword;
 	size_t	count;
@@ -53,7 +53,7 @@ static size_t	getnum(char const *s, char c)
 	return (count);
 }
 
-static int	myfrees(char **r, size_t n)
+static int	ft_myfrees(char **r, size_t n)
 {
 	size_t	i;
 	int		b;

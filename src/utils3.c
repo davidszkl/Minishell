@@ -11,60 +11,31 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-char	*ft_itoas(int nbr)
+int	ft_isalpha(int c)
 {
-	char	*new;
-	int		n;
-	int		j;
-
-	if (nbr < 0)
-		return (NULL);
-	n = nbr;
-	j = 1;
-	while (n > 9 && j++ >= 0)
-		n /= 10;
-	new = malloc(sizeof(char) * (j + 1));
-	if (!new)
-		return (NULL);
-	n = 0;
-	while (nbr > 9)
-	{
-		new[j - n - 1] = nbr % 10 + '0';
-		nbr /= 10;
-		n++;
-	}
-	new[j - n - 1] = nbr % 10 + '0';
-	new[j] = 0;
-	return (new);
+	return (('a' <= c && c <= 'z')
+		|| ('A' <= c && c <= 'Z'));
 }
 
-char	*ft_strjoin(char *str, char *buff)
+int	ft_isdigit(int c)
 {
-	size_t	i;
-	size_t	j;
-	char	*line;
+	return ('0' <= c && c <= '9');
+}
 
-	if (!str)
-	{
-		str = (char *)malloc(sizeof(char) * 1);
-		if (!str || !buff)
-			return (NULL);
-		str[0] = '\0';
-	}
-	line = malloc(sizeof(char) * ((ft_strlen(str) + ft_strlen(buff)) + 1));
-	if (line == NULL)
-		return (NULL);
-	i = -1;
-	j = 0;
-	if (str)
-		while (str[++i] != '\0')
-			line[i] = str[i];
-	while (buff[j] != '\0')
-		line[i++] = buff[j++];
-	line[ft_strlen(str) + ft_strlen(buff)] = '\0';
-	// free(str);
-	// free(buff);
-	return (line);
+int	ft_isspace(char c)
+{
+	if ((c >= 9 && c <= 13) || c == ' ')
+		return (1);
+	return (0);
+}
+
+int	ft_isalnumx(char c)
+{
+	if (c == '|' || c == '<' || c == '>' || c == 0)
+		return (0);
+	else if ((c >= 0 && c <= 32) || c == 127)
+		return (0);
+	return (1);
 }
 
 int	ft_spwordcount(char *str)
@@ -78,8 +49,3 @@ int	ft_spwordcount(char *str)
 		n++;
 	return (n);
 }
-
-/* int main(int argc, char *argv[])
-{
-	printf("%s\n", ft_itoas(1234));
-} */

@@ -13,10 +13,8 @@
 
 void	ft_env(void)
 {
-
 }
 
 void	ft_exit(void)
-{
-	
+{	
 }
