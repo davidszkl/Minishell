@@ -55,7 +55,7 @@ int		ft_check_echo(char *str);
 /*parser*/
 
 void	ft_read_chev(char *line, t_main *main);
-int		ft_parser(char *line, t_main *main);
+int		ft_parser(t_main *main);
 
 /*expander*/
 

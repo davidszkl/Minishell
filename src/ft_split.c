@@ -82,7 +82,7 @@ char	**ft_split(char *s, char c)
 
 	if (!s)
 		return (0);
-	n2 = getnum(s, c);
+	n2 = ft_getnum(s, c);
 	n = n2;
 	r = malloc((n + 1) * sizeof(char *));
 	if (!r)
@@ -90,12 +90,12 @@ char	**ft_split(char *s, char c)
 	r[n] = 0;
 	while (n--)
 	{
-		i = nextnotc(s, c);
-		j = nextc(s + i, c);
+		i = ft_nextnotc(s, c);
+		j = ft_nextc(s + i, c);
 		*r++ = ft_substr(s, i, j);
 		s = s + j + i;
 	}
-	if (!myfrees(r - n2, n2))
+	if (!ft_myfrees(r - n2, n2))
 		return (0);
 	return (r - n2);
 }
