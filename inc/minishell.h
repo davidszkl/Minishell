@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/09 11:53:02 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/10 09:57:55 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -86,7 +86,7 @@ void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
 char	**ft_split(char *str, char c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_replace_str(char *s, int start, int n, char *sub);
+char	*ft_replace_str(const char *s, size_t start, size_t n, const char *sub);
 char	*ft_strjoin(char *str, char *buff);
 char	*ft_strdup(const char *s1);
 char	*ft_getword(char *str);
