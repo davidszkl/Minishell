@@ -30,7 +30,7 @@ void	ft_freeshell(t_main *main)
 	int	n;
 
 	n = 0;
-	while(main->cline[n].line)
+	while (main->cline[n].line)
 		ft_freetab(main->cline[n++].argv);
 	free(main->line);
 	free(main->cline);

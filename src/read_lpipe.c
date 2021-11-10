@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_main.c                                      :+:      :+:    :+:   */
+/*   read_lpipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 11:37:26 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/09 12:00:11 by mlefevre         ###   ########.fr       */
+/*   Created: 2021/11/10 14:09:06 by dszklarz          #+#    #+#             */
+/*   Updated: 2021/11/10 14:09:09 by dszklarz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../inc/minishell.h"
 
-/* int	main(int argc, char **argv, char **envp)
+/* int	ft_read_lpipe(char *line, t_main *main)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
+
 } */

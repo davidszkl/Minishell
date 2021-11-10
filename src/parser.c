@@ -11,22 +11,24 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-void	ft_getcount(char *line, t_main *main)
+int	ft_getcount(char *line, t_main *main)
 {
-	size_t	n;
+	int	n;
 
 	n = 0;
 	main->pipecount = 0;
 	main->dchevcount = 0;
+	main->chev.nbr = 0;
+	main->error = 0;
 	while (line[n])
 	{
 		if (line[n] == '|')
 			main->pipecount++;
-		if (ft_is_dchev(line, n) == 1)
+		if (ft_is_chev(line, n) == 1)
 			main->dchevcount++;
 		n++;
 	}
-	printf("chevcount = %d\n", main->dchevcount);
+	return (0);
 }
 
 static int	ft_insert_space3(char *str, int index, int t, int mod)
@@ -58,16 +60,10 @@ static char	*ft_insert_space2(char *new, char *str)
 	j = 0;
 	while (str[n])
 	{
-		if (ft_is_dchev(str, n) == 0)
+		if (ft_is_chev(str, n) == 3 || ft_is_chev(str, n) == 4 || str[n] == '|')
 			j += ft_insert_space3(new, j, str[n], 1);
-		else if (str[n] == '<' && str[n - 1] != '<' && str[n + 1] == '<')
+		else if (ft_is_chev(str, n) == 1 || ft_is_chev(str, n) == 2)
 			j += ft_insert_space3(new, j, str[n++], 2);
-		else if (str[n] == '>' && str[n - 1] != '>' && str[n + 1] != '>')
-			j += ft_insert_space3(new, j, str[n], 1);
-		else if (str[n] == '>' && str[n - 1] != '>' && str[n + 1] == '>')
-			j += ft_insert_space3(new, j, str[n++], 2);
-		else if (str[n] == '|')
-			j += ft_insert_space3(new, j, str[n], 1);
 		else
 			new[j++] = str[n];
 		n++;
@@ -89,11 +85,7 @@ static char	*ft_insert_space(char *str)
 		return (ft_strdup(""));
 	while (str[n])
 	{
-		if ((n == 0 && str[n] == '<') || str[n] == '|'
-			|| (n > 0 && str[n] == '<' && str[n - 1] != '<'))
-			count += 2;
-		else if ((n == 0 && str[n] == '>')
-			|| (n > 0 && str[n] == '>' && str[n - 1] != '>'))
+		if (ft_is_chev(str, n) || str[n] == '|')
 			count += 2;
 		n++;
 	}
@@ -115,11 +107,17 @@ int	ft_parser(t_main *main)
 	if (!main->cline)
 		return (1);
 	main->line = ft_insert_space(main->line);
+	if (!main->line)
+		return (1);
 	tab = ft_split(main->line, '|');
+	if (!tab)
+		return (1);
 	while (n < main->pipecount + 1)
 	{
 		main->cline[n].line = tab[n];
 		main->cline[n].argv = ft_split(main->cline[n].line, ' ');
+		if (!main->cline[n].argv)
+			return (1);
 		ft_showtab(main->cline[n].argv);
 		n++;
 	}

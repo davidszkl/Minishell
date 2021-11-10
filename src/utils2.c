@@ -11,32 +11,19 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-char	*ft_strjoin(char *str, char *buff)
+char	*ft_strjoin_free(char const *s1, char *s2)
 {
-	size_t	i;
-	size_t	j;
-	char	*line;
+	char	*r;
 
-	if (!str)
-	{
-		str = (char *)malloc(sizeof(char) * 1);
-		if (!str || !buff)
-			return (NULL);
-		str[0] = '\0';
-	}
-	line = malloc(sizeof(char) * ((ft_strlen(str) + ft_strlen(buff)) + 1));
-	if (line == NULL)
-		return (NULL);
-	i = -1;
-	j = 0;
-	if (str)
-		while (str[++i] != '\0')
-			line[i] = str[i];
-	while (buff[j] != '\0')
-		line[i++] = buff[j++];
-	line[ft_strlen(str) + ft_strlen(buff)] = '\0';
-	free(buff);
-	return (line);
+	if (!s1 || !s2)
+		return (0);
+	r = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!r)
+		return (0);
+	ft_memcpy(r, s1, ft_strlen(s1));
+	ft_memcpy(r + ft_strlen(s1), s2, ft_strlen(s2) + 1);
+	free(s2);
+	return (r);
 }
 
 char	*ft_replace_str(char *s, int start, int n, char *sub)
