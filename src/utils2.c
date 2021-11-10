@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:09:45 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/08 09:09:46 by dszklarz         ###   ########.fr       */
+/*   Updated: 2021/11/10 12:25:21 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -39,11 +39,11 @@ char	*ft_strjoin(char *str, char *buff)
 	return (line);
 }
 
-char	*ft_replace_str(char *s, int start, int n, char *sub)
+char	*ft_replace_str(const char *s, size_t start, size_t n, const char *sub)
 {
-	int		i;
-	int		sl;
-	int		l;
+	size_t	i;
+	size_t	sl;
+	size_t	l;
 	char	*tmp;
 
 	sl = ft_strlen(sub);

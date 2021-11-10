@@ -6,11 +6,11 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:17:19 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/08 17:29:50 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/10 12:11:47 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
-#include "expand_variables_args.h"
+#include "../inc/expand_variables_args.h"
 
 size_t	var_len(const char *s)
 {

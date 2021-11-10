@@ -6,18 +6,18 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:58:35 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/08 17:49:09 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/10 12:14:16 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
-#include "expand_variables_args.h"
+#include "../inc/expand_variables_args.h"
 
 /*
 Returns value of environment
 variable name in envp NULL in
 case of error.
 */
-char	*get_envp_val(const char *name, const char **envp)
+char	*get_envp_val(const char *name, char **envp)
 {
 	int	l;
 
@@ -55,8 +55,7 @@ static char	*replace_str(const char *s, size_t start, size_t n, const char *sub)
 	return (tmp);
 }
 
-static int	expand_variables_2(char **s, size_t *i, const char **envp,
-		const char **locals)
+static int	expand_variables_2(char **s, size_t *i, char **envp, char **locals)
 {
 	t_expand_variables_2_args	args;
 
@@ -101,8 +100,7 @@ Returns new string with all variables
 in s expanded. NULL in case of error.
 (envp for exported variables, locals for the rest)
 */
-char	*expand_variables(const char *str, const char **envp,
-		const char **locals)
+char	*expand_variables(const char *str, char **envp, char **locals)
 {
 	t_expand_variables_args	args;
 

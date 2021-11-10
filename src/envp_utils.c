@@ -6,12 +6,12 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 08:39:25 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/09 09:17:40 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/10 12:10:57 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-size_t	get_envp_size(const char **envp)
+size_t	get_envp_size(char **envp)
 {
 	size_t	i;
 
@@ -21,11 +21,11 @@ size_t	get_envp_size(const char **envp)
 	return (i);
 }
 
-int	sort_envp(const char **envp)
+int	sort_envp(char **envp)
 {
 	size_t		i;
 	size_t		j;
-	const char	*tmp;
+	char	*tmp;
 
 	j = -1;
 	while (envp[++j])
@@ -73,7 +73,7 @@ char	**init_locals(void)
 	return (r);
 }
 
-char	**init_envp(const char **envp)
+char	**init_envp(char **envp)
 {
 	const size_t	l = get_envp_size(envp);
 	size_t			i;

@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:05:55 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/10 10:57:42 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:18:47 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ size_t	get_envp_size(char **envp);
 char	*ft_strdup(const char *s1);
 void	ft_freetab(char **tab);
 char	*ft_replace_str(const char *s, size_t start, size_t n, const char *sub);
+char	*ft_strjoin(const char *s1, const char *s2);
 
 static int	my_putstr_fd(const char *s, int fd)
 {
@@ -53,6 +54,7 @@ static char	*get_value(const char *str)
 {
 	while (*str && *str != '=')
 		str++;
+	str += (*str == '=');
 	return (ft_substr(str, 0, ft_strlen(str)));
 }
 
@@ -137,17 +139,49 @@ static int	del_in_envp(const char *name, char ***envp)
 	return (1);
 }
 
-static int	envp_assign(const char *name, char *value, char **envp)
+static int	envp_append(char *name, char *value, char ***envp)
 {
+	char			**tmp;
+	char			*str;
+	char			*str2;
+	size_t			i;
+	const size_t	l = get_envp_size(*envp);
+
+	str = ft_strjoin(name, "=");
+	if (!str)
+		return (0);
+	str2 = ft_strjoin(str, value);
+	free(str);
+	if (!str2)
+		return (0);
+	tmp = malloc(sizeof(char *) * (l + 2));
+	if (!tmp)
+		return (0);
+	i = -1;
+	while (++i < l)
+		tmp[i] = ft_strdup((*envp)[i]);
+	tmp[i + 1] = str2;
+	tmp[i + 2] = 0;
+	if (!check_and_free(tmp, l + 1))
+		return (0);
+	ft_freetab(*envp);
+	*envp = tmp;
+	return (1);
+}
+
+static int	envp_assign(char *name, char *value, char ***envp_p)
+{
+	char			**envp;
 	char			*tmp;
 	const size_t	l = ft_strlen(name);
 
+	if (!is_in_envp(name, *envp_p))
+		return (envp_append(name, value, envp_p));
+	envp = *envp_p;
 	envp--;
 	while (*++envp)
 		if (!ft_strncmp(name, *envp, l) && (*envp)[l] == '=')
 			break ;
-	if (!*envp)
-		return (0);
 	tmp = ft_replace_str(*envp, l + 1, ft_strlen(*envp) - l - 1, value);
 	if (!tmp)
 		return (0);
@@ -185,8 +219,12 @@ int	ft_export(char ***envp, char ***locals, char **argv)
 			free(value);
 			return (0);
 		}
-		if (value)
-			envp_assign(name, value, *envp);
+		if (value && !envp_assign(name, value, envp))
+		{
+			free(name);
+			free(value);
+			return (0);
+		}
 		free(name);
 		free(value);
 	}
