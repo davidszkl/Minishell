@@ -22,14 +22,26 @@ int	main(int argc, char **argv)
 	{
 		line = readline(PROMPT);
 		ft_getcount(line, &main);
-		ft_read_chev(line, &main);
-		//expand_variables(line);
+		/* while(y a << || y a | de fin)
+		{
+			if (y a <<)
+				trucmush;
+			if (y a | de fin)
+				truc pour ca
+
+		} */
+		if (ft_read_chev(line, &main) == 1)
+		{
+			//ft_exit(&main);
+			return (1);
+		}
 		//pipe_de_fin();
+		//expand_variables(line);
 		ft_parser(&main);
 		//ft_exec(&main);
 		ft_freeshell(&main);
 	}
-	return (1);
+	return (0);
 }
 
 /* void	ft(void)
