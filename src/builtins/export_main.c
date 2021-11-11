@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 11:37:26 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/10 15:37:20 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/11 18:19:52 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ char	**init_envp(char **envp);
 char	**init_locals(void);
 void	ft_showtab(char **tab);
 
-/* static int	myperror(const char *str)
+static int	myperror(const char *str)
 {
 	perror(str);
 	return (1);
-} */
+}
 
-/* int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	(void)argc;
 	char	**locals;
 
+	(void)argc;
 	locals = init_locals();
 	if (!locals)
 		return (myperror(argv[0]));
@@ -45,8 +45,7 @@ void	ft_showtab(char **tab);
 		ft_freetab(envp);
 		return (1);
 	}
-	ft_showtab(envp);
 	ft_freetab(envp);
 	ft_freetab(locals);
 	return (0);
-}*/
+}
