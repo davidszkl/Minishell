@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:05:55 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/10 14:18:47 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/11 11:50:42 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static char	*get_value(const char *str)
 {
 	while (*str && *str != '=')
 		str++;
+	if (*str != '=')
+		return (0);
 	str += (*str == '=');
 	return (ft_substr(str, 0, ft_strlen(str)));
 }
@@ -160,8 +162,8 @@ static int	envp_append(char *name, char *value, char ***envp)
 	i = -1;
 	while (++i < l)
 		tmp[i] = ft_strdup((*envp)[i]);
-	tmp[i + 1] = str2;
-	tmp[i + 2] = 0;
+	tmp[i] = str2;
+	tmp[i + 1] = 0;
 	if (!check_and_free(tmp, l + 1))
 		return (0);
 	ft_freetab(*envp);
@@ -174,8 +176,9 @@ static int	envp_assign(char *name, char *value, char ***envp_p)
 	char			**envp;
 	char			*tmp;
 	const size_t	l = ft_strlen(name);
+	const int		b = is_in_envp(name, *envp_p);
 
-	if (!is_in_envp(name, *envp_p))
+	if (!b)
 		return (envp_append(name, value, envp_p));
 	envp = *envp_p;
 	envp--;
