@@ -46,7 +46,7 @@ static int	ft_insert_space3(char *str, int index, int t, int mod)
 		str[index + 3] = ' ';
 		return (4);
 	}
-	return (-1);
+	return (0);
 }
 
 static char	*ft_insert_space2(char *new, char *str)
@@ -67,7 +67,6 @@ static char	*ft_insert_space2(char *new, char *str)
 		n++;
 	}
 	new[j] = 0;
-	n = 0;
 	return (new);
 }
 
@@ -89,7 +88,10 @@ static char	*ft_insert_space(char *str)
 	}
 	new = malloc(sizeof(char) * (ft_strlen(str) + count + 1));
 	if (!new)
+	{
+		free(str);
 		return (NULL);
+	}
 	new = ft_insert_space2(new, str);
 	free(str);
 	return (new);
