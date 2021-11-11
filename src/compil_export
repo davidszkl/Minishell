@@ -1,1 +1,1 @@
-gcc -g -Wall -Wextra -Werror export_main.c ft_export.c envp_utils.c utils* error.c to_erase.c
+gcc -g -Wall -Wextra -Werror export_main.c ft_export*.c envp_utils.c utils* error.c to_erase.c
