@@ -24,12 +24,10 @@ int	main(int argc, char **argv)
 		while (ft_check_chevpipe(main.line) == 1)
 		{
 			if (ft_read_chev(&main) == 1)
-				return (1);
-				//return (ft_exit(&main));
+				return (ft_myfree(main.line));
 			if (main.line[ft_strlen(main.line) - 1] == '|')
 				if (ft_read_lpipe(&main) == 1)
-					return (1);
-					//return (ft_exit(&main));
+					return (ft_myfree(main.line));
 		}
 		ft_getcount(&main);
 		//expand_variables(line);

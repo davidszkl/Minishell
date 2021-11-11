@@ -54,7 +54,6 @@ typedef struct s_main {
 	char	*temp;
 	int		dchevcount;
 	int		pipecount;
-	int		error;
 	int		lpipe;
 }	t_main;
 
@@ -84,7 +83,7 @@ int		ft_getcount(t_main *main);
 
 /*errors*/
 
-void	ft_freeshell(t_main *main);
+int		ft_freeshell(t_main *main);
 
 /*utils*/
 
@@ -109,6 +108,7 @@ int		ft_is_chev(char *str, int n);
 int		ft_read_lpipe(t_main *main);
 int		ft_spwordcount(char *str);
 int		sort_envp(char **envp);
+int		ft_myfree(char *str);
 int		ft_isalnumx(char c);
 int		ft_isspace(char c);
 int		ft_isalpha(int c);
@@ -117,7 +117,7 @@ int		ft_isdigit(int c);
 /*erase*/
 
 void	ft_showtab(char **tab);
-//>< salut >< hello <<||><< au revoi coucou <<<<<   
+//>< salut >< hello <<a ||><< au revoi coucou <<b <<c <   
 //salut << hello >> | C | < > < > <| A| F|A |FA AR AR >AR? G>?R AR|S 
 //|ARS A>R? < < <A ?R ?AGR> GAR |R> 
 

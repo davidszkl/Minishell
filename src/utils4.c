@@ -72,3 +72,9 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 		*d2++ = *s2++;
 	return (dst);
 }
+
+int	ft_myfree(char *str)
+{
+	free(str);
+	return (0);
+}

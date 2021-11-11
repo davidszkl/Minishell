@@ -18,8 +18,6 @@ int	ft_getcount(t_main *main)
 	n = 0;
 	main->pipecount = 0;
 	main->dchevcount = 0;
-	main->chev.nbr = 0;
-	main->error = 0;
 	while (main->line[n])
 	{
 		if (main->line[n] == '|')
