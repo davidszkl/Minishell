@@ -20,7 +20,7 @@ int	ft_getcount(t_main *main)
 	main->dchevcount = 0;
 	while (main->line[n])
 	{
-		if (main->line[n] == '|')
+		if (main->line[n] == '|' && !ft_isquote_now(main->line, n))
 			main->pipecount++;
 		if (ft_is_chev(main->line, n) == 1)
 			main->dchevcount++;
@@ -58,7 +58,8 @@ static char	*ft_insert_space2(char *new, char *str)
 	j = 0;
 	while (str[n])
 	{
-		if (ft_is_chev(str, n) == 3 || ft_is_chev(str, n) == 4 || str[n] == '|')
+		if (ft_is_chev(str, n) == 3 || ft_is_chev(str, n) == 4
+			|| (str[n] == '|' && !ft_isquote_now(str, n)))
 			j += ft_insert_space3(new, j, str[n], 1);
 		else if (ft_is_chev(str, n) == 1 || ft_is_chev(str, n) == 2)
 			j += ft_insert_space3(new, j, str[n++], 2);
@@ -82,7 +83,7 @@ static char	*ft_insert_space(char *str)
 		return (ft_strdup(""));
 	while (str[n])
 	{
-		if (ft_is_chev(str, n) || str[n] == '|')
+		if (ft_is_chev(str, n) || (str[n] == '|' && !ft_isquote_now(str, n)))
 			count += 2;
 		n++;
 	}
@@ -109,16 +110,18 @@ int	ft_parser(t_main *main)
 	main->line = ft_insert_space(main->line);
 	if (!main->line)
 		return (1);
-	tab = ft_split(main->line, '|');
+	printf("string = %s\n", main->line);
+	tab = ft_splitq(main->line, '|');
+	ft_showtab(tab);
 	if (!tab)
 		return (1);
 	while (n < main->pipecount + 1)
 	{
 		main->cline[n].line = tab[n];
-		main->cline[n].argv = ft_split(main->cline[n].line, ' ');
+		main->cline[n].argv = ft_splitq(main->cline[n].line, ' ');
 		if (!main->cline[n].argv)
 			return (1);
-		ft_showtab(main->cline[n].argv);
+		//ft_showtab(main->cline[n].argv);
 		n++;
 	}
 	main->cline[n].line = NULL;
