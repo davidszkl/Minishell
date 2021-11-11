@@ -19,13 +19,13 @@ char	**init_envp(char **envp);
 char	**init_locals(void);
 void	ft_showtab(char **tab);
 
-static int	myperror(const char *str)
+/* static int	myperror(const char *str)
 {
 	perror(str);
 	return (1);
-}
+} */
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
 	char	**locals;
@@ -49,4 +49,4 @@ int	main(int argc, char **argv, char **envp)
 	ft_freetab(envp);
 	ft_freetab(locals);
 	return (0);
-}
+}*/

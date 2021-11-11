@@ -17,7 +17,7 @@ static void	ft_free(t_main *main)
 	free(main->chev.path);
 }
 
-static void	ft_get(t_main *main, char *line, int n)
+static void	ft_get(t_main *main, int n)
 {
 	char	*nbr;
 	char	*term;
@@ -25,7 +25,7 @@ static void	ft_get(t_main *main, char *line, int n)
 	nbr = ft_itoas(main->chev.nbr);
 	if (!nbr)
 		return ;
-	term = ft_getword(&line[n]);
+	term = ft_getword(&main->line[n]);
 	if (!nbr)
 		return (free(nbr));
 	main->chev.nbrs = ft_strjoin("/tmp/", nbr);
@@ -61,39 +61,41 @@ static void	ft_read_chev2(t_main *main, char *str)
 	free(str);
 }
 
-static char	*ft_read_chev1(char *line, t_main *main, int n, int j)
+static int	ft_read_chev1(t_main *main, int n, int j)
 {
-	while (line[n])
+	char	*temp;
+
+	while (main->line[n])
 	{
-		if (line[n] == '|')
+		if (main->line[n] == '|')
 			main->chev.nbr++;
-		if (ft_is_chev(line, n) == 1)
+		if (ft_is_chev(main->line, n) == 1)
 		{
 			n += 2;
-			ft_get(main, line, n);
-			ft_read_chev2(main, ft_getword(&line[n]));
-			j = ft_spwordcount(&line[n]);
-			main->temp = ft_replace_str(line, n - 1, j + 1, main->chev.path);
-			if (!main->temp)
-				return (NULL);
-			free(line);
-			line = main->temp;
+			ft_get(main, n);
+			ft_read_chev2(main, ft_getword(&main->line[n]));
+			j = ft_spwordcount(&main->line[n]);
+			temp = ft_replace_str(main->line, n - 1, j + 1, main->chev.path);
+			if (!temp)
+				return (1);
+			free(main->line);
+			main->line = ft_strdup(temp);
+			free(temp);
 			ft_free(main);
 		}
 		n++;
 	}
-	return (line);
+	return (0);
 }
 
-int	ft_read_chev(char *line, t_main *main)
+int	ft_read_chev(t_main *main)
 {
 	int	j;
 	int	n;
 
 	n = 0;
 	j = 0;
-	main->line = ft_read_chev1(line, main, n, j);
-	if (!main->line || main->error == 1)
+	if (ft_read_chev1(main, n, j) == 1)
 		return (1);
 	return (0);
 }

@@ -14,28 +14,24 @@
 int	main(int argc, char **argv)
 {
 	t_main		main;
-	char		*line;
 
 	(void)argc;
 	(void)argv;
 	while (1)
 	{
-		line = readline(PROMPT);
-		ft_getcount(line, &main);
-		/* while(y a << || y a | de fin)
+		main.line = readline(PROMPT);
+		ft_getcount(&main);
+		while (ft_check_chevpipe(main.line) == 1)
 		{
-			if (y a <<)
-				trucmush;
-			if (y a | de fin)
-				truc pour ca
-
-		} */
-		if (ft_read_chev(line, &main) == 1)
-		{
-			//ft_exit(&main);
-			return (1);
+			if (ft_read_chev(&main) == 1)
+				return (1);
+				//return (ft_exit(&main));
+			if (main.line[ft_strlen(main.line) - 1] == '|')
+				if (ft_read_lpipe(&main) == 1)
+					return (1);
+					//return (ft_exit(&main));
 		}
-		//pipe_de_fin();
+		ft_getcount(&main);
 		//expand_variables(line);
 		ft_parser(&main);
 		//ft_exec(&main);
@@ -43,21 +39,3 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-
-/* void	ft(void)
-{
-	while (str)
-		if << truc
-		{
-			makestring (truc + index);
-		 	fd = open("temp/string", O_CREAT | O_TRUNC | O_WRONLY, 0644);
-			check fd
-			line = readline();
-			while(line != truc)
-				line = readline("> ");
-				check readline
-				ft_putendl_fd(line, fd);
-			close(fd);
-			remplacer << truc par < temp/fichier
-		}
-} */

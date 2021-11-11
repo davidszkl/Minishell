@@ -11,7 +11,16 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-/* int	ft_read_lpipe(char *line, t_main *main)
+int	ft_read_lpipe(t_main *main)
 {
+	char	*temp;
 
-} */
+	main->temp = readline("> ");
+	temp = ft_replace_str(main->line, ft_strlen(main->line), 0, main->temp);
+	free(main->line);
+	main->line = temp;
+	free(main->temp);
+	if (!main->line)
+		return (1);
+	return (0);
+}

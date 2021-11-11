@@ -25,7 +25,7 @@ int	sort_envp(char **envp)
 {
 	size_t		i;
 	size_t		j;
-	char	*tmp;
+	char		*tmp;
 
 	j = -1;
 	while (envp[++j])

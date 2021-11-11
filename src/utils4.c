@@ -49,7 +49,7 @@ int	ft_check_chevpipe(char	*str)
 
 	n = 0;
 	while (str[n])
-		if (ft_is_chev(str, n++))
+		if (ft_is_chev(str, n++) == 1)
 			return (1);
 	n--;
 	while (ft_isspace(str[n]) == 1)

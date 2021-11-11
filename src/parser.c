@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-int	ft_getcount(char *line, t_main *main)
+int	ft_getcount(t_main *main)
 {
 	int	n;
 
@@ -20,11 +20,11 @@ int	ft_getcount(char *line, t_main *main)
 	main->dchevcount = 0;
 	main->chev.nbr = 0;
 	main->error = 0;
-	while (line[n])
+	while (main->line[n])
 	{
-		if (line[n] == '|')
+		if (main->line[n] == '|')
 			main->pipecount++;
-		if (ft_is_chev(line, n) == 1)
+		if (ft_is_chev(main->line, n) == 1)
 			main->dchevcount++;
 		n++;
 	}

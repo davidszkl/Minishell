@@ -65,7 +65,7 @@ int		ft_check_cmd(char *str);
 
 /*parser*/
 
-int		ft_read_chev(char *line, t_main *main);
+int		ft_read_chev(t_main *main);
 int		ft_parser(t_main *main);
 
 /*expander*/
@@ -80,7 +80,7 @@ void	ft_execute(void);
 
 char	**init_envp(char **envp);
 char	**init_locals(void);
-int		ft_getcount(char *line, t_main *main);
+int		ft_getcount(t_main *main);
 
 /*errors*/
 
@@ -90,30 +90,29 @@ void	ft_freeshell(t_main *main);
 
 size_t	ft_strlen(const char *str);
 size_t	get_envp_size(char **envp);
-void	ft_strcpy(char *dst, char *src);
-void	ft_freetab(char **tab);
 char	**ft_split(char *str, char c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_replace_str(const char *s, size_t start, size_t n, const char *sub);
-void	*ft_memcpy(void *dst, const void *src, size_t n);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
 char	*ft_getword(char *str);
 char	*ft_tolower(char *str);
 char	*ft_itoas(int nbr);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_putendl_fd(char	*str, int fd);
 void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_is_dchev(char *str, int n);
 int		ft_check_chevpipe(char	*str);
 int		ft_is_chev(char *str, int n);
+int		ft_read_lpipe(t_main *main);
 int		ft_spwordcount(char *str);
+int		sort_envp(char **envp);
 int		ft_isalnumx(char c);
 int		ft_isspace(char c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
-int		ft_is_dchev(char *str, int n);
-int		sort_envp(char **envp);
 
 /*erase*/
 
