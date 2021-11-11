@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:05:55 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/11 16:34:43 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/11 18:14:17 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_export(char ***envp, char ***locals, char **argv)
 	{
 		if (!is_valid_export_arg(*argv))
 		{
-			my_putstr_fd_3("minishell: export: `",
+			my_putstr_fd_3("export: `",
 				*argv, "': not a valid identifier\n", 2);
 			continue ;
 		}

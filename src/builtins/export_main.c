@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 11:37:26 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/11 15:47:50 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/11 18:19:52 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,18 @@ char	**init_envp(char **envp);
 char	**init_locals(void);
 void	ft_showtab(char **tab);
 
- static int	myperror(const char *str)
+static int	myperror(const char *str)
 {
 	perror(str);
 	return (1);
-} 
-
-char *ft_strdup(const char *s);
-static char **init_locals_to_erase(void)
-{
-	char **r = malloc(sizeof(char *) * 5);
-
-	r[0] = ft_strdup("cool=oui");
-	r[1] = ft_strdup("empty=");
-	r[3] = ft_strdup("name=martin");
-	r[2] = ft_strdup("name2=martin");
-	r[4] = 0;
-	return (r);
 }
 
-#include <unistd.h>
- int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	char	**locals;
 
 	(void)argc;
-	locals = init_locals_to_erase();
+	locals = init_locals();
 	if (!locals)
 		return (myperror(argv[0]));
 	envp = init_envp(envp);
@@ -59,11 +45,6 @@ static char **init_locals_to_erase(void)
 		ft_freetab(envp);
 		return (1);
 	}
-	write(1, "///////////////\n", 16);
-	ft_showtab(envp);
-	write(1, "///////////////\n", 16);
-	ft_showtab(locals);
-	write(1, "///////////////\n", 16);
 	ft_freetab(envp);
 	ft_freetab(locals);
 	return (0);
