@@ -64,28 +64,29 @@ char	*ft_tolower(char *str)
 	return (str);
 }
 
-char	*ft_getword(char *str)
+char	*ft_getword(char *str, int n)
 {
 	char	*new;
-	int		n;
 	int		j;
+	int		t;
 
-	n = 0;
 	j = 0;
 	while (str[n] && ft_isspace(str[n]) == 1)
 	{
 		j++;
 		n++;
 	}
-	while (str[n] && ft_isalnumx(str[n]) == 1)
+	t = n;
+	while (str[n] && ft_isalnumx(str, n) == 1)
 		n++;
 	new = malloc(sizeof(char) * (n + 1));
 	if (!new)
 		return (NULL);
-	n = 0;
-	while (str[j] && ft_isalnumx(str[j]) == 1)
-		new[n++] = str[j++];
-	new[n] = 0;
+	n = t;
+	j = 0;
+	while (str[n] && ft_isalnumx(str, n) == 1)
+		new[j++] = str[n++];
+	new[j] = 0;
 	return (new);
 }
 

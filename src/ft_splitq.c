@@ -11,24 +11,24 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-static size_t	ft_nextc(char *s, char c)
+static size_t	ft_nextc(char *s, char c, int index)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] != c && !ft_isquote_now(s, i))
-		i++;
-	return (i);
+	while (1)
+	{
+		while (s[index] && s[index] != c)
+			index++;
+		if (!s[index] || !ft_isquote_now(s, index))
+			break ;
+		index++;
+	}
+	return (index);
 }
 
-static size_t	ft_nextnotc(char *s, char c)
+static size_t	ft_nextnotc(char *s, char c, int index)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] && s[i] == c && !ft_isquote_now(s, i))
-		i++;
-	return (i);
+	while (s[index] && s[index] == c && !ft_isquote_now(s, index))
+		index++;
+	return (index);
 }
 
 static size_t	ft_getnum(char *s, char c)
@@ -46,13 +46,11 @@ static size_t	ft_getnum(char *s, char c)
 	{
 		if (onword == 0 && s[i] != c)
 			count++;
-		printf("quote = %d\n", ft_isquote_now(s, i));
 		if (s[i] == c && !ft_isquote_now(s, i))
 			onword = 0;
 		else
 			onword = 1;
 	}
-	//printf("count = %zu\n", count);
 	return (count);
 }
 
@@ -91,12 +89,13 @@ char	**ft_splitq(char *s, char c)
 	if (!r)
 		return (0);
 	r[n] = 0;
+	i = 0;
 	while (n--)
 	{
-		i = ft_nextnotc(s, c);
-		j = ft_nextc(s + i, c);
-		*r++ = ft_substr(s, i, j);
-		s = s + j + i;
+		i = ft_nextnotc(s, c, i);
+		j = ft_nextc(s, c, i);
+		*r++ = ft_substr(s, i, j - i);
+		i += j - i;
 	}
 	if (!ft_myfrees(r - n2, n2))
 		return (0);

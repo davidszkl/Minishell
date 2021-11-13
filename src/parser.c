@@ -110,9 +110,7 @@ int	ft_parser(t_main *main)
 	main->line = ft_insert_space(main->line);
 	if (!main->line)
 		return (1);
-	printf("string = %s\n", main->line);
 	tab = ft_splitq(main->line, '|');
-	ft_showtab(tab);
 	if (!tab)
 		return (1);
 	while (n < main->pipecount + 1)
@@ -121,7 +119,6 @@ int	ft_parser(t_main *main)
 		main->cline[n].argv = ft_splitq(main->cline[n].line, ' ');
 		if (!main->cline[n].argv)
 			return (1);
-		//ft_showtab(main->cline[n].argv);
 		n++;
 	}
 	main->cline[n].line = NULL;

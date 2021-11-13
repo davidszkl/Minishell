@@ -32,6 +32,7 @@ static int	ft_read_chev2(t_main *main, char *str)
 		free(str);
 		return (1);
 	}
+	printf("str to enter = %s\n", str);
 	main->temp = readline("> ");
 	while (ft_strncmp(main->temp, str, ft_strlen(main->temp)))
 	{
@@ -53,7 +54,7 @@ static void	ft_get(t_main *main, int n)
 	nbr = ft_itoas(main->chev.nbr);
 	if (!nbr)
 		return ;
-	term = ft_getword(&main->line[n]);
+	term = ft_getword(main->line, n);
 	if (!term)
 		return (free(nbr));
 	main->chev.nbrs = ft_strjoin("/tmp/", nbr);
@@ -82,7 +83,7 @@ static int	ft_read_chev1(t_main *main, char *temp, int n, int j)
 		{
 			n += 2;
 			ft_get(main, n);
-			if (ft_read_chev2(main, ft_getword(&main->line[n])) == 1)
+			if (ft_read_chev2(main, ft_getword(main->line, n)) == 1)
 				return (1);
 			j = ft_spwordcount(&main->line[n]);
 			temp = ft_replace_str(main->line, n - 1, j + 1, main->chev.path);

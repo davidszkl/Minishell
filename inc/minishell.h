@@ -94,7 +94,7 @@ char	*ft_replace_str(const char *s, size_t start, size_t n, const char *sub);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
-char	*ft_getword(char *str);
+char	*ft_getword(char *str, int n);
 char	*ft_tolower(char *str);
 char	*ft_itoas(int nbr);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
@@ -111,7 +111,7 @@ int		ft_spwordcount(char *str);
 int		sort_envp(char **envp);
 int		ft_isquote(char *str);
 int		ft_myfree(char *str);
-int		ft_isalnumx(char c);
+int		ft_isalnumx(char *str, int n);
 int		ft_isspace(char c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -119,8 +119,15 @@ int		ft_isdigit(int c);
 /*erase*/
 
 void	ft_showtab(char **tab);
+
+/*TESTS*/
+
 //>< salut >< hello <<a ||><< au revoi coucou <<b <<c <   
 //salut << hello >> | C | < > < > <| A| F|A |FA AR AR >AR? G>?R AR|S 
 //|ARS A>R? < < <A ?R ?AGR> GAR |R> 
+//s << c"|"c
+//salut << coucou | echo <<     bon"|"jour "|" |"|" salut << hello
+//"echo"
+//""
 
 #endif

@@ -35,29 +35,29 @@ int	ft_isquote(char *str)
 
 int	ft_isquote_now(char *str, int index)
 {
-	int	nqtdqt[3];
+	int	nqd[3];
 
-	nqtdqt[0] = -1;
-	nqtdqt[1] = 0;
-	nqtdqt[2] = 0;
-	while (++nqtdqt[0] < index)
+	nqd[0] = -1;
+	nqd[1] = 0;
+	nqd[2] = 0;
+	while (++nqd[0] < index + 1)
 	{
-		if (str[nqtdqt[0]] == 39)
+		if (str[nqd[0]] == 39 && nqd[0]++)
 		{
-			nqtdqt[1] = 1;
-			while (str[nqtdqt[0]] && str[nqtdqt[0]] != 39)
-				nqtdqt[0]++;
-			if (str[nqtdqt[0]] == 39)
-				nqtdqt[1] = 0;
+			nqd[1] = 1;
+			while (str[nqd[0]] && str[nqd[0]] != 39 && nqd[0] < index)
+				nqd[0]++;
+			if (str[nqd[0]] == 39)
+				nqd[1] = 0;
 		}
-		else if (str[nqtdqt[0]] == 34)
+		else if (str[nqd[0]] == 34 && nqd[0]++)
 		{
-			nqtdqt[2] = 1;
-			while (str[nqtdqt[0]] && str[nqtdqt[0]] != 39)
-				nqtdqt[0]++;
-			if (str[nqtdqt[0]] == 39)
-				nqtdqt[2] = 0;
+			nqd[2] = 1;
+			while (str[nqd[0]] && str[nqd[0]] != 34 && nqd[0] < index)
+				nqd[0]++;
+			if (str[nqd[0]] == 34)
+				nqd[2] = 0;
 		}
 	}
-	return (nqtdqt[1] || nqtdqt[2]);
+	return (nqd[1] || nqd[2]);
 }
