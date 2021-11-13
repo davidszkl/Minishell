@@ -79,7 +79,7 @@ static int	ft_read_chev1(t_main *main, char *temp, int n, int j)
 	{
 		if (main->line[n] == '|')
 			main->chev.nbr++;
-		if (ft_is_chev(main->line, n) == 1)
+		if (ft_is_chev(main->line, n) == 1 && !ft_isquote_now(main->line, n))
 		{
 			n += 2;
 			ft_get(main, n);

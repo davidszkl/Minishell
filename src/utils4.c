@@ -49,8 +49,11 @@ int	ft_check_chevpipe(char	*str)
 
 	n = 0;
 	while (str[n])
-		if (ft_is_chev(str, n++) == 1)
+	{
+		if (ft_is_chev(str, n) == 1 && !ft_isquote_now(str, n))
 			return (1);
+		n++;
+	}
 	while (ft_isspace(str[n]) == 1)
 		n--;
 	if (!str[n])
