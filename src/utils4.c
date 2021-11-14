@@ -50,7 +50,7 @@ int	ft_check_chevpipe(char	*str)
 	n = 0;
 	while (str[n])
 	{
-		if (ft_is_chev(str, n) == 1 && !ft_isquote_now(str, n))
+		if (ft_is_chev(str, n) == 1 && !ft_isinquote_now(str, n))
 			return (1);
 		n++;
 	}

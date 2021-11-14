@@ -79,6 +79,9 @@ void	ft_execute(void);
 
 char	**init_envp(char **envp);
 char	**init_locals(void);
+char	*ft_remquotestr(char *str);
+int		ft_remquote1(t_main *main, char *str, int n1, int j);
+int		ft_remquote(t_main *main);
 int		ft_getcount(t_main *main);
 
 /*errors*/
@@ -102,19 +105,21 @@ void	ft_putendl_fd(char	*str, int fd);
 void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_isquote_now(char *str, int index);
+int		ft_isinquote_now(char *str, int index);
+int		ft_spwordcount(char *str, int n);
+int		ft_isalnumx(char *str, int n);
 int		ft_is_dchev(char *str, int n);
 int		ft_check_chevpipe(char	*str);
 int		ft_is_chev(char *str, int n);
 int		ft_read_lpipe(t_main *main);
-int		ft_spwordcount(char *str);
+int		ft_isinquote(char *str);
 int		sort_envp(char **envp);
-int		ft_isquote(char *str);
 int		ft_myfree(char *str);
-int		ft_isalnumx(char *str, int n);
+int		ft_isquote(char c);
 int		ft_isspace(char c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
+
 
 /*erase*/
 

@@ -17,7 +17,7 @@ static size_t	ft_nextc(char *s, char c, int index)
 	{
 		while (s[index] && s[index] != c)
 			index++;
-		if (!s[index] || !ft_isquote_now(s, index))
+		if (!s[index] || !ft_isinquote_now(s, index))
 			break ;
 		index++;
 	}
@@ -26,7 +26,7 @@ static size_t	ft_nextc(char *s, char c, int index)
 
 static size_t	ft_nextnotc(char *s, char c, int index)
 {
-	while (s[index] && s[index] == c && !ft_isquote_now(s, index))
+	while (s[index] && s[index] == c && !ft_isinquote_now(s, index))
 		index++;
 	return (index);
 }
@@ -46,7 +46,7 @@ static size_t	ft_getnum(char *s, char c)
 	{
 		if (onword == 0 && s[i] != c)
 			count++;
-		if (s[i] == c && !ft_isquote_now(s, i))
+		if (s[i] == c && !ft_isinquote_now(s, i))
 			onword = 0;
 		else
 			onword = 1;

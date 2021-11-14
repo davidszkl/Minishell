@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-int	ft_isquote(char *str)
+int	ft_isinquote(char *str)
 {
 	int	n;
 	int	quote;
@@ -33,7 +33,7 @@ int	ft_isquote(char *str)
 	return (0);
 }
 
-int	ft_isquote_now(char *str, int index)
+int	ft_isinquote_now(char *str, int index)
 {
 	int	nqd[3];
 
@@ -60,4 +60,13 @@ int	ft_isquote_now(char *str, int index)
 		}
 	}
 	return (nqd[1] || nqd[2]);
+}
+
+int	ft_isquote(char c)
+{
+	if (c == 34)
+		return (1);
+	else if (c == 39)
+		return (2);
+	return (0);
 }

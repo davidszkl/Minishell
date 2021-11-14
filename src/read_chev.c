@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-static void	ft_free(t_main *main)
+static int	ft_free(t_main *main)
 {
 	free(main->chev.nbrs);
 	free(main->chev.path);
+	return (0);
 }
 
 static int	ft_read_chev2(t_main *main, char *str)
@@ -26,6 +27,7 @@ static int	ft_read_chev2(t_main *main, char *str)
 		free(str);
 		return (1);
 	}
+	str = ft_remquotestr(str);
 	fd = open(main->chev.path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd < 0)
 	{
@@ -79,13 +81,15 @@ static int	ft_read_chev1(t_main *main, char *temp, int n, int j)
 	{
 		if (main->line[n] == '|')
 			main->chev.nbr++;
-		if (ft_is_chev(main->line, n) == 1 && !ft_isquote_now(main->line, n))
+		if (ft_is_chev(main->line, n) == 1 && !ft_isinquote_now(main->line, n))
 		{
 			n += 2;
 			ft_get(main, n);
-			if (ft_read_chev2(main, ft_getword(main->line, n)) == 1)
+			if (ft_read_chev2(main, ft_getword(main->line, n)))
 				return (1);
-			j = ft_spwordcount(&main->line[n]);
+			j = ft_spwordcount(main->line, n);
+			printf("j = %d\n", j);
+			//printf("test--------\n%s\n%d\n%d\n%s\nendtest---------\n", main->line, n - 1, j + 1, main->chev.path);
 			temp = ft_replace_str(main->line, n - 1, j + 1, main->chev.path);
 			if (!temp)
 				return (1);
@@ -111,10 +115,7 @@ int	ft_read_chev(t_main *main)
 	n = 0;
 	j = 0;
 	main->chev.nbr = 0;
-	if (ft_read_chev1(main, temp, n, j) == 1)
-	{
-		ft_free(main);
-		return (1);
-	}
+	if (ft_read_chev1(main, temp, n, j))
+		return (ft_free(main));
 	return (0);
 }

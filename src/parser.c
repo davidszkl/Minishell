@@ -20,9 +20,9 @@ int	ft_getcount(t_main *main)
 	main->dchevcount = 0;
 	while (main->line[n])
 	{
-		if (main->line[n] == '|' && !ft_isquote_now(main->line, n))
+		if (main->line[n] == '|' && !ft_isinquote_now(main->line, n))
 			main->pipecount++;
-		if (ft_is_chev(main->line, n) == 1 && !ft_isquote_now(main->line, n))
+		if (ft_is_chev(main->line, n) == 1 && !ft_isinquote_now(main->line, n))
 			main->dchevcount++;
 		n++;
 	}
@@ -59,10 +59,10 @@ static char	*ft_insert_space2(char *new, char *str)
 	while (str[n])
 	{
 		if ((ft_is_chev(str, n) == 3 || ft_is_chev(str, n) == 4
-			|| str[n] == '|' ) && !ft_isquote_now(str, n))
+			|| str[n] == '|' ) && !ft_isinquote_now(str, n))
 			j += ft_insert_space3(new, j, str[n], 1);
 		else if ((ft_is_chev(str, n) == 1 || ft_is_chev(str, n) == 2)
-			&& !ft_isquote_now(str, n))
+			&& !ft_isinquote_now(str, n))
 			j += ft_insert_space3(new, j, str[n++], 2);
 		else
 			new[j++] = str[n];
@@ -84,7 +84,7 @@ static char	*ft_insert_space(char *str)
 		return (ft_strdup(""));
 	while (str[n])
 	{
-		if ((ft_is_chev(str, n) || str[n] == '|' ) && !ft_isquote_now(str, n))
+		if ((ft_is_chev(str, n) || str[n] == '|' ) && !ft_isinquote_now(str, n))
 			count += 2;
 		n++;
 	}
