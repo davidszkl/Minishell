@@ -23,13 +23,13 @@ static int	ft_getrdircount(t_main *main, int n)
 	while (main->cline[n].argv[j])
 	{
 		if (ft_strncmp(main->cline[n].argv[j], "<",
-			ft_strlen(main->cline[n].argv[j])))
+				ft_strlen(main->cline[n].argv[j])))
 			incount++;
 		else if (ft_strncmp(main->cline[n].argv[j], ">",
-			ft_strlen(main->cline[n].argv[j])))
+				ft_strlen(main->cline[n].argv[j])))
 			outcount++;
 		else if (ft_strncmp(main->cline[n].argv[j], ">>",
-			ft_strlen(main->cline[n].argv[j])))
+				ft_strlen(main->cline[n].argv[j])))
 			outcount++;
 		j++;
 	}
@@ -87,14 +87,14 @@ int	ft_fillstruct(t_main *main)
 	while (main->cline[n].line)
 	{
 		ft_getrdircount(main, n);
-		main->cline[n].file_in =
-			malloc(sizeof(t_file) * main->cline[n].rin + 1);
+		main->cline[n].file_in
+			= malloc(sizeof(t_file) * main->cline[n].rin + 1);
 		if (!main->cline[n].file_in)
 			return (1);
-		main->cline[n].file_out =
-			malloc(sizeof(t_file) * main->cline[n].rout + 1);
+		main->cline[n].file_out
+			= malloc(sizeof(t_file) * main->cline[n].rout + 1);
 		if (!main->cline[n].file_out)
-			return (1);	
+			return (1);
 		ft_fillstruct1(&main->cline[n]);
 		n++;
 	}

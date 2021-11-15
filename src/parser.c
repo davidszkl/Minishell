@@ -59,7 +59,7 @@ static char	*ft_insert_space2(char *new, char *str)
 	while (str[n])
 	{
 		if ((ft_is_chev(str, n) == 3 || ft_is_chev(str, n) == 4
-			|| str[n] == '|' ) && !ft_isinquote_now(str, n))
+				|| str[n] == '|' ) && !ft_isinquote_now(str, n))
 			j += ft_insert_space3(new, j, str[n], 1);
 		else if ((ft_is_chev(str, n) == 1 || ft_is_chev(str, n) == 2)
 			&& !ft_isinquote_now(str, n))

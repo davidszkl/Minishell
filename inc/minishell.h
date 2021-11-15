@@ -25,9 +25,9 @@
 /*structures*/
 
 typedef struct s_file {
-	char *name;
-	int	flags;
- 	int	fd;
+	char	*name;
+	int		flags;
+	int		fd;
 }	t_file;
 
 typedef struct s_comm {
@@ -122,7 +122,6 @@ int		ft_isquote(char c);
 int		ft_isspace(char c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
-
 
 /*erase*/
 
