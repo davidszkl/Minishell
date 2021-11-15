@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/10 15:42:14 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/15 17:21:49 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -51,6 +51,7 @@ typedef struct s_main {
 	t_comm	*cline; // ligne de commande
 	t_chev	chev;
 	char	**envp;
+	char	**locals;
 	char	**locs;
 	char	*line;
 	char	*temp;
