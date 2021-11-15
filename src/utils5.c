@@ -11,28 +11,6 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-int	ft_isinquote(char *str)
-{
-	int	n;
-	int	quote;
-	int	dquote;
-
-	n = 0;
-	quote = 0;
-	dquote = 0;
-	while (str[n])
-	{
-		if (str[n] == 39)
-			quote = !quote;
-		else if (str[n] == 34)
-			dquote = !dquote;
-		n++;
-	}
-	if (quote || dquote)
-		return (1);
-	return (0);
-}
-
 int	ft_isinquote_now(char *str, int index)
 {
 	int	nqd[3];

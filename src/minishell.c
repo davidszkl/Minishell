@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		main.line = readline(PROMPT);
-		if (ft_isinquote(main.line))
+		if (ft_isinquote_now(main.line, 0))
 			return (ft_myfree(main.line));
 		ft_getcount(&main);
 		while (ft_check_chevpipe(main.line) == 1)
