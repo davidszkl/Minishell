@@ -6,17 +6,16 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:58:35 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/15 15:58:21 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/15 16:12:41 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stddef.h>
 
-void	ft_freetab(char **tab);
 int		del_in_envp(const char *name, char ***envp);
 int		is_in_envp(const char *name, char **envp);
-int		ft_isdigit(int c);
+int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 
 static int	my_putstr_fd(const char *s, int fd)
@@ -30,15 +29,15 @@ static int	put_invalid_id(const char *s)
 {
 	my_putstr_fd("unset: `", 2);
 	my_putstr_fd(s, 2);
-	my_putstr_fd("': not a valid identifier", 2);
+	my_putstr_fd("': not a valid identifier\n", 2);
 	return (1);
 }
 
 static int	is_valid_identifier(const char *str)
 {
-	if (!(ft_isdigit(*str) || *str == '_'))
+	if (!(ft_isalpha(*str) || *str == '_'))
 		return (0);
-	while (*str++)
+	while (*++str)
 		if (!(ft_isalnum(*str) || *str == '_'))
 			return (0);
 	return (1);
@@ -55,8 +54,6 @@ int	ft_unset(char **envp, char **locals, char **argv)
 	{
 		if (!is_valid_identifier(argv[i]))
 		{
-			ft_freetab(envp);
-			ft_freetab(locals);
 			put_invalid_id(argv[i]);
 			r = 1;
 			continue ;

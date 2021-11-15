@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:12:54 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/15 13:16:23 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/15 16:14:19 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_freetab(locals);
 		return (myperror("unset: "));
 	}
+	ft_freetab(envp);
+	ft_freetab(locals);
 	return (r);
 }
