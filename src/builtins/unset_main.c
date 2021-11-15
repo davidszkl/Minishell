@@ -6,13 +6,13 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:12:54 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/15 16:14:19 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/15 17:12:30 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-int		ft_unset(char **envp, char **locals, char **argv);
+int		ft_unset(char ***envp, char ***locals, char **argv);
 void	ft_freetab(char **tab);
 char	**init_envp(char **envp);
 char	**init_locals(void);
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_freetab(envp);
 		return (myperror("unset: "));
 	}
-	r = ft_unset(envp, locals, argv);
+	r = ft_unset(&envp, &locals, argv);
 	if (r == -1)
 	{
 		ft_freetab(envp);

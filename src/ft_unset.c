@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:58:35 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/15 16:12:41 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/15 17:14:04 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	is_valid_identifier(const char *str)
 	return (1);
 }
 
-int	ft_unset(char **envp, char **locals, char **argv)
+int	ft_unset(char ***envp, char ***locals, char **argv)
 {
 	int		r;
 	size_t	i;
@@ -58,9 +58,9 @@ int	ft_unset(char **envp, char **locals, char **argv)
 			r = 1;
 			continue ;
 		}
-		if (is_in_envp(argv[i], locals) && !del_in_envp(argv[i], &locals))
+		if (is_in_envp(argv[i], *locals) && !del_in_envp(argv[i], locals))
 			return (-1);
-		if (is_in_envp(argv[i], envp) && !del_in_envp(argv[i], &envp))
+		if (is_in_envp(argv[i], *envp) && !del_in_envp(argv[i], envp))
 			return (-1);
 	}
 	return (r);
