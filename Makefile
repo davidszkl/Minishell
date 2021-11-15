@@ -24,6 +24,7 @@ EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			utils2.o\
 			utils3.o\
 			utils4.o\
+			utils5.o\
 			error.o\
 			)
 
@@ -33,6 +34,7 @@ UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
 			 utils2.o\
 			 utils3.o\
 			 utils4.o\
+			 utils5.o\
 			 envp_utils.o\
 			 ft_export.o\
 			 ft_export_utils.o\
