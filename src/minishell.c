@@ -20,7 +20,12 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		main.line = readline(PROMPT);
-		if (ft_isinquote_now(main.line, 0))
+		if (!*main.line)
+		{
+			free(main.line);
+			continue ;
+		}
+		if (ft_isinquote_now(main.line, ft_strlen(main.line)))
 			return (ft_myfree(main.line));
 		ft_getcount(&main);
 		while (ft_check_chevpipe(main.line) == 1)
@@ -33,10 +38,14 @@ int	main(int argc, char **argv)
 		}
 		ft_getcount(&main);
 		//expand_variables(line);
-		ft_parser(&main);
-		ft_remquote(&main);
+		if (ft_parser(&main))
+			return (ft_freeshell(&main));
+		if (ft_remquote(&main))
+			return (ft_freeshell(&main));
+		if (ft_fillstruct(&main))
+			return (ft_freeshell2(&main));
 		//ft_exec(&main);
-		ft_freeshell(&main);
+		ft_freeshell2(&main);
 	}
 	return (0);
 }

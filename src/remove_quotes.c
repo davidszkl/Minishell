@@ -39,7 +39,7 @@ char	*ft_remquotestr(char *str)
 	return (new);
 }
 
-int	ft_remquote1(t_main *main, char *str, int n1, int j)
+static int	ft_remquote1(t_main *main, char *str, int n1, int j)
 {
 	char	*new;
 	int		count;

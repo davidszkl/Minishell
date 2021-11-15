@@ -114,7 +114,6 @@ int	ft_parser(t_main *main)
 	tab = ft_splitq(main->line, '|');
 	if (!tab)
 		return (1);
-	ft_showtab(tab);
 	while (n < main->pipecount + 1)
 	{
 		main->cline[n].line = tab[n];
