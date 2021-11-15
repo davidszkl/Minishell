@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:17:19 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/10 12:11:47 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/15 12:03:08 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -39,4 +39,23 @@ t_expand_variables_args	init_args(const char *str)
 	args.i = -1;
 	args.is_in_quote = 0;
 	return (args);
+}
+
+int	is_in_dquotes(const char *str, size_t i)
+{
+	int		b;
+	int		b2;
+	size_t	j;
+
+	b2 = 0;
+	b = 0;
+	j = -1;
+	while (++j < i)
+	{
+		if (str[j] == '"' && b2 == 0)
+			b = !b;
+		if (str[j] == '\'' && b == 0)
+			b2 = !b2;
+	}
+	return (b);
 }

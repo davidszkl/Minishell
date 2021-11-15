@@ -6,11 +6,13 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:58:35 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/10 12:14:16 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/15 12:04:00 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 #include "../inc/expand_variables_args.h"
+
+int	is_in_dquotes(const char *str, size_t i);
 
 /*
 Returns value of environment
@@ -111,7 +113,7 @@ char	*expand_variables(const char *str, char **envp, char **locals)
 		return (free_4(args.s, 0, 0, 0));
 	while (args.s[++args.i])
 	{
-		if (args.s[args.i] == '\'')
+		if (args.s[args.i] == '\'' && !is_in_dquotes(args.s, args.i))
 			args.is_in_quote = !args.is_in_quote;
 		if (args.is_in_quote)
 			continue ;
