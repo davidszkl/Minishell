@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:05:55 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/11 18:14:17 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/15 15:49:44 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		my_putstr_fd(const char *s, int fd);
 int		check_and_free(char **tab, size_t l);
 char	*get_name(const char *str);
 char	*get_value(const char *str);
+char	*assign_name(char **name_value, char **argv);
+char	*assign_value(char **name_value, char **argv);
 
 int	envp_append(char *name, char *value, char ***envp)
 {
@@ -74,27 +76,28 @@ static int	my_putstr_fd_3(char *s1, char *s2, char *s3, int fd)
 int	ft_export(char ***envp, char ***locals, char **argv)
 {
 	char	*name_value[2];
+	int		r;
 
+	r = 0;
 	while (*++argv)
 	{
 		if (!is_valid_export_arg(*argv))
 		{
-			my_putstr_fd_3("export: `",
-				*argv, "': not a valid identifier\n", 2);
+			r = my_putstr_fd_3("export: `",
+					*argv, "': not a valid identifier\n", 2);
 			continue ;
 		}
-		name_value[0] = get_name(*argv);
-		if (!name_value[0])
-			return (0);
-		name_value[1] = get_value(*argv);
-		if (!name_value[1] && !is_in_envp(name_value[0], *locals))
-			return (free_2(name_value[0], 0));
+		if (!assign_name(name_value, argv))
+			return (-1);
+		if (!assign_value(name_value, argv) && !is_in_envp
+			(name_value[0], *locals) && free_2(name_value[0], 0))
+			continue ;
 		if (is_in_envp(name_value[0], *locals) && (!copy_to_envp(name_value
 					[0], *locals, envp) || !del_in_envp(name_value[0], locals)))
-			return (0 * free_2(name_value[0], name_value[1]));
+			return (-free_2(name_value[0], name_value[1]));
 		if (name_value[1] && !envp_assign(name_value[0], name_value[1], envp))
-			return (0 * free_2(name_value[0], name_value[1]));
+			return (-free_2(name_value[0], name_value[1]));
 		free_2(name_value[0], name_value[1]);
 	}
-	return (1);
+	return (r);
 }

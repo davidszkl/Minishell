@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_main.c                                      :+:      :+:    :+:   */
+/*   unset_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 11:37:26 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/15 13:25:15 by mlefevre         ###   ########.fr       */
+/*   Created: 2021/11/15 12:12:54 by mlefevre          #+#    #+#             */
+/*   Updated: 2021/11/15 13:16:23 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
 
+int		ft_unset(char **envp, char **locals, char **argv);
 void	ft_freetab(char **tab);
-int		ft_export(char ***envp, char ***locals, char **argv);
 char	**init_envp(char **envp);
 char	**init_locals(void);
-void	ft_showtab(char **tab);
 
-static int	myperror(const char *str)
+static int	myperror(const char *s)
 {
-	perror(str);
+	perror(s);
 	return (1);
 }
 
@@ -31,24 +29,21 @@ int	main(int argc, char **argv, char **envp)
 	int		r;
 
 	(void)argc;
-	locals = init_locals();
-	if (!locals)
-		return (myperror(argv[0]));
 	envp = init_envp(envp);
 	if (!envp)
+		return (myperror("unset: "));
+	locals = init_locals();
+	if (!locals)
 	{
-		ft_freetab(locals);
-		return (myperror(argv[0]));
+		ft_freetab(envp);
+		return (myperror("unset: "));
 	}
-	r = ft_export(&envp, &locals, argv);
+	r = ft_unset(envp, locals, argv);
 	if (r == -1)
 	{
-		perror("export: ");
-		ft_freetab(locals);
 		ft_freetab(envp);
-		return (1);
+		ft_freetab(locals);
+		return (myperror("unset: "));
 	}
-	ft_freetab(envp);
-	ft_freetab(locals);
 	return (r);
 }
