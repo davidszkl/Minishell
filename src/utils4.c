@@ -49,10 +49,14 @@ int	ft_check_chevpipe(char	*str)
 
 	n = 0;
 	while (str[n])
-		if (ft_is_chev(str, n++) == 1)
+	{
+		if (ft_is_chev(str, n) == 1 && !ft_isinquote_now(str, n))
 			return (1);
-	n--;
+		n++;
+	}
 	while (ft_isspace(str[n]) == 1)
+		n--;
+	if (!str[n] && ft_strlen(str))
 		n--;
 	if (str[n] == '|')
 		return (1);
@@ -71,4 +75,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	while (n--)
 		*d2++ = *s2++;
 	return (dst);
+}
+
+int	ft_myfree(char *str)
+{
+	free(str);
+	return (0);
 }

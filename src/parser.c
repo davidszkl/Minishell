@@ -18,13 +18,11 @@ int	ft_getcount(t_main *main)
 	n = 0;
 	main->pipecount = 0;
 	main->dchevcount = 0;
-	main->chev.nbr = 0;
-	main->error = 0;
 	while (main->line[n])
 	{
-		if (main->line[n] == '|')
+		if (main->line[n] == '|' && !ft_isinquote_now(main->line, n))
 			main->pipecount++;
-		if (ft_is_chev(main->line, n) == 1)
+		if (ft_is_chev(main->line, n) == 1 && !ft_isinquote_now(main->line, n))
 			main->dchevcount++;
 		n++;
 	}
@@ -48,7 +46,7 @@ static int	ft_insert_space3(char *str, int index, int t, int mod)
 		str[index + 3] = ' ';
 		return (4);
 	}
-	return (-1);
+	return (0);
 }
 
 static char	*ft_insert_space2(char *new, char *str)
@@ -60,16 +58,17 @@ static char	*ft_insert_space2(char *new, char *str)
 	j = 0;
 	while (str[n])
 	{
-		if (ft_is_chev(str, n) == 3 || ft_is_chev(str, n) == 4 || str[n] == '|')
+		if ((ft_is_chev(str, n) == 3 || ft_is_chev(str, n) == 4
+				|| str[n] == '|' ) && !ft_isinquote_now(str, n))
 			j += ft_insert_space3(new, j, str[n], 1);
-		else if (ft_is_chev(str, n) == 1 || ft_is_chev(str, n) == 2)
+		else if ((ft_is_chev(str, n) == 1 || ft_is_chev(str, n) == 2)
+			&& !ft_isinquote_now(str, n))
 			j += ft_insert_space3(new, j, str[n++], 2);
 		else
 			new[j++] = str[n];
 		n++;
 	}
 	new[j] = 0;
-	n = 0;
 	return (new);
 }
 
@@ -85,13 +84,16 @@ static char	*ft_insert_space(char *str)
 		return (ft_strdup(""));
 	while (str[n])
 	{
-		if (ft_is_chev(str, n) || str[n] == '|')
+		if ((ft_is_chev(str, n) || str[n] == '|' ) && !ft_isinquote_now(str, n))
 			count += 2;
 		n++;
 	}
 	new = malloc(sizeof(char) * (ft_strlen(str) + count + 1));
 	if (!new)
+	{
+		free(str);
 		return (NULL);
+	}
 	new = ft_insert_space2(new, str);
 	free(str);
 	return (new);
@@ -109,16 +111,16 @@ int	ft_parser(t_main *main)
 	main->line = ft_insert_space(main->line);
 	if (!main->line)
 		return (1);
-	tab = ft_split(main->line, '|');
+	tab = ft_splitq(main->line, '|');
 	if (!tab)
 		return (1);
 	while (n < main->pipecount + 1)
 	{
 		main->cline[n].line = tab[n];
-		main->cline[n].argv = ft_split(main->cline[n].line, ' ');
+		main->cline[n].argv = ft_splitq(main->cline[n].line, ' ');
 		if (!main->cline[n].argv)
 			return (1);
-		ft_showtab(main->cline[n].argv);
+		ft_showtab(main->cline->argv);
 		n++;
 	}
 	main->cline[n].line = NULL;

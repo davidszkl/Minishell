@@ -25,7 +25,7 @@ void	ft_freetab(char **tab)
 	free(tab);
 }
 
-void	ft_freeshell(t_main *main)
+int	ft_freeshell(t_main *main)
 {
 	int	n;
 
@@ -34,6 +34,21 @@ void	ft_freeshell(t_main *main)
 		ft_freetab(main->cline[n++].argv);
 	free(main->line);
 	free(main->cline);
-	//free(main->chev.nbrs);
-	//free(main->chev.term);
+	return (0);
+}
+
+int	ft_freeshell2(t_main *main)
+{
+	int	n;
+
+	n = 0;
+	while (main->cline[n].line)
+	{
+		free(main->cline[n].file_in);
+		free(main->cline[n].file_out);
+		ft_freetab(main->cline[n++].argv);
+	}
+	free(main->line);
+	free(main->cline);
+	return (0);
 }
