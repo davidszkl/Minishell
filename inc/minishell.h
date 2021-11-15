@@ -25,18 +25,20 @@
 /*structures*/
 
 typedef struct s_file {
-	int	fd;
+	char *name;
 	int	flags;
+ 	int	fd;
 }	t_file;
 
 typedef struct s_comm {
 	t_file	*file_in;
 	t_file	*file_out;
-	char	*line;
+	pid_t	pid;
 	char	**argv;
-	int		redircount;
-	int		pipe_in;
-	int		pipe_out;
+	char	*line;
+	int		rin;
+	int		rout;
+	int		pipe[2];
 }	t_comm;
 
 typedef struct s_chev {
@@ -46,7 +48,7 @@ typedef struct s_chev {
 }	t_chev;
 
 typedef struct s_main {
-	t_comm	*cline;
+	t_comm	*cline; // ligne de commande
 	t_chev	chev;
 	char	**envp;
 	char	**locs;
@@ -65,7 +67,9 @@ int		ft_check_cmd(char *str);
 /*parser*/
 
 int		ft_read_chev(t_main *main);
+int		ft_read_lpipe(t_main *main);
 int		ft_parser(t_main *main);
+int		ft_fillstruct(t_main *main);
 
 /*expander*/
 
@@ -80,13 +84,13 @@ void	ft_execute(void);
 char	**init_envp(char **envp);
 char	**init_locals(void);
 char	*ft_remquotestr(char *str);
-int		ft_remquote1(t_main *main, char *str, int n1, int j);
 int		ft_remquote(t_main *main);
 int		ft_getcount(t_main *main);
 
 /*errors*/
 
 int		ft_freeshell(t_main *main);
+int		ft_freeshell2(t_main *main);
 
 /*utils*/
 
@@ -111,7 +115,6 @@ int		ft_isalnumx(char *str, int n);
 int		ft_is_dchev(char *str, int n);
 int		ft_check_chevpipe(char	*str);
 int		ft_is_chev(char *str, int n);
-int		ft_read_lpipe(t_main *main);
 int		ft_isinquote(char *str);
 int		sort_envp(char **envp);
 int		ft_myfree(char *str);
@@ -129,7 +132,7 @@ void	ft_showtab(char **tab);
 
 //>< salut >< hello <<a ||><< au revoi coucou <<b <<c <   
 //salut << hello >> | C | < > < > <| A| F|A |FA AR AR >AR? G>?R AR|S 
-//|ARS A>R? < < <A ?R ?AGR> GAR |R> 
+//ARS A>R? < < <A ?R ?AGR> GAR |R|> 
 //s << c"|"c
 //salut << coucou | echo <<     bon"|"jour "|" |"|" salut << hello
 //"echo"

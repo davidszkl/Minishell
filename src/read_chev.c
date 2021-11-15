@@ -34,9 +34,10 @@ static int	ft_read_chev2(t_main *main, char *str)
 		free(str);
 		return (1);
 	}
+	write(1, "str to enter: ", 14);
+	ft_putendl_fd(str, 1);
 	main->temp = readline("> ");
-	printf("string = %s\n%s\n", str, main->chev.path);
-	while (ft_strncmp(main->temp, str, ft_strlen(main->temp)))
+	while (ft_strncmp(main->temp, str, ft_strlen(main->chev.path)))
 	{
 		ft_putendl_fd(main->temp, fd);
 		free(main->temp);

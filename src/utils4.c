@@ -56,7 +56,7 @@ int	ft_check_chevpipe(char	*str)
 	}
 	while (ft_isspace(str[n]) == 1)
 		n--;
-	if (!str[n])
+	if (!str[n] && ft_strlen(str))
 		n--;
 	if (str[n] == '|')
 		return (1);
