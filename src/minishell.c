@@ -35,21 +35,21 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		if (ft_isinquote_now(main.line, ft_strlen(main.line)))
-			return (ft_myfree(&main));
+			return (ft_myfreemain(&main));
 		ft_getcount(&main);
 		while (ft_check_chevpipe(main.line) == 1)
 		{
 			if (ft_read_chev(&main) == 1)
-				return (ft_myfree(&main));
+				return (ft_myfreemain(&main));
+			printf("%s\n", main.line);
 			if (main.line[ft_strlen(main.line) - 1] == '|')
 				if (ft_read_lpipe(&main) == 1)
-					return (ft_myfree(&main));
+					return (ft_myfreemain(&main));
 		}
 		main.line = expand_variables(main.line, main.envp, main.locals);
 		if (!main.line)
 			return (ft_freeshell(&main));
 		ft_getcount(&main);
-		printf("%d\n", main.pipecount);
 		if (ft_parser(&main))
 			return (ft_freeshell(&main));
 		if (ft_remquote(&main))

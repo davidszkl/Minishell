@@ -24,6 +24,6 @@ static size_t	get_comm_num(t_comm *cline)
 void	ft_exec(t_main *main)
 {
 	const size_t	n = get_comm_num(main->cline);
+
 	(void)n;
 }
-

@@ -46,22 +46,20 @@ static int	ft_remquote1(t_main *main, char *str, int n1, int j)
 	int		n;
 
 	count = 0;
-	n = 0;
-	while (str[n])
-		if (!ft_isquote(str[n++]))
+	n = -1;
+	while (str[++n])
+		if ((!ft_isinquote_now(str, n) && !ft_isquote(str[n]))
+			|| ft_isinquote_now(str, n))
 			count++;
-	new = malloc(sizeof(char) * (count + 1));
+	new = malloc(sizeof(char) * count + 1);
 	if (!new)
 		return (1);
 	count = 0;
-	n = 0;
-	while (str[n])
-	{
-		if (!ft_isquote(str[n]))
-			new[count++] = str[n++];
-		else
-			n++;
-	}
+	n = -1;
+	while (str[++n])
+		if ((!ft_isinquote_now(str, n) && !ft_isquote(str[n]))
+			|| ft_isinquote_now(str, n))
+			new[count++] = str[n];
 	new[count] = 0;
 	free(main->cline[n1].argv[j]);
 	main->cline[n1].argv[j] = new;
@@ -79,8 +77,9 @@ int	ft_remquote(t_main *main)
 		j = 0;
 		while (main->cline[n].argv[j])
 		{
-			if (ft_remquote1(main, main->cline[n].argv[j], n, j))
-				return (1);
+			if (ft_strncmp(main->cline[n].argv[j], "/tmp/", 5))
+				if (ft_remquote1(main, main->cline[n].argv[j], n, j))
+					return (1);
 			j++;
 		}
 		ft_showtab(main->cline[n].argv);
