@@ -77,8 +77,10 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-int	ft_myfree(char *str)
+int	ft_myfree(t_main *main)
 {
-	free(str);
+	ft_freetab(main->envp);
+	ft_freetab(main->locals);
+	free(main->line);
 	return (0);
 }

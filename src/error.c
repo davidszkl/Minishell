@@ -34,10 +34,30 @@ int	ft_freeshell(t_main *main)
 		ft_freetab(main->cline[n++].argv);
 	free(main->line);
 	free(main->cline);
+	ft_freetab(main->envp);
+	ft_freetab(main->locals);
 	return (0);
 }
 
 int	ft_freeshell2(t_main *main)
+{
+	int	n;
+
+	n = 0;
+	while (main->cline[n].line)
+	{
+		free(main->cline[n].file_in);
+		free(main->cline[n].file_out);
+		ft_freetab(main->cline[n++].argv);
+	}
+	free(main->line);
+	free(main->cline);
+	ft_freetab(main->envp);
+	ft_freetab(main->locals);
+	return (0);
+}
+
+int	ft_freeshell3(t_main *main)
 {
 	int	n;
 

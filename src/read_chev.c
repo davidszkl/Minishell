@@ -15,7 +15,7 @@ static int	ft_free(t_main *main)
 {
 	free(main->chev.nbrs);
 	free(main->chev.path);
-	return (0);
+	return (1);
 }
 
 static int	ft_read_chev2(t_main *main, char *str)
@@ -24,6 +24,7 @@ static int	ft_read_chev2(t_main *main, char *str)
 
 	if (!str[0])
 	{
+		ft_putendl_fd("minishell: syntax error near unexpected token `newline'", 2);
 		free(str);
 		return (1);
 	}

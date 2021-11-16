@@ -48,16 +48,14 @@ typedef struct s_chev {
 }	t_chev;
 
 typedef struct s_main {
-	t_comm	*cline; // ligne de commande
+	t_comm	*cline;
 	t_chev	chev;
 	char	**envp;
 	char	**locals;
-	char	**locs;
 	char	*line;
 	char	*temp;
 	int		dchevcount;
 	int		pipecount;
-	int		lpipe;
 }	t_main;
 
 /*checker*/
@@ -92,6 +90,7 @@ int		ft_getcount(t_main *main);
 
 int		ft_freeshell(t_main *main);
 int		ft_freeshell2(t_main *main);
+int		ft_freeshell3(t_main *main);
 
 /*utils*/
 
@@ -118,7 +117,7 @@ int		ft_check_chevpipe(char	*str);
 int		ft_is_chev(char *str, int n);
 int		ft_isinquote(char *str);
 int		sort_envp(char **envp);
-int		ft_myfree(char *str);
+int		ft_myfree(t_main *main);
 int		ft_isquote(char c);
 int		ft_isspace(char c);
 int		ft_isalpha(int c);

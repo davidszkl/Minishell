@@ -36,6 +36,7 @@ t_expand_variables_args	init_args(const char *str)
 	t_expand_variables_args	args;
 
 	args.s = ft_strdup(str);
+	free((void *)str);
 	args.i = -1;
 	args.is_in_quote = 0;
 	return (args);

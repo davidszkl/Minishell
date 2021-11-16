@@ -17,7 +17,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	(void)argc;
-	//ajouter le free de envp et locals dans freeshell ou jsp mais il faut.
 	main.envp = init_envp(envp);
 	if (!envp)
 		return (1);
@@ -30,26 +29,27 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		main.line = readline(PROMPT);
-		if (!*main.line)
+		if (!main.line || !*main.line)
 		{
 			free(main.line);
 			continue ;
 		}
 		if (ft_isinquote_now(main.line, ft_strlen(main.line)))
-			return (ft_myfree(main.line));
+			return (ft_myfree(&main));
 		ft_getcount(&main);
 		while (ft_check_chevpipe(main.line) == 1)
 		{
 			if (ft_read_chev(&main) == 1)
-				return (ft_myfree(main.line));
+				return (ft_myfree(&main));
 			if (main.line[ft_strlen(main.line) - 1] == '|')
 				if (ft_read_lpipe(&main) == 1)
-					return (ft_myfree(main.line));
+					return (ft_myfree(&main));
 		}
+		main.line = expand_variables(main.line, main.envp, main.locals);
+		if (!main.line)
+			return (ft_freeshell(&main));
 		ft_getcount(&main);
-		//expand_variables(main.line, main.envp, main.locals);
-		//la fonction ne modifie pas main.line mais retourne le resultat. faut assigner cette
-		//valeur de retour a main.line + free ancien main.line et checker si c'est pas null
+		printf("%d\n", main.pipecount);
 		if (ft_parser(&main))
 			return (ft_freeshell(&main));
 		if (ft_remquote(&main))
@@ -57,7 +57,9 @@ int	main(int argc, char **argv, char **envp)
 		if (ft_fillstruct(&main))
 			return (ft_freeshell2(&main));
 		//ft_exec(&main);
-		ft_freeshell2(&main);
+		ft_freeshell3(&main);
 	}
+	ft_freetab(main.envp);
+	ft_freetab(main.locals);
 	return (0);
 }

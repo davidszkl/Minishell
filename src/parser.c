@@ -120,7 +120,6 @@ int	ft_parser(t_main *main)
 		main->cline[n].argv = ft_splitq(main->cline[n].line, ' ');
 		if (!main->cline[n].argv)
 			return (1);
-		ft_showtab(main->cline->argv);
 		n++;
 	}
 	main->cline[n].line = NULL;
