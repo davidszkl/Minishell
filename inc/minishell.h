@@ -6,12 +6,13 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/15 17:21:49 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/16 16:58:19 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # define PROMPT "minishell> "
+# define BINDIR "bin/"
 
 /*includes*/
 
@@ -38,7 +39,6 @@ typedef struct s_comm {
 	char	*line;
 	int		rin;
 	int		rout;
-	int		pipe[2];
 }	t_comm;
 
 typedef struct s_chev {
