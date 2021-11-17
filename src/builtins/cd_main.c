@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 10:49:20 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/17 11:08:07 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/17 13:30:21 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	*exec_perror(const char *str);
 
 int	main(int argc, char **argv, char **envp)
 {
+	(void)argc;
 	envp = init_envp(envp);
 	if (!envp)
 		return ((int)exec_perror("init_envp") + 1);

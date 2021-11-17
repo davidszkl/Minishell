@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 12:34:04 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/17 13:04:03 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/17 13:28:47 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 {
 	int	nl;
 
+	(void)argc;
 	nl = 1;
 	while (*++argv)
 	{
