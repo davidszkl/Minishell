@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/16 17:10:32 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/17 13:06:50 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(const char *s, int fd);
 int		ft_export(char ***envp, char ***locals, char **argv);
 int		ft_unset(char ***envp, char ***locals, char **argv);
+int		ft_cd(char ***envp, char **argv);
 
 static void	close_pipes(int *pipes, size_t n)
 {
@@ -32,7 +33,7 @@ static void	close_pipes(int *pipes, size_t n)
 		close(*pipes++);
 }
 
-static void	*exec_perror(const char *str)
+void	*exec_perror(const char *str)
 {
 	ft_putstr_fd(PROMPT, 2);
 	ft_putstr_fd(": ", 2);
@@ -184,27 +185,24 @@ static void	open_pipes(int *pipes, size_t n)
 	}
 }
 
-static int	is_c_e_u_e(const char *s)
+static int	is_c_e_u(const char *s)
 {
 	return (!ft_strncmp(s, "cd", -1)
 			|| !ft_strncmp(s, "export", -1)
-			|| !ft_strncmp(s, "unset", -1)
-			|| !ft_strncmp(s, "exit", -1));
+			|| !ft_strncmp(s, "unset", -1));
 }
 
-static int	exec_c_e_u_e(t_comm comm, char ***envp, char ***locals)
+static int	exec_c_e_u(t_comm comm, char ***envp, char ***locals)
 {
 	open_files(comm.file_in, comm.rin);
 	close_files(comm.file_in, comm.rin);
 	open_files(comm.file_out, comm.rout);
 	close_files(comm.file_out, comm.rout);
 	if (!ft_strncmp(comm.argv[0], "cd", -1))
-		return (ft_cd(comm.argv));
+		return (ft_cd(envp, comm.argv));
 	if (!ft_strncmp(comm.argv[0], "export", -1))
 		return (ft_export(envp, locals, comm.argv));
-	if (!ft_strncmp(comm.argv[0], "unset", -1))
-		return (ft_unset(envp, locals, comm.argv));
-	return (ft_exit(comm.argv)); //does argv checking then just think for exiting wo mem leaks
+	return (ft_unset(envp, locals, comm.argv));
 }
 
 int	ft_exec(t_main *main)
@@ -216,8 +214,8 @@ int	ft_exec(t_main *main)
 	size_t			i;
 	int				*pipes;
 
-	if (n == 1 && is_c_e_u_e(main->cline[0].argv[0]))
-		return (exec_c_e_u_e(main->cline[0], &main->envp, &main->locals));
+	if (n == 1 && is_c_e_u(main->cline[0].argv[0]))
+		return (exec_c_e_u(main->cline[0], &main->envp, &main->locals));
 	pipes = malloc(sizeof(int) * n * 2);
 	open_pipes(pipes, n);
 	i = -1;
