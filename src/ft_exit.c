@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 11:18:08 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/17 13:17:33 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/17 14:46:28 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		ft_exit(char **argv)
 		return (0);
 	if (argv[2])
 	{
-		ft_putstr_fd(PROMPT, 2);
+		ft_putstr_fd(ERROR, 2);
 		ft_putstr_fd(": exit: too many arguments\n", 2);
 		return (-1);
 	}
@@ -68,7 +68,7 @@ int		ft_exit(char **argv)
 		argv[1]++;
 	if (!exit_valid_arg(argv[1]))
 	{
-		ft_putstr_fd(PROMPT, 2);
+		ft_putstr_fd(ERROR, 2);
 		ft_putstr_fd(": exit: ", 2);
 		ft_putstr_fd(argv[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);

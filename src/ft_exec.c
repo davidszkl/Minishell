@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/17 14:38:41 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/17 14:46:26 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	close_pipes(int *pipes, size_t n)
 
 void	*exec_perror(const char *str)
 {
-	ft_putstr_fd(PROMPT, 2);
+	ft_putstr_fd(ERROR, 2);
 	ft_putstr_fd(": ", 2);
 	perror(str);
 	return (0);
@@ -49,7 +49,7 @@ static int	is_abs_path(const char *str)
 
 static char	*p_comm_no_found(const char *s)
 {
-	ft_putstr_fd(PROMPT, 2);
+	ft_putstr_fd(ERROR, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd(": command not found\n", 2);
@@ -66,7 +66,7 @@ int	handle_dir(const char *str)
 		if (!p)
 			exec_perror(str);
 		closedir(p);
-		ft_putstr_fd(PROMPT, 2);
+		ft_putstr_fd(ERROR, 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(": is a directory\n", 2);

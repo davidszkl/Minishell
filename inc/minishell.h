@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/16 16:58:19 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/17 14:51:45 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # define PROMPT "minishell> "
+# define ERROR  "minishell"
 # define BINDIR "bin/"
 
 /*includes*/
@@ -76,7 +78,7 @@ char	*expand_variables(const char *str, char **envp, char **locals);
 
 /*executor*/
 
-void	ft_execute(void);
+int		ft_exec(t_main *main);
 
 /*functions*/
 
