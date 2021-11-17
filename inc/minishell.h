@@ -14,13 +14,15 @@
 # define PROMPT "minishell> "
 
 /*includes*/
-
-# include <readline/readline.h>
-# include <readline/history.h>
+# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stddef.h>
+# include <signal.h>
 # include <fcntl.h>
+# include <termios.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 /*structures*/
 
@@ -85,6 +87,10 @@ char	**init_locals(void);
 char	*ft_remquotestr(char *str);
 int		ft_remquote(t_main *main);
 int		ft_getcount(t_main *main);
+
+/*signals*/
+
+int 	ft_signal_handler(void);
 
 /*errors*/
 

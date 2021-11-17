@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
+extern t_comm *g_glb;
+
 static int	ft_getrdircount(t_main *main, int n)
 {
 	int	incount;
@@ -86,6 +88,7 @@ int	ft_fillstruct(t_main *main)
 	n = 0;
 	while (main->cline[n].line)
 	{
+		main->cline[n].pid = 0;
 		ft_getrdircount(main, n);
 		main->cline[n].file_in
 			= malloc(sizeof(t_file) * (main->cline[n].rin + 1));
@@ -98,5 +101,6 @@ int	ft_fillstruct(t_main *main)
 		ft_fillstruct1(&main->cline[n]);
 		n++;
 	}
+	g_glb = main->cline;
 	return (0);
 }
