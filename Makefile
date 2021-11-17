@@ -168,7 +168,7 @@ LIB		= -lreadline
 all:	$(NAME) $(BINDIR) $(BUILTINS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/*.h
-			$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@
+			$(CC) $(CFLAGS) -I$(INCDIR) -I/Users/dszklarz/.brew/opt/readline/include -c $< -o $@
 
 $(OBJDIR)/builtins/%.o: $(SRCDIR)/builtins/%.c
 			$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@           
@@ -201,7 +201,7 @@ $(BINDIR):
 	mkdir $(BINDIR)
 
 $(NAME):        $(OBJDIR) $(OBJS)
-			$(CC) $(CFLAGS) $(LIB) $(OBJS) -o $(NAME)
+			$(CC) $(CFLAGS) $(LIB) -L/Users/dszklarz/.brew/opt/readline/lib $(OBJS) -o $(NAME)
 
 install:
 			mkdir $(OBJDIR) $(SRCDIR) $(INCDIR) $(BINDIR)

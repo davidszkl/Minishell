@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
+t_main	*g_glb;
+
 static int	ft_envpinit(t_main *main, char **envp)
 {
 	main->envp = init_envp(envp);
@@ -22,12 +24,19 @@ static int	ft_envpinit(t_main *main, char **envp)
 		ft_freetab(main->envp);
 		return (1);
 	}
+	ft_signal_handler();
 	return (0);
 }
 
 static int	ft_first_check(t_main *main)
 {
-	if (!main->line || !*main->line)
+	if (!main->line)
+	{
+		ft_freetab(main->envp);
+		ft_freetab(main->locals);
+		exit(0);
+	}
+	if (!*main->line)
 		return (ft_myfree(main->line));
 	if (ft_isinquote_now(main->line, ft_strlen(main->line)))
 		return (write(1, "unclosed quote\n", 15));
@@ -68,11 +77,17 @@ static int	ft_parse(t_main *main)
 int	main(int argc, char **argv, char **envp)
 {
 	t_main		main;
+	struct termios old;
+	struct termios new;
 
+	tcgetattr(0, &old);
+	tcsetattr(0, ECHOCTL, &new);
+	g_glb = &main;
 	(void)argv;
 	(void)argc;
 	if (ft_envpinit(&main, envp))
 		return (1);
+	
 	while (1)
 	{
 		main.line = readline(PROMPT);
