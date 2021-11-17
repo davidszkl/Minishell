@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 08:34:32 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/14 08:34:33 by dszklarz         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:11:40 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -82,7 +82,7 @@ int	ft_remquote(t_main *main)
 					return (1);
 			j++;
 		}
-		ft_showtab(main->cline[n].argv);
+		//ft_showtab(main->cline[n].argv);
 		n++;
 	}
 	return (0);

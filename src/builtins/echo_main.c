@@ -6,9 +6,11 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 12:34:04 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/17 13:28:47 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:19:42 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stddef.h>
 
 void	ft_putstr_fd(const char *s, int fd);
 
@@ -19,20 +21,22 @@ static int	is_nl_param(const char *s)
 
 int	main(int argc, char **argv)
 {
-	int	nl;
+	size_t	i;
+	int		nl;
 
 	(void)argc;
+	i = 0;
 	nl = 1;
-	while (*++argv)
+	while (argv[++i])
 	{
-		if (is_nl_param(*argv))
+		if (is_nl_param(argv[i]))
 		{
 			nl = 0;
 			continue ;
 		}
-		ft_putstr_fd(*argv, 1);
-		if (argv[1])
+		if (i > 1)
 			ft_putstr_fd(" ", 1);
+		ft_putstr_fd(*argv, 1);
 	}
 	if (nl)
 		ft_putstr_fd("\n", 1);

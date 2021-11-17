@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/17 14:51:45 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/17 15:00:08 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ char	*ft_tolower(char *str);
 char	*ft_itoas(int nbr);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	ft_putendl_fd(char	*str, int fd);
+void	ft_putstr_fd(const char *str, int fd);
 void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

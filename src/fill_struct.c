@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:16:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/15 12:16:40 by dszklarz         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:06:26 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -22,13 +22,13 @@ static int	ft_getrdircount(t_main *main, int n)
 	j = 0;
 	while (main->cline[n].argv[j])
 	{
-		if (ft_strncmp(main->cline[n].argv[j], "<",
+		if (!ft_strncmp(main->cline[n].argv[j], "<",
 				ft_strlen(main->cline[n].argv[j])))
 			incount++;
-		else if (ft_strncmp(main->cline[n].argv[j], ">",
+		else if (!ft_strncmp(main->cline[n].argv[j], ">",
 				ft_strlen(main->cline[n].argv[j])))
 			outcount++;
-		else if (ft_strncmp(main->cline[n].argv[j], ">>",
+		else if (!ft_strncmp(main->cline[n].argv[j], ">>",
 				ft_strlen(main->cline[n].argv[j])))
 			outcount++;
 		j++;

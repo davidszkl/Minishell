@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/17 14:46:26 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:10:55 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		ft_cd(char ***envp, char **argv);
 
 static void	close_pipes(int *pipes, size_t n)
 {
+	n = n * 2;
 	while (n--)
 		close(*pipes++);
 }
@@ -139,13 +140,16 @@ static void	close_files(t_file *files, int n)
 	i = -1;
 	while (++i < n)
 		if (files[i].fd != -1)
-			close(files[i].fd);
+			if (close(files[i].fd) == -1)
+				exec_perror("close");
 }
 
 static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes, size_t n)
 {
 	char	*path;
-	//free tout et close tout si error avant execve
+	int		b;
+
+	b = 1;
 	if (comm.rin)
 	{
 		open_files(comm.file_in, comm.rin);
@@ -158,8 +162,10 @@ static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes
 		close_files(comm.file_out, comm.rout - 1);
 		fd_w = comm.file_out[comm.rout - 1].fd;
 	}
-	dup2(fd_r, 0);
-	dup2(fd_w, 1);
+	if (dup2(fd_r, 0) == -1)
+		b = (int)exec_perror("dup2");
+	if (dup2(fd_w, 1) == -1)
+		b = (int)exec_perror("dup2");
 	if (comm.rin)
 		close(fd_r);
 	if (comm.rout)
@@ -168,7 +174,8 @@ static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes
 	path = find_command_wrapper(comm.argv[0], envp);
 	if (!path)
 		exit(1);
-	execve(path, comm.argv, envp);
+	if (b)
+		execve(path, comm.argv, envp);
 	free(path);
 	exit((int)exec_perror(path) + 1);
 }
@@ -180,7 +187,11 @@ static void	open_pipes(int *pipes, size_t n)
 	i = 0;
 	while (i / 2 < n)
 	{
-		pipe(pipes + i);
+		if (pipe(pipes + i) == -1)
+		{
+			exec_perror("pipe");
+			close_pipes(pipes, i / 2);
+		}
 		i += 2;
 	}
 }
@@ -216,17 +227,26 @@ int	ft_exec(t_main *main)
 
 	if (n == 1 && is_c_e_u(main->cline[0].argv[0]))
 		return (exec_c_e_u(main->cline[0], &main->envp, &main->locals));
-	pipes = malloc(sizeof(int) * n * 2);
+	pipes = malloc(sizeof(int) * main->pipecount * 2);
 	open_pipes(pipes, n);
 	i = -1;
 	while (++i < n)
 	{
 		init_r_w(&fd_r, &fd_w, i, main->pipecount, pipes);
 		main->cline[i].pid = fork();
+		if (main->cline[i].pid == -1)
+		{
+			free(pipes);
+			close_pipes(pipes, main->pipecount);
+			ft_putstr_fd(ERROR, 2);
+			ft_putstr_fd(": ", 2);
+			perror("fork");
+			return (1);
+		}
 		if (!main->cline[i].pid)
 			enter_child(fd_r, fd_w, main->cline[i], main->envp, pipes, n);
 	}
-	close_pipes(pipes, n);
+	close_pipes(pipes, main->pipecount);
 	free(pipes);
 	waitpid(main->cline[i - 1].pid, &status, 0);
 	return (wexitstatus(status));
