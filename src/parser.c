@@ -105,6 +105,7 @@ int	ft_parser(t_main *main)
 	int		n;
 
 	n = 0;
+	ft_getcount(main);
 	main->cline = malloc(sizeof(t_comm) * (main->pipecount + 2));
 	if (!main->cline)
 		return (1);

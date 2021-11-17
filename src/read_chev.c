@@ -18,38 +18,6 @@ static int	ft_free(t_main *main)
 	return (1);
 }
 
-static int	ft_read_chev2(t_main *main, char *str)
-{
-	int	fd;
-
-	if (!str[0])
-	{
-		ft_putendl_fd("minishell: syntax error near unexpected token `newline'", 2);
-		free(str);
-		return (1);
-	}
-	str = ft_remquotestr(str);
-	fd = open(main->chev.path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (fd < 0)
-	{
-		free(str);
-		return (1);
-	}
-	write(1, "str to enter: ", 14);
-	ft_putendl_fd(str, 1);
-	main->temp = readline("> ");
-	while (ft_strncmp(main->temp, str, ft_strlen(main->chev.path)))
-	{
-		ft_putendl_fd(main->temp, fd);
-		free(main->temp);
-		main->temp = readline("> ");
-	}
-	close(fd);
-	free(main->temp);
-	free(str);
-	return (0);
-}
-
 static void	ft_get(t_main *main, int n)
 {
 	char	*nbr;
@@ -73,16 +41,42 @@ static void	ft_get(t_main *main, int n)
 		free(nbr);
 		return (free(term));
 	}
-	main->chev.path = ft_remquotestr(main->chev.path);
 	free(nbr);
 	free(term);
+}
+
+static int	ft_read_chev2(t_main *main, char *str)
+{
+	int		fd;
+
+	if (!str[0])
+	{
+		printf("minishell: syntax error near unexpected token `newline'\n");
+		return (ft_myfree(str));
+	}
+	fd = open(main->chev.path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	if (fd < 0)
+		return (ft_myfree(str));
+	str = ft_remquotestr(str);
+	printf("string to enter: %s\n", str);
+	main->temp = readline("> ");
+	while (ft_strncmp(main->temp, str, ft_strlen(main->temp)))
+	{
+		ft_putendl_fd(main->temp, fd);
+		free(main->temp);
+		main->temp = readline("> ");
+	}
+	close(fd);
+	free(main->temp);
+	free(str);
+	return (0);
 }
 
 static int	ft_read_chev1(t_main *main, char *temp, int n, int j)
 {
 	while (main->line[n])
 	{
-		if (main->line[n] == '|')
+		if (main->line[n] == '|' && !ft_isinquote_now(main->line, n))
 			main->chev.nbr++;
 		if (ft_is_chev(main->line, n) == 1 && !ft_isinquote_now(main->line, n))
 		{

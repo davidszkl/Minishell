@@ -88,11 +88,11 @@ int	ft_fillstruct(t_main *main)
 	{
 		ft_getrdircount(main, n);
 		main->cline[n].file_in
-			= malloc(sizeof(t_file) * main->cline[n].rin + 1);
+			= malloc(sizeof(t_file) * (main->cline[n].rin + 1));
 		if (!main->cline[n].file_in)
 			return (1);
 		main->cline[n].file_out
-			= malloc(sizeof(t_file) * main->cline[n].rout + 1);
+			= malloc(sizeof(t_file) * (main->cline[n].rout + 1));
 		if (!main->cline[n].file_out)
 			return (1);
 		ft_fillstruct1(&main->cline[n]);

@@ -77,7 +77,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	return (dst);
 }
 
-int	ft_myfree(t_main *main)
+int	ft_myfreemain(t_main *main)
 {
 	ft_freetab(main->envp);
 	ft_freetab(main->locals);
