@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 13:17:55 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 14:45:44 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_export(char ***envp, char ***locals, char **argv);
 int		ft_unset(char ***envp, char ***locals, char **argv);
 int		ft_cd(char ***envp, char **argv);
 
-#define DEBUGG
+#define DEBUG
 
 static void	close_pipes(int *pipes, size_t n)
 {
@@ -128,14 +128,14 @@ static int	open_files(t_file *files, int n)
 	int	i;
 
 #ifdef DEBUG
-	printf("in open\n");
+	printf("in open(n==%i)\n", n);
 #endif
 	b = 1;
 	i = -1;
 	while (++i < n)
 	{
 #ifdef DEBUG
-		printf("filename: %s\n", files[i].name);
+		printf("filename: %s  i==%i\n", files[i].name, i);
 #endif
 		files[i].fd = open(files[i].name, files[i].flags, 0644);
 		if (files[i].fd == -1)
@@ -282,7 +282,9 @@ int	ft_exec(t_main *main)
 		if (!pipes)
 			return (1 + (int)exec_perror("malloc"));
 	}
+	ft_putstr_fd("Before ope pipe\n", 2);
 	open_pipes(pipes, main->pipecount);
+	ft_putstr_fd("After ope pipe\n", 2);
 	showfd(pipes, main->pipecount * 2);
 	i = -1;
 	while (++i < n)

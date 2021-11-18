@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/17 15:07:20 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 13:27:29 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -97,7 +97,6 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		if (ft_parse_error(&main))
 			return (ft_myfreemain(&main));
-		printf("%s\n", main.line);
 		ft_getcount(&main);
 		while (ft_check_chevpipe(main.line) == 1)
 			if (ft_chevpipe_loop(&main))

@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:16:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/17 16:06:26 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 14:53:21 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -71,19 +71,19 @@ static int	ft_fillstruct2(t_comm *comm, int n, int j)
 	if (!ft_strncmp(comm->argv[n], "<", ft_strlen(comm->argv[n])))
 	{
 		comm->file_in[j].flags = O_RDONLY;
-		comm->file_in[j].name = comm->argv[n + 1];
+		comm->file_in[j].name = ft_strdup(comm->argv[n + 1]);
 		return (1);
 	}
 	if (!ft_strncmp(comm->argv[n], ">", ft_strlen(comm->argv[n])))
 	{
 		comm->file_out[j].flags = O_CREAT | O_TRUNC | O_WRONLY;
-		comm->file_out[j].name = comm->argv[n + 1];
+		comm->file_out[j].name = ft_strdup(comm->argv[n + 1]);
 		return (1);
 	}
 	if (!ft_strncmp(comm->argv[n], ">>", ft_strlen(comm->argv[n])))
 	{
 		comm->file_out[j].flags = O_CREAT | O_APPEND | O_WRONLY;
-		comm->file_out[j].name = comm->argv[n + 1];
+		comm->file_out[j].name = ft_strdup(comm->argv[n + 1]);
 		return (1);
 	}
 	return (0);
@@ -125,13 +125,8 @@ int	ft_fillstruct(t_main *main)
 		if (!main->cline[n].file_out)
 			return (1);
 		ft_fillstruct1(&main->cline[n]);
-		write(1, "before\n", 7);
-		ft_showtab(main->cline[n].argv);
-		write(1, "----------\n", 11);
 		if (ft_tabremrdir(main, n))
 			return (1);
-		write(1, "after\n", 6);
-		ft_showtab(main->cline[n].argv);
 		n++;
 	}
 	g_glb = main->cline;
