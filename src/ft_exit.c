@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 11:18:08 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/17 14:46:28 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 09:27:45 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ int		ft_exit(char **argv)
 {
 	if (!argv[1])
 		return (0);
-	if (argv[2])
-	{
-		ft_putstr_fd(ERROR, 2);
-		ft_putstr_fd(": exit: too many arguments\n", 2);
-		return (-1);
-	}
 	while (*(argv[1]) == ' ')
 		argv[1]++;
 	if (!exit_valid_arg(argv[1]))
@@ -73,6 +67,12 @@ int		ft_exit(char **argv)
 		ft_putstr_fd(argv[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		return (255);	
+	}
+	if (argv[2])
+	{
+		ft_putstr_fd(ERROR, 2);
+		ft_putstr_fd(": exit: too many arguments\n", 2);
+		return (-1);
 	}
 	return ((unsigned char)ft_atoi(argv[1]));
 }

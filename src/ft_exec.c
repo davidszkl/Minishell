@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/17 16:10:55 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 10:09:47 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ static int	open_files(t_file *files, int n)
 	int	b;
 	int	i;
 
+//	printf("n: %i\n", n);
+//	printf("filename: %s\n", files[n].name);
 	b = 1;
 	i = -1;
 	while (++i < n)
@@ -150,6 +152,8 @@ static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes
 	int		b;
 
 	b = 1;
+//	printf("argv[0]: %s\n", comm.argv[0]);
+//	printf("comm.rin: %i\ncomm.rout: %i\n", comm.rin, comm.rout);
 	if (comm.rin)
 	{
 		open_files(comm.file_in, comm.rin);
