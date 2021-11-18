@@ -76,3 +76,29 @@ int	ft_myfree(char *str)
 	free(str);
 	return (1);
 }
+
+char	*ft_getword_simple(char *str, int n)
+{
+	char	*new;
+	int		j;
+	int		t;
+
+	j = 0;
+	while (str[n] && ft_isspace(str[n]) == 1)
+	{
+		j++;
+		n++;
+	}
+	t = n;
+	while (str[n] && ft_isalnumx(str, n) == 1)
+		n++;
+	new = malloc(sizeof(char) * (n + 1));
+	if (!new)
+		return (NULL);
+	n = t;
+	j = 0;
+	while (str[n] && ft_isalnumx(str, n) == 1)
+		new[j++] = str[n++];
+	new[j] = 0;
+	return (new);
+}

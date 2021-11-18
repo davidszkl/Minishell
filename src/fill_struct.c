@@ -13,6 +13,32 @@
 
 extern t_comm *g_glb;
 
+static int	ft_tabremrdir(t_main *main, int n)
+{
+	int		count;
+	int		j;
+
+	count = 0;
+	j = 0;
+	while (main->cline[n].argv[j])
+	{
+		if (ft_is_chev(main->cline[n].argv[j], 0))
+		{
+			free(main->cline[n].argv[j]);
+			free(main->cline[n].argv[j + 1]);
+			while (main->cline[n].argv[j + 2])
+			{
+				main->cline[n].argv[j] = main->cline[n].argv[j + 2];
+				j++;
+			}
+			main->cline[n].argv[j] = NULL;
+			continue ;
+		}
+		j++;
+	}
+	return (0);
+}
+
 static int	ft_getrdircount(t_main *main, int n)
 {
 	int	incount;
@@ -99,6 +125,13 @@ int	ft_fillstruct(t_main *main)
 		if (!main->cline[n].file_out)
 			return (1);
 		ft_fillstruct1(&main->cline[n]);
+		write(1, "before\n", 7);
+		ft_showtab(main->cline[n].argv);
+		write(1, "----------\n", 11);
+		if (ft_tabremrdir(main, n))
+			return (1);
+		write(1, "after\n", 6);
+		ft_showtab(main->cline[n].argv);
 		n++;
 	}
 	g_glb = main->cline;

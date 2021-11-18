@@ -76,23 +76,28 @@ static int	ft_parse(t_main *main)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_main		main;
-	struct termios old;
-	struct termios new;
+	t_main			main;
+	struct termios	old;
+	struct termios	new;
 
 	tcgetattr(0, &old);
-	tcsetattr(0, ECHOCTL, &new);
+	new = old;
+	new.c_lflag &= ~(ECHOCTL);
+	tcsetattr(0, TCSANOW, &new);
 	g_glb = &main;
+	g_glb->cline = NULL;
 	(void)argv;
 	(void)argc;
 	if (ft_envpinit(&main, envp))
 		return (1);
-	
 	while (1)
 	{
 		main.line = readline(PROMPT);
 		if (ft_first_check(&main))
 			continue ;
+		if (ft_parse_error(&main))
+			return (ft_myfreemain(&main));
+		printf("%s\n", main.line);
 		ft_getcount(&main);
 		while (ft_check_chevpipe(main.line) == 1)
 			if (ft_chevpipe_loop(&main))
@@ -101,10 +106,10 @@ int	main(int argc, char **argv, char **envp)
 			return (1);
 		if (ft_fillstruct(&main))
 			return (ft_freeshell2(&main));
+		if (ft_tabcheck(&main))
+			return (ft_freeshell2(&main));
 		ft_exec(&main);
 		ft_freeshell3(&main);
 	}
-	ft_freetab(main.envp);
-	ft_freetab(main.locals);
 	return (0);
 }

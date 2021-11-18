@@ -101,6 +101,8 @@ int		ft_freeshell2(t_main *main);
 int		ft_freeshell3(t_main *main);
 int		ft_freeshell4(t_main *main);
 int		ft_myfreemain(t_main *main);
+int		ft_parse_error(t_main *main);
+int		ft_tabcheck(t_main *main);
 int		ft_myfree(char *str);
 
 /*utils*/
@@ -111,20 +113,20 @@ char	**ft_splitq(char *str, char c);
 char	*ft_replace_str(const char *s, size_t start, size_t n, const char *sub);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strdup(const char *s1);
+char	*ft_getword_simple(char *str, int n);
 char	*ft_getword(char *str, int n);
+char	*ft_strdup(const char *s1);
 char	*ft_tolower(char *str);
 char	*ft_itoas(int nbr);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	ft_putendl_fd(char	*str, int fd);
 void	ft_putstr_fd(const char *str, int fd);
+void	ft_putendl_fd(char	*str, int fd);
 void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isinquote_now(char *str, int index);
 int		ft_spwordcount(char *str, int n);
 int		ft_isalnumx(char *str, int n);
-int		ft_is_dchev(char *str, int n);
 int		ft_check_chevpipe(char	*str);
 int		ft_is_chev(char *str, int n);
 int		ft_isinquote(char *str);
@@ -147,5 +149,6 @@ void	ft_showtab(char **tab);
 //salut << coucou | echo <<     bon"|"jour "|" |"|" salut << hello
 //"echo"
 //""
+//| |
 
 #endif
