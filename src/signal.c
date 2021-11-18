@@ -38,24 +38,30 @@ static void ft_sigint(int signbr)
     rl_redisplay();
 }
 
-static void ft_sigabrt(int signbr)
+static void ft_sigquit(int signbr)
 {
     int n;
 
     n = 0;
     if (!g_glb->cline)
+    {
+        rl_on_new_line();
+        rl_redisplay();
         return ;
+    }
     while (g_glb->cline[n].line)
     {
         if (g_glb->cline[n].pid)
             kill(g_glb->cline[n].pid, signbr);
         n++;
     }
+    rl_on_new_line();
+    rl_redisplay();
 }
 
 int ft_signal_handler(void)
 {
     signal(SIGINT, ft_sigint);
-    signal(SIGABRT, ft_sigabrt);
+    signal(SIGQUIT, ft_sigquit);
     return (0);
 }

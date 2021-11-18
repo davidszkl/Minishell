@@ -76,13 +76,16 @@ static int	ft_parse(t_main *main)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_main		main;
-	struct termios old;
-	struct termios new;
+	t_main			main;
+	struct termios	old;
+	struct termios	new;
 
 	tcgetattr(0, &old);
-	tcsetattr(0, ECHOCTL, &new);
+	new = old;
+	new.c_lflag &= ~(ECHOCTL);
+	tcsetattr(0, TCSANOW, &new);
 	g_glb = &main;
+	g_glb->cline = NULL;
 	(void)argv;
 	(void)argc;
 	if (ft_envpinit(&main, envp))
@@ -103,6 +106,7 @@ int	main(int argc, char **argv, char **envp)
 			return (ft_freeshell2(&main));
 		ft_exec(&main);
 		ft_freeshell3(&main);
+		tcsetattr(0, ECHOCTL, &old);
 	}
 	ft_freetab(main.envp);
 	ft_freetab(main.locals);
