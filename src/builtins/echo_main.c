@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 12:34:04 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/17 16:19:42 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 09:49:50 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 		}
 		if (i > 1)
 			ft_putstr_fd(" ", 1);
-		ft_putstr_fd(*argv, 1);
+		ft_putstr_fd(argv[i], 1);
 	}
 	if (nl)
 		ft_putstr_fd("\n", 1);
