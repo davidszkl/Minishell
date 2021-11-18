@@ -90,12 +90,14 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	if (ft_envpinit(&main, envp))
 		return (1);
-	
 	while (1)
 	{
 		main.line = readline(PROMPT);
 		if (ft_first_check(&main))
 			continue ;
+		if (ft_parse_error(&main))
+			return (ft_myfreemain(&main));
+		printf("%s\n", main.line);
 		ft_getcount(&main);
 		while (ft_check_chevpipe(main.line) == 1)
 			if (ft_chevpipe_loop(&main))
@@ -104,11 +106,10 @@ int	main(int argc, char **argv, char **envp)
 			return (1);
 		if (ft_fillstruct(&main))
 			return (ft_freeshell2(&main));
+		if (ft_tabcheck(&main))
+			return (ft_freeshell2(&main));
 		ft_exec(&main);
 		ft_freeshell3(&main);
-		tcsetattr(0, ECHOCTL, &old);
 	}
-	ft_freetab(main.envp);
-	ft_freetab(main.locals);
 	return (0);
 }
