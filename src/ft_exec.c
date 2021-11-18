@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 14:45:44 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:57:09 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_export(char ***envp, char ***locals, char **argv);
 int		ft_unset(char ***envp, char ***locals, char **argv);
 int		ft_cd(char ***envp, char **argv);
 
-#define DEBUG
+#define DEBUGG
 
 static void	close_pipes(int *pipes, size_t n)
 {
@@ -191,19 +191,32 @@ static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes
 #endif
 	if (comm.rin)
 	{
+#ifdef DEBUG
+		printf("file in stuff\n");
+#endif
 		open_files(comm.file_in, comm.rin);
 		close_files(comm.file_in, comm.rin - 1);
 		fd_r = comm.file_in[comm.rin - 1].fd;
 	}
 	if (comm.rout)
 	{
+#ifdef DEBUG
+		printf("file out stuff\n");
+#endif
 		open_files(comm.file_out, comm.rout);
 		close_files(comm.file_out, comm.rout - 1);
 		fd_w = comm.file_out[comm.rout - 1].fd;
 	}
+	if (fd_r == -1 || fd_w == -1)
+	{
+		close_pipes(pipes, pipecount);
+		free(pipes);
+		ft_freeshell4(main);
+		exit(1);
+	}
 	if (dup2(fd_r, 0) == -1)
 		b = (int)exec_perror("dup2");
-	if (dup2(fd_w, 1) == -1)
+	if (b && dup2(fd_w, 1) == -1)
 		b = (int)exec_perror("dup2");
 	if (comm.rin)
 		close(fd_r);
