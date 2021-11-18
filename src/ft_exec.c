@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 10:09:47 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 10:21:17 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ int	ft_exec(t_main *main)
 			perror("fork");
 			return (1);
 		}
+		//printf("i: %i\n");
 		if (!main->cline[i].pid)
 			enter_child(fd_r, fd_w, main->cline[i], main->envp, pipes, n);
 	}
