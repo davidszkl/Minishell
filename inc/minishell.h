@@ -52,14 +52,16 @@ typedef struct s_chev {
 }	t_chev;
 
 typedef struct s_main {
-	t_comm	*cline;
-	t_chev	chev;
-	char	**envp;
-	char	**locals;
-	char	*line;
-	char	*temp;
-	int		dchevcount;
-	int		pipecount;
+	struct termios	old;
+	struct termios	new;
+	t_comm			*cline;
+	t_chev			chev;
+	char			**envp;
+	char			**locals;
+	char			*line;
+	char			*temp;
+	int				dchevcount;
+	int				pipecount;
 }	t_main;
 
 /*checker*/
@@ -92,16 +94,17 @@ int		ft_getcount(t_main *main);
 
 /*signals*/
 
-int 	ft_signal_handler(void);
+int		ft_signal_handler(void);
 
 /*errors*/
 
+void	ft_freefiles(t_main *main, int n);
+int		ft_parse_error(t_main *main);
 int		ft_freeshell(t_main *main);
 int		ft_freeshell2(t_main *main);
 int		ft_freeshell3(t_main *main);
 int		ft_freeshell4(t_main *main);
 int		ft_myfreemain(t_main *main);
-int		ft_parse_error(t_main *main);
 int		ft_tabcheck(t_main *main);
 int		ft_myfree(char *str);
 
@@ -119,12 +122,12 @@ char	*ft_strdup(const char *s1);
 char	*ft_tolower(char *str);
 char	*ft_itoas(int nbr);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	ft_putstr_fd(const char *str, int fd);
 void	ft_putendl_fd(char	*str, int fd);
 void	ft_strcpy(char *dst, char *src);
 void	ft_freetab(char **tab);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isinquote_now(char *str, int index);
+int		ft_putstr_fd(const char *str, int fd);
 int		ft_spwordcount(char *str, int n);
 int		ft_isalnumx(char *str, int n);
 int		ft_check_chevpipe(char	*str);

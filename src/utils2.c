@@ -79,7 +79,7 @@ char	*ft_getword(char *str, int n)
 	t = n;
 	while (str[n] && ft_isalnumx(str, n) == 1)
 		n++;
-	new = malloc(sizeof(char) * (n + 3)); // (n + 1) + 2 quotes
+	new = malloc(sizeof(char) * (n + 3));
 	if (!new)
 		return (NULL);
 	n = t;

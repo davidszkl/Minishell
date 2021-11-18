@@ -15,7 +15,6 @@
 #include <limits.h>
 
 int		ft_isdigit(int c);
-void	ft_putstr_fd(const char *s, int fd);
 int		ft_atoi(const char *str);
 
 static int	not_overflow(const char *str)
@@ -54,7 +53,7 @@ static int	exit_valid_arg(const char *s)
 }
 
 /*returns exit status. -1 if invalid argument count.*/
-int		ft_exit(char **argv)
+int	ft_exit(char **argv)
 {
 	if (!argv[1])
 		return (0);
@@ -66,7 +65,7 @@ int		ft_exit(char **argv)
 		ft_putstr_fd(": exit: ", 2);
 		ft_putstr_fd(argv[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
-		return (255);	
+		return (255);
 	}
 	if (argv[2])
 	{

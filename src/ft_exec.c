@@ -22,7 +22,6 @@ char	*find_command(const char *command, char *envp[]);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
-void	ft_putstr_fd(const char *s, int fd);
 int		ft_export(char ***envp, char ***locals, char **argv);
 int		ft_unset(char ***envp, char ***locals, char **argv);
 int		ft_cd(char ***envp, char **argv);

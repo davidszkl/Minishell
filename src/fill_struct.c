@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-extern t_comm *g_glb;
+extern t_comm	*g_glb;
 
 static int	ft_tabremrdir(t_main *main, int n)
 {
@@ -68,22 +68,29 @@ static int	ft_getrdircount(t_main *main, int n)
 
 static int	ft_fillstruct2(t_comm *comm, int n, int j)
 {
+	printf("%s\n", comm->argv[n]);
 	if (!ft_strncmp(comm->argv[n], "<", ft_strlen(comm->argv[n])))
 	{
 		comm->file_in[j].flags = O_RDONLY;
-		comm->file_in[j].name = comm->argv[n + 1];
+		comm->file_in[j].name = ft_strdup(comm->argv[n + 1]);
+		if (!comm->file_in[j].name)
+			return (2);
 		return (1);
 	}
 	if (!ft_strncmp(comm->argv[n], ">", ft_strlen(comm->argv[n])))
 	{
 		comm->file_out[j].flags = O_CREAT | O_TRUNC | O_WRONLY;
-		comm->file_out[j].name = comm->argv[n + 1];
+		comm->file_out[j].name = ft_strdup(comm->argv[n + 1]);
+		if (!comm->file_out[j].name)
+			return (2);
 		return (1);
 	}
 	if (!ft_strncmp(comm->argv[n], ">>", ft_strlen(comm->argv[n])))
 	{
 		comm->file_out[j].flags = O_CREAT | O_APPEND | O_WRONLY;
-		comm->file_out[j].name = comm->argv[n + 1];
+		comm->file_out[j].name = ft_strdup(comm->argv[n + 1]);
+		if (!comm->file_out[j].name)
+			return (2);
 		return (1);
 	}
 	return (0);
@@ -93,6 +100,7 @@ static int	ft_fillstruct1(t_comm *comm)
 {
 	int	n;
 	int	j;
+	int	r;
 
 	n = 0;
 	j = 0;
@@ -101,8 +109,15 @@ static int	ft_fillstruct1(t_comm *comm)
 	while (comm->argv[n])
 	{
 		j = 0;
-		if (ft_fillstruct2(comm, n++, j))
+		r = ft_fillstruct2(comm, n, j);
+		if (r == 2)
+		{
+			n++;
+			return (1);
+		}
+		else if (r == 1)
 			j++;
+		n++;
 	}
 	return (0);
 }
@@ -124,14 +139,12 @@ int	ft_fillstruct(t_main *main)
 			= malloc(sizeof(t_file) * (main->cline[n].rout + 1));
 		if (!main->cline[n].file_out)
 			return (1);
-		ft_fillstruct1(&main->cline[n]);
-		write(1, "before\n", 7);
-		ft_showtab(main->cline[n].argv);
-		write(1, "----------\n", 11);
+		if (ft_tabcheck(main))
+			return (1);
+		if (ft_fillstruct1(&main->cline[n]))
+			return (1);
 		if (ft_tabremrdir(main, n))
 			return (1);
-		write(1, "after\n", 6);
-		ft_showtab(main->cline[n].argv);
 		n++;
 	}
 	g_glb = main->cline;

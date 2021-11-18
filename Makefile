@@ -38,6 +38,7 @@ ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
 			 ft_export_utils_2.o\
 			 ft_export_utils_3.o\
 			 error.o\
+			 error2.o\
 			 ft_isalnum.o\
 			 )
 
@@ -61,6 +62,7 @@ CD_OBJS = $(addprefix $(OBJDIR)/, builtins/cd_main.o\
 			 ft_export_utils_2.o\
 			 ft_export_utils_3.o\
 			 error.o\
+			 error2.o\
 			 ft_isalnum.o\
 			 )
 
@@ -78,6 +80,7 @@ PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
 			 ft_export_utils_2.o\
 			 ft_export_utils_3.o\
 			 error.o\
+			 error2.o\
 			 ft_isalnum.o\
 			 )
 
@@ -87,12 +90,14 @@ EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			ft_export_utils.o\
 			ft_export_utils_2.o\
 			ft_export_utils_3.o\
+			ft_putstr_fd.o\
 			utils.o\
 			utils2.o\
 			utils3.o\
 			utils4.o\
 			utils5.o\
 			error.o\
+			error2.o\
 			)
 
 UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
@@ -108,7 +113,9 @@ UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
 			 ft_export_utils_2.o\
 			 ft_export_utils_3.o\
 			 error.o\
+			 error2.o\
 			 ft_isalnum.o\
+			 ft_putstr_fd.o\
 			 )
 
 ENV_OBJS = $(addprefix $(OBJDIR)/, builtins/env_main.o\
@@ -126,6 +133,7 @@ ENV_OBJS = $(addprefix $(OBJDIR)/, builtins/env_main.o\
 			 ft_export_utils_2.o\
 			 ft_export_utils_3.o\
 			 error.o\
+			 error2.o\
 			 ft_isalnum.o\
 			 )
 EXIT_OBJS = $(addprefix $(OBJDIR)/, builtins/exit_main.o\
@@ -144,6 +152,7 @@ EXIT_OBJS = $(addprefix $(OBJDIR)/, builtins/exit_main.o\
 			 ft_export_utils_2.o\
 			 ft_export_utils_3.o\
 			 error.o\
+			 error2.o\
 			 ft_isalnum.o\
 			 )
 
@@ -211,6 +220,7 @@ clean:
 			$(RM) -r $(OBJDIR)
 
 fclean:	clean
+			$(RM) -r $(NAME).dSYM
 			$(RM) $(NAME)
 			$(RM) -r $(BINDIR)
 

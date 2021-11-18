@@ -82,7 +82,6 @@ int	ft_remquote(t_main *main)
 					return (1);
 			j++;
 		}
-		//ft_showtab(main->cline[n].argv);
 		n++;
 	}
 	return (0);
