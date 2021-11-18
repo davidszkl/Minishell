@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:16:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 15:58:42 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:05:06 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -68,7 +68,6 @@ static int	ft_getrdircount(t_main *main, int n)
 
 static int	ft_fillstruct2(t_comm *comm, int n, int j)
 {
-	printf("%s\n", comm->argv[n]);
 	if (!ft_strncmp(comm->argv[n], "<", ft_strlen(comm->argv[n])))
 	{
 		comm->file_in[j].flags = O_RDONLY;

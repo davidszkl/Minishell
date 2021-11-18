@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 15:59:15 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:05:17 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -103,7 +103,7 @@ int	main(int argc, char **argv, char **envp)
 			return (1);
 		if (ft_fillstruct(&main))
 			return (ft_freeshell2(&main));
-		//ft_exec(&main);
+		ft_exec(&main);
 		ft_freeshell3(&main);
 	}
 	return (0);

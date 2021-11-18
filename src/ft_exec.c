@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 15:57:09 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:47:08 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,11 +193,11 @@ static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes
 #ifdef DEBUG
 		printf("file in stuff\n");
 #endif
-		open_files(comm.file_in, comm.rin);
+		b = open_files(comm.file_in, comm.rin);
 		close_files(comm.file_in, comm.rin - 1);
 		fd_r = comm.file_in[comm.rin - 1].fd;
 	}
-	if (comm.rout)
+	if (b && comm.rout)
 	{
 #ifdef DEBUG
 		printf("file out stuff\n");
@@ -206,7 +206,7 @@ static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes
 		close_files(comm.file_out, comm.rout - 1);
 		fd_w = comm.file_out[comm.rout - 1].fd;
 	}
-	if (fd_r == -1 || fd_w == -1)
+	if (!b || fd_r == -1 || fd_w == -1)
 	{
 		close_pipes(pipes, pipecount);
 		free(pipes);
@@ -294,9 +294,7 @@ int	ft_exec(t_main *main)
 		if (!pipes)
 			return (1 + (int)exec_perror("malloc"));
 	}
-	ft_putstr_fd("Before ope pipe\n", 2);
 	open_pipes(pipes, main->pipecount);
-	ft_putstr_fd("After ope pipe\n", 2);
 	showfd(pipes, main->pipecount * 2);
 	i = -1;
 	while (++i < n)
