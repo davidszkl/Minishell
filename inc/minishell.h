@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/17 15:00:08 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 12:07:07 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int 	ft_signal_handler(void);
 int		ft_freeshell(t_main *main);
 int		ft_freeshell2(t_main *main);
 int		ft_freeshell3(t_main *main);
+int		ft_freeshell4(t_main *main);
 int		ft_myfreemain(t_main *main);
 int		ft_myfree(char *str);
 

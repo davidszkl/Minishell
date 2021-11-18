@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 10:21:17 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 13:17:55 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ int		ft_export(char ***envp, char ***locals, char **argv);
 int		ft_unset(char ***envp, char ***locals, char **argv);
 int		ft_cd(char ***envp, char **argv);
 
+#define DEBUGG
+
 static void	close_pipes(int *pipes, size_t n)
 {
+#ifdef DEBUG
+	printf("close pipes n: %zu\n", n);
+#endif
 	n = n * 2;
 	while (n--)
 		close(*pipes++);
@@ -122,16 +127,23 @@ static int	open_files(t_file *files, int n)
 	int	b;
 	int	i;
 
-//	printf("n: %i\n", n);
-//	printf("filename: %s\n", files[n].name);
+#ifdef DEBUG
+	printf("in open\n");
+#endif
 	b = 1;
 	i = -1;
 	while (++i < n)
 	{
-		files[n].fd = open(files[n].name, files[n].flags, 0644);
-		if (files[n].fd == -1)
-			b = (int)exec_perror(files[n].name);
+#ifdef DEBUG
+		printf("filename: %s\n", files[i].name);
+#endif
+		files[i].fd = open(files[i].name, files[i].flags, 0644);
+		if (files[i].fd == -1)
+			b = (int)exec_perror(files[i].name);
 	}
+#ifdef DEBUG
+	printf("out of open\n");
+#endif
 	return (b);
 }
 
@@ -146,14 +158,37 @@ static void	close_files(t_file *files, int n)
 				exec_perror("close");
 }
 
-static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes, size_t n)
+static void	showfd(int *files, int n)
+{
+#ifdef DEBUG
+	int	i;
+
+	i = -1;
+	printf("in showfd(n==%i)\n", n);
+	while (++i < n)
+	{
+		printf("%i", files[i]);
+		if (i < n - 1)
+			printf(" ");
+	}
+	printf("\nout showfd\n");
+#endif
+#ifndef DEBUG
+	(void)files;
+	(void)n;
+#endif
+}
+
+static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes, size_t pipecount, t_main *main)
 {
 	char	*path;
 	int		b;
 
 	b = 1;
-//	printf("argv[0]: %s\n", comm.argv[0]);
-//	printf("comm.rin: %i\ncomm.rout: %i\n", comm.rin, comm.rout);
+#ifdef DEBUG
+	printf("argv[0]: %s\n", comm.argv[0]);
+	printf("comm.rin: %i\ncomm.rout: %i\n", comm.rin, comm.rout);
+#endif
 	if (comm.rin)
 	{
 		open_files(comm.file_in, comm.rin);
@@ -174,14 +209,23 @@ static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes
 		close(fd_r);
 	if (comm.rout)
 		close(fd_w);
-	close_pipes(pipes, n);
+	close_pipes(pipes, pipecount);
+	free(pipes);
 	path = find_command_wrapper(comm.argv[0], envp);
 	if (!path)
+	{
+#ifdef DEBUG
+		printf("path is NULL\n");
+#endif
+		ft_freeshell4(main);
 		exit(1);
+	}
 	if (b)
 		execve(path, comm.argv, envp);
+	exec_perror(path);
 	free(path);
-	exit((int)exec_perror(path) + 1);
+	ft_freeshell4(main);
+	exit(1);
 }
 
 static void	open_pipes(int *pipes, size_t n)
@@ -231,8 +275,15 @@ int	ft_exec(t_main *main)
 
 	if (n == 1 && is_c_e_u(main->cline[0].argv[0]))
 		return (exec_c_e_u(main->cline[0], &main->envp, &main->locals));
-	pipes = malloc(sizeof(int) * main->pipecount * 2);
-	open_pipes(pipes, n);
+	pipes = 0;
+	if (main->pipecount)
+	{
+		pipes = malloc(sizeof(int) * main->pipecount * 2);
+		if (!pipes)
+			return (1 + (int)exec_perror("malloc"));
+	}
+	open_pipes(pipes, main->pipecount);
+	showfd(pipes, main->pipecount * 2);
 	i = -1;
 	while (++i < n)
 	{
@@ -247,9 +298,8 @@ int	ft_exec(t_main *main)
 			perror("fork");
 			return (1);
 		}
-		//printf("i: %i\n");
 		if (!main->cline[i].pid)
-			enter_child(fd_r, fd_w, main->cline[i], main->envp, pipes, n);
+			enter_child(fd_r, fd_w, main->cline[i], main->envp, pipes, main->pipecount, main);
 	}
 	close_pipes(pipes, main->pipecount);
 	free(pipes);
