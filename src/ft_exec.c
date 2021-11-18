@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 13:17:55 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 15:57:09 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,14 +127,14 @@ static int	open_files(t_file *files, int n)
 	int	i;
 
 #ifdef DEBUG
-	printf("in open\n");
+	printf("in open(n==%i)\n", n);
 #endif
 	b = 1;
 	i = -1;
 	while (++i < n)
 	{
 #ifdef DEBUG
-		printf("filename: %s\n", files[i].name);
+		printf("filename: %s  i==%i\n", files[i].name, i);
 #endif
 		files[i].fd = open(files[i].name, files[i].flags, 0644);
 		if (files[i].fd == -1)
@@ -190,19 +190,32 @@ static void	enter_child(int fd_r, int fd_w, t_comm comm, char **envp, int *pipes
 #endif
 	if (comm.rin)
 	{
+#ifdef DEBUG
+		printf("file in stuff\n");
+#endif
 		open_files(comm.file_in, comm.rin);
 		close_files(comm.file_in, comm.rin - 1);
 		fd_r = comm.file_in[comm.rin - 1].fd;
 	}
 	if (comm.rout)
 	{
+#ifdef DEBUG
+		printf("file out stuff\n");
+#endif
 		open_files(comm.file_out, comm.rout);
 		close_files(comm.file_out, comm.rout - 1);
 		fd_w = comm.file_out[comm.rout - 1].fd;
 	}
+	if (fd_r == -1 || fd_w == -1)
+	{
+		close_pipes(pipes, pipecount);
+		free(pipes);
+		ft_freeshell4(main);
+		exit(1);
+	}
 	if (dup2(fd_r, 0) == -1)
 		b = (int)exec_perror("dup2");
-	if (dup2(fd_w, 1) == -1)
+	if (b && dup2(fd_w, 1) == -1)
 		b = (int)exec_perror("dup2");
 	if (comm.rin)
 		close(fd_r);
@@ -281,7 +294,9 @@ int	ft_exec(t_main *main)
 		if (!pipes)
 			return (1 + (int)exec_perror("malloc"));
 	}
+	ft_putstr_fd("Before ope pipe\n", 2);
 	open_pipes(pipes, main->pipecount);
+	ft_putstr_fd("After ope pipe\n", 2);
 	showfd(pipes, main->pipecount * 2);
 	i = -1;
 	while (++i < n)
