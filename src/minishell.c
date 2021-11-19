@@ -18,7 +18,7 @@ static int	ft_envpinit(t_main *main, char **envp, char **argv, int argc)
 	(void)argv;
 	(void)argc;
 	tcgetattr(0, &main->old);
-	main->new = main->old;
+	tcgetattr(0, &main->new);
 	main->new.c_lflag &= ~(ECHOCTL);
 	tcsetattr(0, TCSANOW, &main->new);
 	main->cline = NULL;
@@ -33,6 +33,7 @@ static int	ft_envpinit(t_main *main, char **envp, char **argv, int argc)
 		return (1);
 	}
 	ft_signal_handler();
+	main->error = 0;
 	return (0);
 }
 
@@ -103,8 +104,10 @@ int	main(int argc, char **argv, char **envp)
 			return (1);
 		if (ft_fillstruct(&main))
 			return (ft_freeshell2(&main));
-		ft_exec(&main);
+		if (!main.error)
+			ft_exec(&main);
 		ft_freeshell3(&main);
+		main.error = 0;
 	}
 	return (0);
 }

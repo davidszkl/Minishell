@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
-extern t_comm	*g_glb;
-
 static int	ft_tabremrdir(t_main *main, int n)
 {
 	int		count;
@@ -32,6 +30,7 @@ static int	ft_tabremrdir(t_main *main, int n)
 				j++;
 			}
 			main->cline[n].argv[j] = NULL;
+			j = 0;
 			continue ;
 		}
 		j++;
@@ -61,7 +60,6 @@ static int	ft_getrdircount(t_main *main, int n)
 			outcount++;
 		j++;
 	}
-	printf("%d\n%d\n", incount, outcount);
 	main->cline[n].rin = incount;
 	main->cline[n].rout = outcount;
 	return (0);
@@ -108,13 +106,9 @@ static int	ft_fillstruct1(t_comm *comm)
 	comm->file_out[j].fd = 1;
 	while (comm->argv[n])
 	{
-		j = 0;
 		r = ft_fillstruct2(comm, n, j);
 		if (r == 2)
-		{
-			n++;
 			return (1);
-		}
 		else if (r == 1)
 			j++;
 		n++;
@@ -132,11 +126,11 @@ int	ft_fillstruct(t_main *main)
 		main->cline[n].pid = 0;
 		ft_getrdircount(main, n);
 		main->cline[n].file_in
-			= malloc(sizeof(t_file) * (main->cline[n].rin + 1));
+			= (t_file *)malloc(sizeof(t_file) * (main->cline[n].rin + 1));
 		if (!main->cline[n].file_in)
 			return (1);
 		main->cline[n].file_out
-			= malloc(sizeof(t_file) * (main->cline[n].rout + 1));
+			= (t_file *)malloc(sizeof(t_file) * (main->cline[n].rout + 1));
 		if (!main->cline[n].file_out)
 			return (1);
 		if (ft_tabcheck(main))
@@ -147,6 +141,5 @@ int	ft_fillstruct(t_main *main)
 			return (1);
 		n++;
 	}
-	g_glb = main->cline;
 	return (0);
 }

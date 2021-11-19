@@ -49,15 +49,18 @@ static int	ft_read_chev2(t_main *main, char *str)
 {
 	int		fd;
 
+	str = ft_remquotestr(str);
 	if (!str[0])
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
-		return (ft_myfree(str));
+		ft_putstr_fd("minishell: syntax error near unexpected \
+token `newline'\n", 2);
+		main->error = 1;
+		ft_myfree(str);
+		return (0);
 	}
 	fd = open(main->chev.path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (fd < 0)
 		return (ft_myfree(str));
-	str = ft_remquotestr(str);
 	printf("string to enter: %s\n", str);
 	main->temp = readline("> ");
 	while (ft_strncmp(main->temp, str, ft_strlen(main->temp)))

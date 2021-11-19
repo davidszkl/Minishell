@@ -62,6 +62,7 @@ typedef struct s_main {
 	char			*temp;
 	int				dchevcount;
 	int				pipecount;
+	int				error;
 }	t_main;
 
 /*checker*/
@@ -132,6 +133,7 @@ int		ft_spwordcount(char *str, int n);
 int		ft_isalnumx(char *str, int n);
 int		ft_check_chevpipe(char	*str);
 int		ft_is_chev(char *str, int n);
+int		ft_special(t_main *main);
 int		ft_isinquote(char *str);
 int		sort_envp(char **envp);
 int		ft_isquote(char c);

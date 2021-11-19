@@ -82,5 +82,5 @@ int	ft_myfreemain(t_main *main)
 	ft_freetab(main->envp);
 	ft_freetab(main->locals);
 	free(main->line);
-	return (0);
+	return (1);
 }
