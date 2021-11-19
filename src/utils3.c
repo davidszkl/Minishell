@@ -31,6 +31,8 @@ int	ft_isspace(char c)
 
 int	ft_isalnumx(char *str, int n)
 {
+	if (!str[n])
+		return (0);
 	if ((str[n] == '|' || str[n] == '<' || str[n] == '>' || str[n] == 0)
 		&& !ft_isinquote_now(str, n))
 		return (0);
@@ -44,9 +46,15 @@ int	ft_spwordcount(char *str, int n)
 	int	count;
 
 	count = 0;
-	while (ft_isspace(str[n++]) == 1)
+	while (ft_isspace(str[n]) == 1)
+	{
+		n++;
 		count++;
-	while (ft_isalnumx(str, n++) == 1)
+	}
+	while (ft_isalnumx(str, n) == 1)
+	{
+		n++;
 		count++;
+	}
 	return (count + 1);
 }

@@ -43,6 +43,7 @@ static int	ft_first_check(t_main *main)
 	{
 		ft_freetab(main->envp);
 		ft_freetab(main->locals);
+		free(main->line);
 		exit(0);
 	}
 	if (!*main->line)
@@ -56,8 +57,18 @@ static int	ft_first_check(t_main *main)
 
 static int	ft_chevpipe_loop(t_main *main)
 {
+	if (main->error == 1)
+	{
+		//ft_myfreemain(main);
+		return (0);
+	}
 	if (ft_read_chev(main) == 1)
 		return (ft_myfreemain(main));
+	if (main->error == 1)
+	{
+		// ft_myfreemain(main);
+		return (0);
+	}
 	if (main->line[ft_strlen(main->line) - 1] == '|')
 		if (ft_read_lpipe(main) == 1)
 			return (ft_myfreemain(main));
@@ -93,6 +104,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	while (1)
 	{
+		main.error = 0;
 		main.line = readline(PROMPT);
 		if (ft_first_check(&main))
 			continue ;
@@ -100,14 +112,17 @@ int	main(int argc, char **argv, char **envp)
 		while (ft_check_chevpipe(main.line) == 1)
 			if (ft_chevpipe_loop(&main))
 				return (1);
+		if (main.error)
+		{
+			free(main.line);
+			continue ;
+		}
 		if (ft_parse(&main))
 			return (1);
 		if (ft_fillstruct(&main))
 			return (ft_freeshell2(&main));
-		if (!main.error)
-			ft_exec(&main);
+		ft_exec(&main);
 		ft_freeshell3(&main);
-		main.error = 0;
 	}
 	return (0);
 }

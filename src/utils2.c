@@ -34,7 +34,7 @@ char	*ft_replace_str(const char *s, size_t start, size_t n, const char *sub)
 
 	sl = ft_strlen(sub);
 	l = ft_strlen(s) - n + sl;
-	tmp = malloc(sizeof(char) * (l + 1));
+	tmp = malloc(sizeof(char) * (l + 2));
 	if (!tmp)
 		return (NULL);
 	i = -1;
