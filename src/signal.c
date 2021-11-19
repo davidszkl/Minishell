@@ -60,9 +60,15 @@ static void	ft_sigquit(int signbr)
 	rl_redisplay();
 }
 
-int	ft_signal_handler(void)
+int	ft_signal_main(void)
 {
 	signal(SIGINT, ft_sigint);
 	signal(SIGQUIT, ft_sigquit);
 	return (0);
+}
+
+void	ft_signal_heredoc(int signbr)
+{
+	(void)signbr;
+	write(1, "\n", 1);
 }

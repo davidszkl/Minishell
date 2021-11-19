@@ -95,11 +95,13 @@ int		ft_getcount(t_main *main);
 
 /*signals*/
 
-int		ft_signal_handler(void);
+int		ft_signal_main(void);
+void	ft_signal_heredoc(int signbr);
 
 /*errors*/
 
 void	ft_freefiles(t_main *main, int n);
+int		ft_dpipe_check(t_main *main);
 int		ft_parse_error(t_main *main);
 int		ft_freeshell(t_main *main);
 int		ft_freeshell2(t_main *main);
@@ -140,7 +142,6 @@ int		ft_isquote(char c);
 int		ft_isspace(char c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
-
 /*erase*/
 
 void	ft_showtab(char **tab);

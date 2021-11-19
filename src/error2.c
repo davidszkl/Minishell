@@ -62,3 +62,20 @@ void	ft_freefiles(t_main *main, int n)
 	while (j < main->cline[n].rout)
 		free(main->cline[n].file_out[j++].name);
 }
+
+int	ft_dpipe_check(t_main *main)
+{
+	int	n;
+
+	n = 0;
+	while (main->line[n])
+	{
+		if (main->line[n++] == '|' && !ft_isinquote_now(main->line, n - 1))
+			while (main->line[n])
+				if (!ft_isspace(main->line[n++]))
+					break ;
+		if (main->line[n - 1] == '|')
+			return (1);
+	}
+	return (0);
+}

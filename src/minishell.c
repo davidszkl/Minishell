@@ -32,7 +32,7 @@ static int	ft_envpinit(t_main *main, char **envp, char **argv, int argc)
 		ft_freetab(main->envp);
 		return (1);
 	}
-	ft_signal_handler();
+	ft_signal_main();
 	main->error = 0;
 	return (0);
 }
@@ -48,8 +48,17 @@ static int	ft_first_check(t_main *main)
 	}
 	if (!*main->line)
 		return (ft_myfree(main->line));
+	if	(ft_dpipe_check(main))
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected \
+token `|'\n", 2);
+		return (ft_myfree(main->line));
+	}
 	if (ft_isinquote_now(main->line, ft_strlen(main->line)))
-		return (ft_putstr_fd("minishell: unclosed quote\n", 2));
+	{
+		ft_putstr_fd("minishell: unclosed quote\n", 2);
+		return (ft_myfree(main->line));
+	}
 	if (ft_parse_error(main))
 		return (1);
 	return (0);
@@ -106,6 +115,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		main.error = 0;
 		main.line = readline(PROMPT);
+		if (main.line && main.line[0])
+			add_history(main.line);
 		if (ft_first_check(&main))
 			continue ;
 		ft_getcount(&main);

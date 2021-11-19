@@ -49,7 +49,6 @@ static int	ft_read_chev2(t_main *main, char *str)
 {
 	int		fd;
 
-	str = ft_remquotestr(str);
 	if (!str[0])
 	{
 		ft_putstr_fd("minishell: syntax error near unexpected \
@@ -62,6 +61,7 @@ token `newline'\n", 2);
 	if (fd < 0)
 		return (ft_myfree(str));
 	printf("string to enter: %s\n", str);
+	//signal(SIGINT, ft_signal_heredoc);
 	main->temp = readline("> ");
 	while (ft_strncmp(main->temp, str, ft_strlen(main->temp)))
 	{
@@ -85,7 +85,7 @@ static int	ft_read_chev1(t_main *main, char *temp, int n, int j)
 		{
 			n += 2;
 			ft_get(main, n);
-			if (ft_read_chev2(main, ft_getword(main->line, n)))
+			if (ft_read_chev2(main, ft_remquotestr(ft_getword(main->line, n))))
 				return (1);
 			j = ft_spwordcount(main->line, n);
 			temp = ft_replace_str(main->line, n - 1, j + 1, main->chev.path);
