@@ -103,7 +103,7 @@ int	main(int argc, char **argv, char **envp)
 			return (1);
 		if (ft_fillstruct(&main))
 			return (ft_freeshell2(&main));
-		//ft_exec(&main);
+		ft_exec(&main);
 		ft_freeshell3(&main);
 	}
 	return (0);

@@ -61,6 +61,7 @@ static int	ft_getrdircount(t_main *main, int n)
 			outcount++;
 		j++;
 	}
+	printf("%d\n%d\n", incount, outcount);
 	main->cline[n].rin = incount;
 	main->cline[n].rout = outcount;
 	return (0);
@@ -68,7 +69,6 @@ static int	ft_getrdircount(t_main *main, int n)
 
 static int	ft_fillstruct2(t_comm *comm, int n, int j)
 {
-	printf("%s\n", comm->argv[n]);
 	if (!ft_strncmp(comm->argv[n], "<", ft_strlen(comm->argv[n])))
 	{
 		comm->file_in[j].flags = O_RDONLY;
