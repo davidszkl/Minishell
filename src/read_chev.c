@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 11:02:44 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/11 12:46:32 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 13:28:48 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -51,7 +51,7 @@ static int	ft_read_chev2(t_main *main, char *str)
 
 	if (!str[0])
 	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
 		return (ft_myfree(str));
 	}
 	fd = open(main->chev.path, O_CREAT | O_TRUNC | O_WRONLY, 0644);

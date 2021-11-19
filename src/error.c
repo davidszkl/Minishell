@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 12:04:06 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 13:21:09 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:31:25 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -82,6 +82,7 @@ int	ft_freeshell4(t_main *main)
 	n = 0;
 	while (main->cline[n].line)
 	{
+		ft_freefiles(main, n);
 		free(main->cline[n].file_in);
 		free(main->cline[n].file_out);
 		ft_freetab(main->cline[n++].argv);
