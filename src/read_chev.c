@@ -61,14 +61,21 @@ token `newline'\n", 2);
 	if (fd < 0)
 		return (ft_myfree(str));
 	printf("string to enter: %s\n", str);
-	//signal(SIGINT, ft_signal_heredoc);
-	main->temp = readline("> ");
-	while (ft_strncmp(main->temp, str, ft_strlen(main->temp)))
+	signal(SIGINT, ft_signal_heredoc);
+	main->r = fork();
+	if (!main->r)
 	{
-		ft_putendl_fd(main->temp, fd);
-		free(main->temp);
 		main->temp = readline("> ");
+		while (ft_strncmp(main->temp, str, ft_strlen(main->temp) + 1))
+		{	
+			ft_putendl_fd(main->temp, fd);
+			free(main->temp);
+			main->temp = readline("> ");
+		}
 	}
+	if (main->r)
+		waitpid(main->r, &fd, 0);
+	ft_signal_main();
 	close(fd);
 	free(main->temp);
 	free(str);

@@ -131,7 +131,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (ft_fillstruct(&main))
 			return (ft_freeshell2(&main));
-		ft_exec(&main);
+		if (!main.error)
+			ft_exec(&main);
 		ft_freeshell3(&main);
 	}
 	return (0);

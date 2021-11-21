@@ -63,6 +63,7 @@ typedef struct s_main {
 	int				dchevcount;
 	int				pipecount;
 	int				error;
+	pid_t			r;
 }	t_main;
 
 /*checker*/

@@ -70,5 +70,8 @@ int	ft_signal_main(void)
 void	ft_signal_heredoc(int signbr)
 {
 	(void)signbr;
+	kill(g_glb->r, 9);
+	tcsetattr(0, TCSANOW, &g_glb->new);
 	write(1, "\n", 1);
+	g_glb->error = 1;
 }

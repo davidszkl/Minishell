@@ -40,6 +40,7 @@ ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
 			 error.o\
 			 error2.o\
 			 ft_isalnum.o\
+			 to_erase.o\
 			 )
 
 
@@ -64,6 +65,7 @@ CD_OBJS = $(addprefix $(OBJDIR)/, builtins/cd_main.o\
 			 error.o\
 			 error2.o\
 			 ft_isalnum.o\
+			  to_erase.o\
 			 )
 
 PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
@@ -82,6 +84,7 @@ PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
 			 error.o\
 			 error2.o\
 			 ft_isalnum.o\
+			  to_erase.o\
 			 )
 
 EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
@@ -98,6 +101,7 @@ EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			utils5.o\
 			error.o\
 			error2.o\
+			 to_erase.o\
 			)
 
 UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
@@ -116,6 +120,7 @@ UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
 			 error2.o\
 			 ft_isalnum.o\
 			 ft_putstr_fd.o\
+			  to_erase.o\
 			 )
 
 ENV_OBJS = $(addprefix $(OBJDIR)/, builtins/env_main.o\
@@ -135,6 +140,7 @@ ENV_OBJS = $(addprefix $(OBJDIR)/, builtins/env_main.o\
 			 error.o\
 			 error2.o\
 			 ft_isalnum.o\
+			  to_erase.o\
 			 )
 EXIT_OBJS = $(addprefix $(OBJDIR)/, builtins/exit_main.o\
 			ft_atoi.o\
@@ -154,6 +160,7 @@ EXIT_OBJS = $(addprefix $(OBJDIR)/, builtins/exit_main.o\
 			 error.o\
 			 error2.o\
 			 ft_isalnum.o\
+			  to_erase.o\
 			 )
 
 BUILTINS = $(addprefix $(BINDIR)/, $(ECHO)\
