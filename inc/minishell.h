@@ -101,6 +101,8 @@ void	ft_signal_heredoc(int signbr);
 /*errors*/
 
 void	ft_freefiles(t_main *main, int n);
+int		ft_syntax_check(t_main* main, int n, int j);
+int		ft_freeshell_continue(t_main *main);
 int		ft_dpipe_check(t_main *main);
 int		ft_parse_error(t_main *main);
 int		ft_freeshell(t_main *main);

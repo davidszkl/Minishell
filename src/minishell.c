@@ -49,18 +49,18 @@ static int	ft_first_check(t_main *main)
 	if (!*main->line)
 		return (ft_myfree(main->line));
 	if	(ft_dpipe_check(main))
-	{
-		ft_putstr_fd("minishell: syntax error near unexpected \
-token `|'\n", 2);
 		return (ft_myfree(main->line));
-	}
 	if (ft_isinquote_now(main->line, ft_strlen(main->line)))
 	{
 		ft_putstr_fd("minishell: unclosed quote\n", 2);
 		return (ft_myfree(main->line));
 	}
 	if (ft_parse_error(main))
-		return (1);
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected token \
+`|'\n", 2);
+		return (ft_myfree(main->line));
+	}
 	return (0);
 }
 
@@ -86,22 +86,20 @@ static int	ft_chevpipe_loop(t_main *main)
 
 static int	ft_parse(t_main *main)
 {
+	int	n;
+	int	j;
+
+	n = 0;
+	j = 0;
 	main->line = expand_variables(main->line, main->envp, main->locals);
 	if (!main->line)
-	{
-		ft_freeshell(main);
-		return (1);
-	}
+		return (ft_freeshell(main));
 	if (ft_parser(main))
-	{
-		ft_freeshell(main);
-		return (1);
-	}
+		return (ft_freeshell(main));
+	if (ft_syntax_check(main, n, j))
+		return (ft_freeshell_continue(main));
 	if (ft_remquote(main))
-	{
-		ft_freeshell(main);
-		return (1);
-	}
+		return (ft_freeshell(main));
 	return (0);
 }
 
@@ -123,13 +121,14 @@ int	main(int argc, char **argv, char **envp)
 		while (ft_check_chevpipe(main.line) == 1)
 			if (ft_chevpipe_loop(&main))
 				return (1);
-		if (main.error)
-		{
-			free(main.line);
+		if (main.error && ft_myfree(main.line))
 			continue ;
-		}
 		if (ft_parse(&main))
+		{
+			if (main.error)
+				continue ;
 			return (1);
+		}
 		if (ft_fillstruct(&main))
 			return (ft_freeshell2(&main));
 		ft_exec(&main);

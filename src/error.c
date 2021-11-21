@@ -36,7 +36,7 @@ int	ft_freeshell(t_main *main)
 	free(main->cline);
 	ft_freetab(main->envp);
 	ft_freetab(main->locals);
-	return (0);
+	return (1);
 }
 
 int	ft_freeshell2(t_main *main)
