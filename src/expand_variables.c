@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:58:35 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/22 11:44:38 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:25:27 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -125,7 +125,7 @@ char	*expand_variables(const char *str, char **envp, char **locals, int ret)
 	args = init_args(str);
 	if (!args.s)
 		return (free_4(args.s, 0, 0, 0));
-	while (args.s[++args.i])
+	while (++args.i < ft_strlen(args.s))
 	{
 		if (args.s[args.i] == '\'' && !is_in_dquotes(args.s, args.i))
 			args.is_in_quote = !args.is_in_quote;

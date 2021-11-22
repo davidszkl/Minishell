@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/22 13:17:12 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:44:27 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int		wexitstatus(int status);
 void	close_pipes(int *pipes, size_t n);
 void	*exec_perror(const char *str);
 char	*find_command_wrapper(char *str, char **envp);
-int		is_c_e_u(const char *s);
-int		exec_c_e_u(t_comm comm, char ***envp, char ***locals);
+int		is_c_e_u_ass(const char *s);
+int		exec_c_e_u_ass(t_comm comm, char ***envp, char ***locals);
 void	open_pipes(int *pipes, size_t n);
 void	close_files(t_file *files, int n);
 int		open_files(t_file *files, int n);
@@ -53,8 +53,8 @@ int	ft_exec(t_main *main)
 	t_exec_args	args;
 
 	args = init_exec_args(main);
-	if (args.n == 1 && is_c_e_u(main->cline[0].argv[0]))
-		return (exec_c_e_u(main->cline[0], &main->envp, &main->locals));
+	if (args.n == 1 && is_c_e_u_ass(main->cline[0].argv[0]))
+		return (exec_c_e_u_ass(main->cline[0], &main->envp, &main->locals));
 	if (main->pipecount)
 	{
 		args.pipes = malloc(sizeof(int) * main->pipecount * 2);
