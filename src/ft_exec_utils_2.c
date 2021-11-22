@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:04:18 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/22 15:11:51 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 16:33:44 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ int	handle_dir(const char *str)
 {
 	DIR	*p;
 
-	if (str[ft_strlen(str) - 1] == '/')
+	if (str[ft_strlen(str) - 1] == '/' || is_abs_path(str))
 	{
 		p = opendir(str);
 		if (!p)
 			exec_perror(str);
-		closedir(p);
+		else
+			closedir(p);
 		ft_putstr_fd(ERROR, 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(str, 2);
@@ -77,6 +78,8 @@ char	*find_command_wrapper(char *str, char **envp)
 {
 	char	*comm;
 
+	if (!ft_strncmp("..", str, -1) || !ft_strncmp(".", str, -1))
+		return (p_comm_no_found(str));
 	if (!handle_dir(str))
 		exit(1);
 	if (is_abs_path(str))

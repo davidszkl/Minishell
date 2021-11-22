@@ -2,7 +2,52 @@ NAME	= minishell
 
 SRCDIR	= src
 
-SRCS	= $(shell find $(SRCDIR)/*.c)
+SRCS = $(addprefix $(SRCDIR)/,\
+	check.c\
+	enter_child.c\
+	envp_utils.c\
+	error.c\
+	error2.c\
+	error3.c\
+	expand_variables.c\
+	expand_variables_utils.c\
+	fill_struct.c\
+	find_command.c\
+	ft_assign.c\
+	ft_atoi.c\
+	ft_cd.c\
+	ft_exec.c\
+	ft_exec_utils.c\
+	ft_exec_utils_2.c\
+	ft_exec_utils_3.c\
+	ft_exit.c\
+	ft_export.c\
+	ft_export_utils.c\
+	ft_export_utils_2.c\
+	ft_export_utils_3.c\
+	ft_isalnum.c\
+	ft_itoa.c\
+	ft_putstr_fd.c\
+	ft_split.c\
+	ft_splitq.c\
+	ft_unset.c\
+	is_valid_export_args_2.c\
+	main2.c\
+	minishell.c\
+	parser.c\
+	read_chev.c\
+	read_lpipe.c\
+	remove_quotes.c\
+	signal.c\
+	to_erase.c\
+	utils.c\
+	utils2.c\
+	utils3.c\
+	utils4.c\
+	utils5.c\
+	)
+
+# SRCS	= $(shell find $(SRCDIR)/*.c)
 
 OBJDIR	= obj
 
