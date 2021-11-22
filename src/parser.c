@@ -123,7 +123,7 @@ int	ft_parser(t_main *main)
 			return (1);
 		n++;
 	}
-	main->cline[n].line = NULL;
-	ft_freetab(tab);
+	main->cline[n].line = tab[n];
+	free(tab);
 	return (0);
 }

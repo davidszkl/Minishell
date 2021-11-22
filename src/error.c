@@ -68,6 +68,7 @@ int	ft_freeshell3(t_main *main)
 		ft_freefiles(main, n);
 		free(main->cline[n].file_in);
 		free(main->cline[n].file_out);
+		free(main->cline[n].line);
 		ft_freetab(main->cline[n++].argv);
 	}
 	free(main->line);

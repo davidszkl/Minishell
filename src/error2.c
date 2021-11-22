@@ -102,6 +102,7 @@ int	ft_syntax_check(t_main *main, int n, int j)
 {
 	while (main->cline[n].line)
 	{
+		j = 0;
 		while (main->cline[n].argv[j])
 		{
 			if (ft_is_chev(main->cline[n].argv[j], 0))
@@ -109,8 +110,7 @@ int	ft_syntax_check(t_main *main, int n, int j)
 				if (!main->cline[n].argv[j + 1]
 					|| ft_is_chev(main->cline[n].argv[j + 1], 0))
 				{
-					ft_putstr_fd("minishell: syntax error near unexpected token \
-`", 2);
+					ft_putstr_fd(SYNTAX, 2);
 					if (!main->cline[n].argv[j + 1])
 						ft_putstr_fd("newline", 2);
 					else

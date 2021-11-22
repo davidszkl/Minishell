@@ -15,6 +15,7 @@
 # define PROMPT "minishell> "
 # define ERROR  "minishell"
 # define BINDIR "bin/"
+# define SYNTAX "minishell: syntax error near unexpected token `"
 
 /*includes*/
 # include <stdio.h>
