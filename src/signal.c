@@ -46,8 +46,8 @@ int	ft_signal_main(void)
 void	ft_sigint_heredoc(int signbr)
 {
 	(void)signbr;
-	kill(g_glb->r, 9);
-	tcsetattr(0, TCSANOW, &g_glb->new);
+	rl_replace_line("", 0);
 	write(1, "\n", 1);
-	g_glb->error = 1;
+	rl_on_new_line();
+	rl_redisplay();
 }

@@ -26,11 +26,11 @@ int	ft_parse_error(t_main *main)
 			if (str[n] && str[n] == '|' && str[n + 1]
 				&& ft_is_chev(str, n - 1) == 4)
 				main->line = ft_replace_str(str, n, ft_strlen(str) - n - 1,
-					&str[n + 1]);
+						&str[n + 1]);
 			else
 			{
 				while (ft_isspace(str[n]) || (ft_is_chev(str, n - 1) > 0
-					&& ft_is_chev(str, n - 1) < 2))
+						&& ft_is_chev(str, n - 1) < 2))
 					n++;
 				if (str[n] == '|')
 					return (1);
@@ -98,7 +98,7 @@ int	ft_dpipe_check(t_main *main)
 	return (0);
 }
 
-int	ft_syntax_check(t_main* main, int n, int j)
+int	ft_syntax_check(t_main *main, int n, int j)
 {
 	while (main->cline[n].line)
 	{
@@ -107,7 +107,7 @@ int	ft_syntax_check(t_main* main, int n, int j)
 			if (ft_is_chev(main->cline[n].argv[j], 0))
 			{
 				if (!main->cline[n].argv[j + 1]
-				|| ft_is_chev(main->cline[n].argv[j + 1], 0))
+					|| ft_is_chev(main->cline[n].argv[j + 1], 0))
 				{
 					ft_putstr_fd("minishell: syntax error near unexpected token \
 `", 2);
