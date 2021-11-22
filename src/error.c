@@ -31,7 +31,10 @@ int	ft_freeshell(t_main *main)
 
 	n = 0;
 	while (main->cline[n].line)
+	{
+		free(main->cline[n].line);
 		ft_freetab(main->cline[n++].argv);
+	}
 	free(main->line);
 	free(main->cline);
 	ft_freetab(main->envp);
@@ -49,6 +52,7 @@ int	ft_freeshell2(t_main *main)
 		ft_freefiles(main, n);
 		free(main->cline[n].file_in);
 		free(main->cline[n].file_out);
+		free(main->cline[n].line);
 		ft_freetab(main->cline[n++].argv);
 	}
 	free(main->line);
@@ -86,6 +90,7 @@ int	ft_freeshell4(t_main *main)
 		ft_freefiles(main, n);
 		free(main->cline[n].file_in);
 		free(main->cline[n].file_out);
+		free(main->cline[n].line);
 		ft_freetab(main->cline[n++].argv);
 	}
 	free(main->line);
