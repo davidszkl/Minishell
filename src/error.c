@@ -91,5 +91,6 @@ int	ft_freeshell4(t_main *main)
 	free(main->cline);
 	ft_freetab(main->envp);
 	ft_freetab(main->locals);
+	tcsetattr(0, TCSANOW, &main->old);
 	return (0);
 }

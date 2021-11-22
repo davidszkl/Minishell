@@ -63,11 +63,14 @@ typedef struct s_main {
 	int				dchevcount;
 	int				pipecount;
 	int				error;
+	int				tmp;
+	int				rval;
 	pid_t			r;
 }	t_main;
 
 /*checker*/
 
+int		ft_single_pipe(t_main *main);
 int		ft_check_echo(char *str);
 int		ft_check_cmd(char *str);
 
@@ -96,8 +99,11 @@ int		ft_getcount(t_main *main);
 
 /*signals*/
 
+void	ft_sigint_heredoc(int signbr);
+void	ft_sigint_main(int signbr);
+void	ft_sigint_exec(int signbr);
+void	ft_sigquit(int signbr);
 int		ft_signal_main(void);
-void	ft_signal_heredoc(int signbr);
 
 /*errors*/
 
@@ -113,6 +119,7 @@ int		ft_freeshell4(t_main *main);
 int		ft_myfreemain(t_main *main);
 int		ft_tabcheck(t_main *main);
 int		ft_myfree(char *str);
+int		ft_exit(char **argv);
 
 /*utils*/
 

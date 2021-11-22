@@ -13,61 +13,37 @@
 
 extern t_main	*g_glb;
 
-static void	ft_sigint(int signbr)
+void	ft_sigint_main(int signbr)
 {
-	int	n;
-
-	n = 0;
-	if (!g_glb->cline)
-	{
-		rl_replace_line("", 0);
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_redisplay();
-		return ;
-	}
-	while (g_glb->cline[n].line)
-	{
-		if (g_glb->cline[n].pid)
-			kill(g_glb->cline[n].pid, signbr);
-		n++;
-	}
+	(void)signbr;
 	rl_replace_line("", 0);
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_redisplay();
 }
 
-static void	ft_sigquit(int signbr)
+void	ft_sigquit(int signbr)
 {
-	int	n;
-
-	n = 0;
-	if (!g_glb->cline)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-		tcsetattr(0, TCSANOW, &g_glb->old);
-		return ;
-	}
-	while (g_glb->cline[n].line)
-	{
-		if (g_glb->cline[n].pid)
-			kill(g_glb->cline[n].pid, signbr);
-		n++;
-	}
+	(void)signbr;
 	rl_on_new_line();
 	rl_redisplay();
 }
 
+void	ft_sigint_exec(int signbr)
+{
+	(void)signbr;
+	write(1, "^C\n", 3);
+	rl_on_new_line();
+}
+
 int	ft_signal_main(void)
 {
-	signal(SIGINT, ft_sigint);
+	signal(SIGINT, ft_sigint_main);
 	signal(SIGQUIT, ft_sigquit);
 	return (0);
 }
 
-void	ft_signal_heredoc(int signbr)
+void	ft_sigint_heredoc(int signbr)
 {
 	(void)signbr;
 	kill(g_glb->r, 9);

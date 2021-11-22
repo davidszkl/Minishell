@@ -61,7 +61,7 @@ token `newline'\n", 2);
 	if (fd < 0)
 		return (ft_myfree(str));
 	printf("string to enter: %s\n", str);
-	signal(SIGINT, ft_signal_heredoc);
+	signal(SIGINT, ft_sigint_heredoc);
 	main->r = fork();
 	if (!main->r)
 	{

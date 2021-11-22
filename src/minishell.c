@@ -17,10 +17,11 @@ static int	ft_envpinit(t_main *main, char **envp, char **argv, int argc)
 {
 	(void)argv;
 	(void)argc;
-	tcgetattr(0, &main->old);
-	tcgetattr(0, &main->new);
-	main->new.c_lflag &= ~(ECHOCTL);
-	tcsetattr(0, TCSANOW, &main->new);
+ 	tcgetattr(0, &main->old);
+ 	tcgetattr(0, &main->new);
+ 	main->new.c_lflag &= ~(ECHOCTL);
+ 	tcsetattr(0, TCSANOW, &main->new);
+	main->rval = 0;
 	main->cline = NULL;
 	g_glb = main;
 	main->envp = init_envp(envp);
@@ -48,14 +49,14 @@ static int	ft_first_check(t_main *main)
 	}
 	if (!*main->line)
 		return (ft_myfree(main->line));
-	if	(ft_dpipe_check(main))
+	if (ft_dpipe_check(main))
 		return (ft_myfree(main->line));
 	if (ft_isinquote_now(main->line, ft_strlen(main->line)))
 	{
 		ft_putstr_fd("minishell: unclosed quote\n", 2);
 		return (ft_myfree(main->line));
 	}
-	if (ft_parse_error(main))
+	if (ft_parse_error(main) || ft_single_pipe(main))
 	{
 		ft_putstr_fd("minishell: syntax error near unexpected token \
 `|'\n", 2);
@@ -67,17 +68,11 @@ static int	ft_first_check(t_main *main)
 static int	ft_chevpipe_loop(t_main *main)
 {
 	if (main->error == 1)
-	{
-		//ft_myfreemain(main);
 		return (0);
-	}
 	if (ft_read_chev(main) == 1)
 		return (ft_myfreemain(main));
 	if (main->error == 1)
-	{
-		// ft_myfreemain(main);
 		return (0);
-	}
 	if (main->line[ft_strlen(main->line) - 1] == '|')
 		if (ft_read_lpipe(main) == 1)
 			return (ft_myfreemain(main));
@@ -131,8 +126,23 @@ int	main(int argc, char **argv, char **envp)
 		}
 		if (ft_fillstruct(&main))
 			return (ft_freeshell2(&main));
+		if (!main.pipecount && !ft_strncmp(main.cline[0].argv[0], "exit", -1))
+		{
+			write(1, "exit\n", 5);
+			main.tmp = ft_exit(main.cline[0].argv);
+			ft_freeshell3(&main);
+			if (main.tmp != -1)
+				exit(main.tmp);
+			else
+			{
+				main.rval = main.tmp;
+				continue;
+			}
+		}
+		signal(SIGINT, ft_sigint_exec);
 		if (!main.error)
-			ft_exec(&main);
+			main.rval = ft_exec(&main);
+		ft_signal_main();
 		ft_freeshell3(&main);
 	}
 	return (0);

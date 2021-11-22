@@ -181,10 +181,14 @@ CFLAGS	= -Wall -Werror -Wextra -g
 
 LIB		= -lreadline
 
+IREAD = -I/Users/$(USER)/.brew/opt/readline/include
+
+LREAD = -L/Users/$(USER)/.brew/opt/readline/lib
+
 all:	$(NAME) $(BINDIR) $(BUILTINS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/*.h
-			$(CC) $(CFLAGS) -I$(INCDIR) -I/Users/$(USER)/.brew/opt/readline/include -c $< -o $@
+			$(CC) $(CFLAGS) -I$(INCDIR) $(IREAD) -c $< -o $@
 
 $(OBJDIR)/builtins/%.o: $(SRCDIR)/builtins/%.c
 			$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@           
@@ -217,7 +221,7 @@ $(BINDIR):
 	mkdir $(BINDIR)
 
 $(NAME):        $(OBJDIR) $(OBJS)
-			$(CC) $(CFLAGS) $(LIB) -L/Users/$(USER)/.brew/opt/readline/lib $(OBJS) -o $(NAME)
+			$(CC) $(CFLAGS) $(LIB)  $(OBJS) $(LREAD) -o $(NAME)
 
 install:
 			mkdir $(OBJDIR) $(SRCDIR) $(INCDIR) $(BINDIR)
