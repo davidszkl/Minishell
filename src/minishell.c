@@ -6,10 +6,12 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/22 10:59:11 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 11:42:18 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
+
+int	ft_mainloop(t_main *main);
 
 t_main	*g_glb;
 
@@ -17,10 +19,10 @@ static int	ft_envpinit(t_main *main, char **envp, char **argv, int argc)
 {
 	(void)argv;
 	(void)argc;
- 	tcgetattr(0, &main->old);
- 	tcgetattr(0, &main->new);
- 	main->new.c_lflag &= ~(ECHOCTL);
- 	tcsetattr(0, TCSANOW, &main->new);
+	tcgetattr(0, &main->old);
+	tcgetattr(0, &main->new);
+	main->new.c_lflag &= ~(ECHOCTL);
+	tcsetattr(0, TCSANOW, &main->new);
 	main->rval = 0;
 	main->cline = NULL;
 	g_glb = main;
@@ -65,20 +67,6 @@ static int	ft_first_check(t_main *main)
 	return (0);
 }
 
-static int	ft_chevpipe_loop(t_main *main)
-{
-	if (main->error == 1)
-		return (0);
-	if (ft_read_chev(main) == 1)
-		return (ft_myfreemain(main));
-	if (main->error == 1)
-		return (0);
-	if (main->line[ft_strlen(main->line) - 1] == '|')
-		if (ft_read_lpipe(main) == 1)
-			return (ft_myfreemain(main));
-	return (0);
-}
-
 static int	ft_parse(t_main *main)
 {
 	int	n;
@@ -100,50 +88,39 @@ static int	ft_parse(t_main *main)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_main			main;
+	t_main	main;
 
 	if (ft_envpinit(&main, envp, argv, argc))
 		return (1);
+	ft_mainloop(&main);
+	return (0);
+}
+
+int	ft_mainloop(t_main *main)
+{
 	while (1)
 	{
-		main.error = 0;
-		main.line = readline(PROMPT);
-		if (main.line && main.line[0])
-			add_history(main.line);
-		if (ft_first_check(&main))
+		ft_signal_main();
+		ft_readline(main);
+		if (ft_first_check(main))
 			continue ;
-		ft_getcount(&main);
-		while (ft_check_chevpipe(main.line) == 1)
-			if (ft_chevpipe_loop(&main))
-				return (1);
-		if (main.error && ft_myfree(main.line))
+		if (ft_loop(main))
+			return (1);
+		if (main->error && ft_myfree(main->line))
 			continue ;
-		if (ft_parse(&main))
+		if (ft_parse(main))
 		{
-			if (main.error)
+			if (main->error)
 				continue ;
 			return (1);
 		}
-		if (ft_fillstruct(&main))
-			return (ft_freeshell2(&main));
-		if (!main.pipecount && !ft_strncmp(main.cline[0].argv[0], "exit", -1))
-		{
-			write(1, "exit\n", 5);
-			main.rval = ft_exit(main.cline[0].argv);
-			ft_freeshell3(&main);
-			if (main.rval != -1)
-				exit(main.rval);
-			else
-			{
-				main.rval = 1;
-				continue;
-			}
-		}
+		if (ft_fillstruct(main))
+			return (ft_freeshell2(main));
+		if (ft_exit_check(main))
+			continue ;
 		signal(SIGINT, ft_sigint_exec);
-		if (!main.error)
-			main.rval = ft_exec(&main);
-		ft_signal_main();
-		ft_freeshell3(&main);
+		if (!main->error)
+			main->rval = ft_exec(main);
+		ft_freeshell3(main);
 	}
-	return (0);
 }

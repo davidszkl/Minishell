@@ -91,11 +91,13 @@ int		ft_exec(t_main *main);
 
 /*functions*/
 
+void	ft_readline(t_main *main);
 char	**init_envp(char **envp);
 char	**init_locals(void);
 char	*ft_remquotestr(char *str);
 int		ft_remquote(t_main *main);
 int		ft_getcount(t_main *main);
+int		ft_loop(t_main *main);
 
 /*signals*/
 
@@ -117,6 +119,7 @@ int		ft_freeshell2(t_main *main);
 int		ft_freeshell3(t_main *main);
 int		ft_freeshell4(t_main *main);
 int		ft_myfreemain(t_main *main);
+int		ft_exit_check(t_main *main);
 int		ft_tabcheck(t_main *main);
 int		ft_myfree(char *str);
 int		ft_exit(char **argv);
