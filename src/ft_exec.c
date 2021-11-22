@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/22 13:17:12 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 13:53:24 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	ft_exec(t_main *main)
 	t_exec_args	args;
 
 	args = init_exec_args(main);
-	if (args.n == 1 && is_c_e_u(main->cline[0].argv[0]))
-		return (exec_c_e_u(main->cline[0], &main->envp, &main->locals));
+	if (args.n == 1 && is_c_e_u_ass(main->cline[0].argv[0]))
+		return (exec_c_e_u_ass(main->cline[0], &main->envp, &main->locals));
 	if (main->pipecount)
 	{
 		args.pipes = malloc(sizeof(int) * main->pipecount * 2);

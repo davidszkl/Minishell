@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 11:37:24 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 13:51:03 by dszklarz         ###   ########.fr       */
+/*   Updated: 2021/11/22 13:45:21 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -102,6 +102,7 @@ int	ft_syntax_check(t_main *main, int n, int j)
 {
 	while (main->cline[n].line)
 	{
+		j = 0;
 		while (main->cline[n].argv[j])
 		{
 			if (ft_is_chev(main->cline[n].argv[j], 0))
