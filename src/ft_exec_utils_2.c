@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:04:18 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/22 11:35:54 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 12:48:45 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,12 @@ int	handle_dir(const char *str)
 int	is_builtins(const char *s)
 {
 	return (!ft_strncmp(s, "cd", -1)
-			|| !ft_strncmp(s, "export", -1)
-			|| !ft_strncmp(s, "unset", -1)
-			|| !ft_strncmp(s, "exit", -1)
-			|| !ft_strncmp(s, "echo", -1)
-			|| !ft_strncmp(s, "pwd", -1)
-			|| !ft_strncmp(s, "env", -1));
+		|| !ft_strncmp(s, "export", -1)
+		|| !ft_strncmp(s, "unset", -1)
+		|| !ft_strncmp(s, "exit", -1)
+		|| !ft_strncmp(s, "echo", -1)
+		|| !ft_strncmp(s, "pwd", -1)
+		|| !ft_strncmp(s, "env", -1));
 }
 
 char	*check_builtins(const char *str)

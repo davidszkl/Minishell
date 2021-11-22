@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:05:28 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/22 11:36:44 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 12:48:20 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	open_files(t_file *files, int n)
 
 void	close_files(t_file *files, int n)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < n)
@@ -68,8 +68,8 @@ void	open_pipes(int *pipes, size_t n)
 int	is_c_e_u(const char *s)
 {
 	return (!ft_strncmp(s, "cd", -1)
-			|| !ft_strncmp(s, "export", -1)
-			|| !ft_strncmp(s, "unset", -1));
+		|| !ft_strncmp(s, "export", -1)
+		|| !ft_strncmp(s, "unset", -1));
 }
 
 int	exec_c_e_u(t_comm comm, char ***envp, char ***locals)

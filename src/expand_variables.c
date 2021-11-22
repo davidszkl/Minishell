@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 19:58:35 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/22 10:55:07 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 11:44:38 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -99,7 +99,7 @@ static int	expand_variables_3(char **s, size_t *i, int ret)
 			free(*s);
 			return (0);
 		}
-		t = replace_str(*s, *i, 2, n);	
+		t = replace_str(*s, *i, 2, n);
 	}
 	else
 		t = replace_str(*s, *i, 2, "");

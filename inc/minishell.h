@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/22 10:52:19 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 12:47:26 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int		ft_signal_main(void);
 /*errors*/
 
 void	ft_freefiles(t_main *main, int n);
-int		ft_syntax_check(t_main* main, int n, int j);
+int		ft_syntax_check(t_main *main, int n, int j);
 int		ft_freeshell_continue(t_main *main);
 int		ft_dpipe_check(t_main *main);
 int		ft_parse_error(t_main *main);

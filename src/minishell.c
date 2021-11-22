@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/22 11:42:18 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 11:43:51 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -74,7 +74,8 @@ static int	ft_parse(t_main *main)
 
 	n = 0;
 	j = 0;
-	main->line = expand_variables(main->line, main->envp, main->locals, main->rval);
+	main->line = expand_variables
+		(main->line, main->envp, main->locals, main->rval);
 	if (!main->line)
 		return (ft_freeshell(main));
 	if (ft_parser(main))

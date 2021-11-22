@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 12:11:15 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/22 11:29:15 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 12:45:56 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <stddef.h>
 #include <sys/wait.h>
+#include "../inc/ft_exec_args.h"
 #include "../inc/minishell.h"
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -39,16 +40,16 @@ int	is_abs_path(const char *str)
 		|| !ft_strncmp(str, "../", 3));
 }
 
-void	init_r_w(int *r, int *w, int i, int pipecount, int *pipes)
+void	init_r_w(t_exec_args *args, t_main *main)
 {
-	if ((i - 1) * 2 < 0)
-		*r = 0;
+	if (((int)args->i - 1) * 2 < 0)
+		args->fd_r = 0;
 	else
-		*r = pipes[(i - 1) * 2];
-	if ((i - 1) * 2 + 3 > pipecount * 2 - 1)
-		*w = 1;
+		args->fd_r = args->pipes[((int)args->i - 1) * 2];
+	if (((int)args->i - 1) * 2 + 3 > main->pipecount * 2 - 1)
+		args->fd_w = 1;
 	else
-		*w = pipes[(i - 1) * 2 + 3];
+		args->fd_w = args->pipes[((int)args->i - 1) * 2 + 3];
 }
 
 int	wexitstatus(int status)
