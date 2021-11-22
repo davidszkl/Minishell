@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 12:07:07 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 10:52:19 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int		ft_fillstruct(t_main *main);
 
 /*expander*/
 
-char	*expand_variables(const char *str, char **envp, char **locals);
+char	*expand_variables(const char *str, char **envp, char **locals, int ret);
 
 /*executor*/
 

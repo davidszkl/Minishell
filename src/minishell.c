@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 16:05:17 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 10:59:11 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -86,7 +86,7 @@ static int	ft_parse(t_main *main)
 
 	n = 0;
 	j = 0;
-	main->line = expand_variables(main->line, main->envp, main->locals);
+	main->line = expand_variables(main->line, main->envp, main->locals, main->rval);
 	if (!main->line)
 		return (ft_freeshell(main));
 	if (ft_parser(main))
@@ -129,13 +129,13 @@ int	main(int argc, char **argv, char **envp)
 		if (!main.pipecount && !ft_strncmp(main.cline[0].argv[0], "exit", -1))
 		{
 			write(1, "exit\n", 5);
-			main.tmp = ft_exit(main.cline[0].argv);
+			main.rval = ft_exit(main.cline[0].argv);
 			ft_freeshell3(&main);
-			if (main.tmp != -1)
-				exit(main.tmp);
+			if (main.rval != -1)
+				exit(main.rval);
 			else
 			{
-				main.rval = main.tmp;
+				main.rval = 1;
 				continue;
 			}
 		}

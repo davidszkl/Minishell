@@ -47,6 +47,8 @@ ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
 CD_OBJS = $(addprefix $(OBJDIR)/, builtins/cd_main.o\
 		  	ft_exec.o\
 		  	ft_exec_utils.o\
+		  	ft_exec_utils_2.o\
+		  	ft_exec_utils_3.o\
 			ft_cd.o\
 			find_command.o\
 			ft_split.o\
