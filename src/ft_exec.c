@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:30:55 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/22 14:44:27 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:44:48 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	init_r_w(t_exec_args *args, t_main *main);
 int		wexitstatus(int status);
 void	close_pipes(int *pipes, size_t n);
 void	*exec_perror(const char *str);
-char	*find_command_wrapper(char *str, char **envp);
 int		is_c_e_u_ass(const char *s);
 int		exec_c_e_u_ass(t_comm comm, char ***envp, char ***locals);
 void	open_pipes(int *pipes, size_t n);

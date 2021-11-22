@@ -6,9 +6,10 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/22 11:43:51 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 18:00:03 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
 #include "../inc/minishell.h"
 
 int	ft_mainloop(t_main *main);
@@ -90,9 +91,18 @@ static int	ft_parse(t_main *main)
 int	main(int argc, char **argv, char **envp)
 {
 	t_main	main;
+	char	*tmp;
 
-	if (ft_envpinit(&main, envp, argv, argc))
+	tmp = getcwd(0, 0);
+	main.bindir = ft_strjoin(tmp, "/bin/");
+	free(tmp);
+	if (!main.bindir)
 		return (1);
+	if (ft_envpinit(&main, envp, argv, argc))
+	{
+		free(main.bindir);
+		return (1);
+	}
 	ft_mainloop(&main);
 	return (0);
 }

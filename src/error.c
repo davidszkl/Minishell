@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 12:04:06 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 17:31:25 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:58:13 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -39,6 +39,7 @@ int	ft_freeshell(t_main *main)
 	free(main->cline);
 	ft_freetab(main->envp);
 	ft_freetab(main->locals);
+	free(main->bindir);
 	return (1);
 }
 
@@ -59,6 +60,7 @@ int	ft_freeshell2(t_main *main)
 	free(main->cline);
 	ft_freetab(main->envp);
 	ft_freetab(main->locals);
+	free(main->bindir);
 	return (1);
 }
 
@@ -97,6 +99,7 @@ int	ft_freeshell4(t_main *main)
 	free(main->cline);
 	ft_freetab(main->envp);
 	ft_freetab(main->locals);
+	free(main->bindir);
 	tcsetattr(0, TCSANOW, &main->old);
 	return (0);
 }

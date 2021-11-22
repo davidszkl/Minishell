@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 13:14:49 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/22 16:07:07 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 18:06:05 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	close_pipes(int *pipes, size_t n);
 void	*exec_perror(const char *str);
-char	*find_command_wrapper(char *str, char **envp);
+char	*find_command_wrapper(char *str, char **envp, const char *bindir);
 void	close_files(t_file *files, int n);
 int		open_files(t_file *files, int n);
 
@@ -71,7 +71,7 @@ void	enter_child(t_exec_args args, t_comm comm, t_main *main)
 	child_ifs(&args, &comm, main, &b);
 	close_pipes(args.pipes, main->pipecount);
 	free(args.pipes);
-	path = find_command_wrapper(comm.argv[0], main->envp);
+	path = find_command_wrapper(comm.argv[0], main->envp, main->bindir);
 	if (!path)
 	{
 		ft_freeshell4(main);

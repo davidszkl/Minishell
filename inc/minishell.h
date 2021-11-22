@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:07:39 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/22 12:47:26 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:56:49 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 # define PROMPT "minishell> "
 # define ERROR  "minishell"
-# define BINDIR "bin/"
 # define SYNTAX "minishell: syntax error near unexpected token `"
 
 /*includes*/
@@ -25,6 +24,7 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <termios.h>
+# include <sys/param.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -67,6 +67,7 @@ typedef struct s_main {
 	int				tmp;
 	int				rval;
 	pid_t			r;
+	char			*bindir;
 }	t_main;
 
 /*checker*/
