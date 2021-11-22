@@ -45,6 +45,8 @@ ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
 
 
 CD_OBJS = $(addprefix $(OBJDIR)/, builtins/cd_main.o\
+		  ft_assign.o\
+		  is_valid_export_args_2.o\
 		  	ft_exec.o\
 		  	ft_exec_utils.o\
 		  	ft_exec_utils_2.o\
@@ -91,6 +93,24 @@ PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
 			 )
 
 EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
+			ft_export.o\
+			envp_utils.o\
+			ft_export_utils.o\
+			ft_export_utils_2.o\
+			ft_export_utils_3.o\
+			ft_putstr_fd.o\
+			utils.o\
+			utils2.o\
+			utils3.o\
+			utils4.o\
+			utils5.o\
+			error.o\
+			error2.o\
+			 to_erase.o\
+			)
+
+ASSIGN_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
+			  ft_assign.o\
 			ft_export.o\
 			envp_utils.o\
 			ft_export_utils.o\
@@ -170,6 +190,7 @@ BUILTINS = $(addprefix $(BINDIR)/, $(ECHO)\
 		   $(CD)\
 		   $(PWD)\
 		   $(EXPORT)\
+		   assign\
 		   $(UNSET)\
 		   $(ENV)\
 		   $(EXIT))
@@ -195,6 +216,9 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/*.h
 
 $(OBJDIR)/builtins/%.o: $(SRCDIR)/builtins/%.c
 			$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@           
+
+$(BINDIR)/assign: $(ASSIGN_OBJS)
+	$(CC) $(CFLAGS) -Iinc $^ -o $@
 
 $(BINDIR)/$(ECHO): $(ECHO_OBJS)
 	$(CC) $(CFLAGS) -Iinc $^ -o $@

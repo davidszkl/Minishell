@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:04:18 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/22 12:48:45 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:11:51 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
 void	*exec_perror(const char *str);
+int		is_valid_export_args_2(const char *s);
 
 char	*p_comm_no_found(const char *s)
 {
@@ -59,21 +60,23 @@ int	is_builtins(const char *s)
 		|| !ft_strncmp(s, "exit", -1)
 		|| !ft_strncmp(s, "echo", -1)
 		|| !ft_strncmp(s, "pwd", -1)
-		|| !ft_strncmp(s, "env", -1));
+		|| !ft_strncmp(s, "env", -1)
+		|| is_valid_export_args_2(s));
 }
 
 char	*check_builtins(const char *str)
 {
 	if (!is_builtins(str))
 		return (0);
-	return (ft_strjoin(BINDIR, str));
+	if (!is_valid_export_args_2(str))
+		return (ft_strjoin(BINDIR, str));
+	return (ft_strjoin(BINDIR, "assign"));
 }
 
 char	*find_command_wrapper(char *str, char **envp)
 {
 	char	*comm;
 
-	comm = check_builtins(str);
 	if (!handle_dir(str))
 		exit(1);
 	if (is_abs_path(str))
@@ -83,7 +86,9 @@ char	*find_command_wrapper(char *str, char **envp)
 		else
 			return (ft_strdup(str));
 	}
-	comm = find_command(str, envp);
+	comm = check_builtins(str);
+	if (!comm)
+		comm = find_command(str, envp);
 	if (!comm)
 		return (p_comm_no_found(str));
 	if (access(comm, X_OK) == -1)
