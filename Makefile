@@ -47,8 +47,6 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	utils5.c\
 	)
 
-# SRCS	= $(shell find $(SRCDIR)/*.c)
-
 OBJDIR	= obj
 
 OBJS	= $(subst $(SRCDIR), $(OBJDIR), $(SRCS:.c=.o))
@@ -74,68 +72,68 @@ ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
 			ft_unset.o\
 			utils.o\
 			utils2.o\
-			 utils3.o\
-			 utils4.o\
-			 utils5.o\
-			 envp_utils.o\
-			 ft_export.o\
-			 ft_export_utils.o\
-			 ft_export_utils_2.o\
-			 ft_export_utils_3.o\
-			 error.o\
-			 error2.o\
-			 ft_isalnum.o\
-			 to_erase.o\
-			 )
+			utils3.o\
+			utils4.o\
+			utils5.o\
+			envp_utils.o\
+			ft_export.o\
+			ft_export_utils.o\
+			ft_export_utils_2.o\
+			ft_export_utils_3.o\
+			error.o\
+			error2.o\
+			ft_isalnum.o\
+			to_erase.o\
+			)
 
 
 CD_OBJS = $(addprefix $(OBJDIR)/, builtins/cd_main.o\
-		  ft_assign.o\
-		  is_valid_export_args_2.o\
-		  	ft_exec.o\
-		  	ft_exec_utils.o\
-		  	ft_exec_utils_2.o\
-		  	ft_exec_utils_3.o\
+			ft_assign.o\
+			is_valid_export_args_2.o\
+			ft_exec.o\
+			ft_exec_utils.o\
+			ft_exec_utils_2.o\
+			ft_exec_utils_3.o\
 			enter_child.o\
 			ft_cd.o\
 			find_command.o\
 			ft_split.o\
 			ft_putstr_fd.o\
-			 ft_unset.o\
-			 utils.o\
-			 utils2.o\
-			 utils3.o\
-			 utils4.o\
-			 utils5.o\
-			 envp_utils.o\
-			 ft_export.o\
-			 ft_export_utils.o\
-			 ft_export_utils_2.o\
-			 ft_export_utils_3.o\
-			 error.o\
-			 error2.o\
-			 ft_isalnum.o\
-			  to_erase.o\
-			 )
+			ft_unset.o\
+			utils.o\
+			utils2.o\
+			utils3.o\
+			utils4.o\
+			utils5.o\
+			envp_utils.o\
+			ft_export.o\
+			ft_export_utils.o\
+			ft_export_utils_2.o\
+			ft_export_utils_3.o\
+			error.o\
+			error2.o\
+			ft_isalnum.o\
+			to_erase.o\
+			)
 
 PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
-			 ft_unset.o\
-			 utils.o\
+			ft_unset.o\
+			utils.o\
 			ft_putstr_fd.o\
-			 utils2.o\
-			 utils3.o\
-			 utils4.o\
-			 utils5.o\
-			 envp_utils.o\
-			 ft_export.o\
-			 ft_export_utils.o\
-			 ft_export_utils_2.o\
-			 ft_export_utils_3.o\
-			 error.o\
-			 error2.o\
-			 ft_isalnum.o\
-			  to_erase.o\
-			 )
+			utils2.o\
+			utils3.o\
+			utils4.o\
+			utils5.o\
+			envp_utils.o\
+			ft_export.o\
+			ft_export_utils.o\
+			ft_export_utils_2.o\
+			ft_export_utils_3.o\
+			error.o\
+			error2.o\
+			ft_isalnum.o\
+			to_erase.o\
+			)
 
 EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			ft_export.o\
@@ -151,11 +149,11 @@ EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			utils5.o\
 			error.o\
 			error2.o\
-			 to_erase.o\
+			to_erase.o\
 			)
 
 ASSIGN_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
-			  ft_assign.o\
+			ft_assign.o\
 			ft_export.o\
 			envp_utils.o\
 			ft_export_utils.o\
@@ -169,67 +167,68 @@ ASSIGN_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			utils5.o\
 			error.o\
 			error2.o\
-			 to_erase.o\
+			to_erase.o\
 			)
 
 UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
-			 ft_unset.o\
-			 utils.o\
-			 utils2.o\
-			 utils3.o\
-			 utils4.o\
-			 utils5.o\
-			 envp_utils.o\
-			 ft_export.o\
-			 ft_export_utils.o\
-			 ft_export_utils_2.o\
-			 ft_export_utils_3.o\
-			 error.o\
-			 error2.o\
-			 ft_isalnum.o\
-			 ft_putstr_fd.o\
-			  to_erase.o\
-			 )
+			ft_unset.o\
+			utils.o\
+			utils2.o\
+			utils3.o\
+			utils4.o\
+			utils5.o\
+			envp_utils.o\
+			ft_export.o\
+			ft_export_utils.o\
+			ft_export_utils_2.o\
+			ft_export_utils_3.o\
+			error.o\
+			error2.o\
+			ft_isalnum.o\
+			ft_putstr_fd.o\
+			to_erase.o\
+			)
 
 ENV_OBJS = $(addprefix $(OBJDIR)/, builtins/env_main.o\
-		   	to_erase.o\
-			 ft_unset.o\
-			 utils.o\
+			to_erase.o\
+			ft_unset.o\
+			utils.o\
 			ft_putstr_fd.o\
-			 utils2.o\
-			 utils3.o\
-			 utils4.o\
-			 utils5.o\
-			 envp_utils.o\
-			 ft_export.o\
-			 ft_export_utils.o\
-			 ft_export_utils_2.o\
-			 ft_export_utils_3.o\
-			 error.o\
-			 error2.o\
-			 ft_isalnum.o\
-			  to_erase.o\
-			 )
+			utils2.o\
+			utils3.o\
+			utils4.o\
+			utils5.o\
+			envp_utils.o\
+			ft_export.o\
+			ft_export_utils.o\
+			ft_export_utils_2.o\
+			ft_export_utils_3.o\
+			error.o\
+			error2.o\
+			ft_isalnum.o\
+			to_erase.o\
+			)
+
 EXIT_OBJS = $(addprefix $(OBJDIR)/, builtins/exit_main.o\
 			ft_atoi.o\
 			ft_exit.o\
-			 ft_unset.o\
-			 utils.o\
+			ft_unset.o\
+			utils.o\
 			ft_putstr_fd.o\
-			 utils2.o\
-			 utils3.o\
-			 utils4.o\
-			 utils5.o\
-			 envp_utils.o\
-			 ft_export.o\
-			 ft_export_utils.o\
-			 ft_export_utils_2.o\
-			 ft_export_utils_3.o\
-			 error.o\
-			 error2.o\
-			 ft_isalnum.o\
-			  to_erase.o\
-			 )
+			utils2.o\
+			utils3.o\
+			utils4.o\
+			utils5.o\
+			envp_utils.o\
+			ft_export.o\
+			ft_export_utils.o\
+			ft_export_utils_2.o\
+			ft_export_utils_3.o\
+			error.o\
+			error2.o\
+			ft_isalnum.o\
+			to_erase.o\
+			)
 
 BUILTINS = $(addprefix $(BINDIR)/, $(ECHO)\
 		   $(CD)\
