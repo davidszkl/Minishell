@@ -30,19 +30,10 @@ int	ft_single_pipe(t_main *main)
 {
 	int	n;
 
-	n = -1;
-	while (main->line[++n])
-	{
-		while (ft_isspace(main->line[n]))
-			n++;
-		if (main->line[n] && main->line[n] == '|')
-		{
-			n++;
-			while (ft_isspace(main->line[n]))
-				n++;
-			if (!main->line[n])
-				return (1);
-		}
-	}
+	n = 0;
+	while (ft_isspace(main->line[n]))
+		n++;
+	if (main->line[n] && main->line[n] == '|')
+		return (1);
 	return (0);
 }

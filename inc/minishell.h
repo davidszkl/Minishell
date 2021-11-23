@@ -15,6 +15,7 @@
 # define PROMPT "minishell> "
 # define ERROR  "minishell"
 # define SYNTAX "minishell: syntax error near unexpected token `"
+# define SPIPE "minishell: syntax error near unexpected token `|'\n"
 
 /*includes*/
 # include <stdio.h>

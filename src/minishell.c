@@ -61,8 +61,7 @@ static int	ft_first_check(t_main *main)
 	}
 	if (ft_parse_error(main) || ft_single_pipe(main))
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token \
-`|'\n", 2);
+		ft_putstr_fd(SPIPE, 2);
 		return (ft_myfree(main->line));
 	}
 	return (0);
