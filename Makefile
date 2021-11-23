@@ -45,6 +45,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	utils3.c\
 	utils4.c\
 	utils5.c\
+	print_empty_export.c\
 	)
 
 # SRCS	= $(shell find $(SRCDIR)/*.c)
@@ -86,6 +87,7 @@ ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
 			 error2.o\
 			 ft_isalnum.o\
 			 to_erase.o\
+			print_empty_export.o\
 			 )
 
 
@@ -116,6 +118,7 @@ CD_OBJS = $(addprefix $(OBJDIR)/, builtins/cd_main.o\
 			 error2.o\
 			 ft_isalnum.o\
 			  to_erase.o\
+			print_empty_export.o\
 			 )
 
 PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
@@ -135,6 +138,7 @@ PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
 			 error2.o\
 			 ft_isalnum.o\
 			  to_erase.o\
+			print_empty_export.o\
 			 )
 
 EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
@@ -151,7 +155,8 @@ EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			utils5.o\
 			error.o\
 			error2.o\
-			 to_erase.o\
+			to_erase.o\
+			print_empty_export.o\
 			)
 
 ASSIGN_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
@@ -170,6 +175,7 @@ ASSIGN_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			error.o\
 			error2.o\
 			 to_erase.o\
+			print_empty_export.o\
 			)
 
 UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
@@ -189,6 +195,7 @@ UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
 			 ft_isalnum.o\
 			 ft_putstr_fd.o\
 			  to_erase.o\
+			print_empty_export.o\
 			 )
 
 ENV_OBJS = $(addprefix $(OBJDIR)/, builtins/env_main.o\
@@ -209,6 +216,7 @@ ENV_OBJS = $(addprefix $(OBJDIR)/, builtins/env_main.o\
 			 error2.o\
 			 ft_isalnum.o\
 			  to_erase.o\
+			print_empty_export.o\
 			 )
 EXIT_OBJS = $(addprefix $(OBJDIR)/, builtins/exit_main.o\
 			ft_atoi.o\
@@ -229,6 +237,7 @@ EXIT_OBJS = $(addprefix $(OBJDIR)/, builtins/exit_main.o\
 			 error2.o\
 			 ft_isalnum.o\
 			  to_erase.o\
+			print_empty_export.o\
 			 )
 
 BUILTINS = $(addprefix $(BINDIR)/, $(ECHO)\
