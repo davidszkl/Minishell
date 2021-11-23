@@ -13,6 +13,40 @@ NAME	= minishell
 
 SRCDIR	= src
 
+OBJDIR	= obj
+
+OBJS	= $(subst $(SRCDIR), $(OBJDIR), $(SRCS:.c=.o))
+
+EXPORT = export
+
+UNSET = unset
+
+CD = cd
+
+ECHO = echo
+
+PWD = pwd
+
+ENV = env
+
+EXIT = exit
+
+BINDIR = bin
+
+INCDIR	= inc
+
+CC		= cc
+
+RM		= rm -f
+
+CFLAGS	= -Wall -Werror -Wextra -g
+
+LIB		= -lreadline
+
+IREAD = -I/Users/$(USER)/.brew/opt/readline/include
+
+LREAD = -L/Users/$(USER)/.brew/opt/readline/lib
+
 SRCS = $(addprefix $(SRCDIR)/,\
 	check.c\
 	enter_child.c\
@@ -57,26 +91,6 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	utils4.c\
 	utils5.c\
 	)
-
-OBJDIR	= obj
-
-OBJS	= $(subst $(SRCDIR), $(OBJDIR), $(SRCS:.c=.o))
-
-EXPORT = export
-
-UNSET = unset
-
-CD = cd
-
-ECHO = echo
-
-PWD = pwd
-
-ENV = env
-
-EXIT = exit
-
-BINDIR = bin
 
 ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
 			ft_putstr_fd.o\
@@ -249,20 +263,6 @@ BUILTINS = $(addprefix $(BINDIR)/, $(ECHO)\
 		   $(UNSET)\
 		   $(ENV)\
 		   $(EXIT))
-
-INCDIR	= inc
-
-CC		= cc
-
-RM		= rm -f
-
-CFLAGS	= -Wall -Werror -Wextra -g
-
-LIB		= -lreadline
-
-IREAD = -I/Users/$(USER)/.brew/opt/readline/include
-
-LREAD = -L/Users/$(USER)/.brew/opt/readline/lib
 
 all:	$(NAME) $(BINDIR) $(BUILTINS)
 
