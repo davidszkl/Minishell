@@ -43,20 +43,21 @@ static int	ft_getrdircount(t_main *main, int n)
 	int	incount;
 	int	outcount;
 	int	j;
+	int	size;
 
 	incount = 0;
 	outcount = 0;
 	j = 0;
 	while (main->cline[n].argv[j])
 	{
-		if (!ft_strncmp(main->cline[n].argv[j], "<",
-				ft_strlen(main->cline[n].argv[j])))
+		size = ft_strlen(main->cline[n].argv[j]);
+		if (!size)
+			size = 1;
+		if (!ft_strncmp(main->cline[n].argv[j], "<", size))
 			incount++;
-		else if (!ft_strncmp(main->cline[n].argv[j], ">",
-				ft_strlen(main->cline[n].argv[j])))
+		else if (!ft_strncmp(main->cline[n].argv[j], ">", size))
 			outcount++;
-		else if (!ft_strncmp(main->cline[n].argv[j], ">>",
-				ft_strlen(main->cline[n].argv[j])))
+		else if (!ft_strncmp(main->cline[n].argv[j], ">>", size))
 			outcount++;
 		j++;
 	}
@@ -65,9 +66,9 @@ static int	ft_getrdircount(t_main *main, int n)
 	return (0);
 }
 
-static int	ft_fillstruct2(t_comm *comm, int n, int j)
+static int	ft_fillstruct2(t_comm *comm, int n, int j, int size)
 {
-	if (!ft_strncmp(comm->argv[n], "<", ft_strlen(comm->argv[n])))
+	if (!ft_strncmp(comm->argv[n], "<", size))
 	{
 		comm->file_in[j].flags = O_RDONLY;
 		comm->file_in[j].name = ft_strdup(comm->argv[n + 1]);
@@ -75,7 +76,7 @@ static int	ft_fillstruct2(t_comm *comm, int n, int j)
 			return (2);
 		return (1);
 	}
-	if (!ft_strncmp(comm->argv[n], ">", ft_strlen(comm->argv[n])))
+	if (!ft_strncmp(comm->argv[n], ">", size))
 	{
 		comm->file_out[j].flags = O_CREAT | O_TRUNC | O_WRONLY;
 		comm->file_out[j].name = ft_strdup(comm->argv[n + 1]);
@@ -83,7 +84,7 @@ static int	ft_fillstruct2(t_comm *comm, int n, int j)
 			return (2);
 		return (1);
 	}
-	if (!ft_strncmp(comm->argv[n], ">>", ft_strlen(comm->argv[n])))
+	if (!ft_strncmp(comm->argv[n], ">>", size))
 	{
 		comm->file_out[j].flags = O_CREAT | O_APPEND | O_WRONLY;
 		comm->file_out[j].name = ft_strdup(comm->argv[n + 1]);
@@ -99,6 +100,7 @@ static int	ft_fillstruct1(t_comm *comm)
 	int	n;
 	int	j;
 	int	r;
+	int	size;
 
 	n = 0;
 	j = 0;
@@ -106,7 +108,10 @@ static int	ft_fillstruct1(t_comm *comm)
 	comm->file_out[j].fd = 1;
 	while (comm->argv[n])
 	{
-		r = ft_fillstruct2(comm, n, j);
+		size = ft_strlen(comm->argv[n]);
+		if (!size)
+			size = 1;
+		r = ft_fillstruct2(comm, n, j, size);
 		if (r == 2)
 			return (1);
 		else if (r == 1)
