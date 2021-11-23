@@ -94,7 +94,7 @@ int		ft_exec(t_main *main);
 
 /*functions*/
 
-void	ft_readline(t_main *main);
+int		ft_readline(t_main *main);
 char	**init_envp(char **envp);
 char	**init_locals(void);
 char	*ft_remquotestr(char *str);
@@ -117,6 +117,7 @@ int		ft_syntax_check(t_main *main, int n, int j);
 int		ft_freeshell_continue(t_main *main);
 int		ft_dpipe_check(t_main *main);
 int		ft_parse_error(t_main *main);
+int		ft_freefirst(t_main *main);
 int		ft_freeshell(t_main *main);
 int		ft_freeshell2(t_main *main);
 int		ft_freeshell3(t_main *main);
@@ -124,6 +125,7 @@ int		ft_freeshell4(t_main *main);
 int		ft_myfreemain(t_main *main);
 int		ft_exit_check(t_main *main);
 int		ft_tabcheck(t_main *main);
+int		ft_space_check(char *str);
 int		ft_myfree(char *str);
 int		ft_exit(char **argv);
 
@@ -158,8 +160,6 @@ int		ft_isquote(char c);
 int		ft_isspace(char c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
-/*erase*/
-
 void	ft_showtab(char **tab);
 
 /*TESTS*/

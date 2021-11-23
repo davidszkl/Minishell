@@ -37,3 +37,23 @@ int	ft_single_pipe(t_main *main)
 		return (1);
 	return (0);
 }
+
+int	ft_freefirst(t_main *main)
+{
+	ft_freetab(main->envp);
+	ft_freetab(main->locals);
+	free(main->line);
+	exit(0);
+}
+
+int	ft_space_check(char *str)
+{
+	int	n;
+
+	n = 0;
+	while (str[n] && ft_isspace(str[n]))
+		n++;
+	if (!str[n])
+		return (1);
+	return (0);
+}

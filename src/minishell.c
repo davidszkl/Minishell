@@ -43,14 +43,9 @@ static int	ft_envpinit(t_main *main, char **envp, char **argv, int argc)
 
 static int	ft_first_check(t_main *main)
 {
-	if (!main->line)
-	{
-		ft_freetab(main->envp);
-		ft_freetab(main->locals);
-		free(main->line);
-		exit(0);
-	}
 	if (!*main->line)
+		return (ft_myfree(main->line));
+	if (ft_space_check(main->line))
 		return (ft_myfree(main->line));
 	if (ft_dpipe_check(main))
 		return (ft_myfree(main->line));
@@ -112,8 +107,8 @@ int	ft_mainloop(t_main *main)
 {
 	while (1)
 	{
-		ft_signal_main();
-		ft_readline(main);
+		if (ft_readline(main))
+			return (ft_freefirst(main));
 		if (ft_first_check(main))
 			continue ;
 		if (ft_loop(main))
