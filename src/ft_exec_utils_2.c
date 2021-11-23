@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:04:18 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/22 18:14:01 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:01:04 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ size_t	ft_strlen(const char *s);
 void	*exec_perror(const char *str);
 int		is_valid_export_args_2(const char *s);
 
-char	*p_comm_no_found(const char *s)
+char	*p_comm_no_found(const char *s, int *comm_no_found)
 {
+	*comm_no_found = 127;
 	ft_putstr_fd(ERROR, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(s, 2);
@@ -74,12 +75,13 @@ char	*check_builtins(const char *str, const char *bindir)
 	return (ft_strjoin(bindir, "assign"));
 }
 
-char	*find_command_wrapper(char *str, char **envp, const char *bindir)
+char	*find_command_wrapper(char *str, char **envp, const char *bindir, int
+		*comm_no_found)
 {
 	char	*comm;
 
 	if (!ft_strncmp("..", str, -1) || !ft_strncmp(".", str, -1))
-		return (p_comm_no_found(str));
+		return (p_comm_no_found(str, comm_no_found));
 	if (!handle_dir(str))
 		exit(1);
 	if (is_abs_path(str))
@@ -93,7 +95,7 @@ char	*find_command_wrapper(char *str, char **envp, const char *bindir)
 	if (!comm)
 		comm = find_command(str, envp);
 	if (!comm)
-		return (p_comm_no_found(str));
+		return (p_comm_no_found(str, comm_no_found));
 	if (access(comm, X_OK) == -1)
 	{
 		exec_perror(comm);
