@@ -17,7 +17,10 @@ int	ft_freeshell_continue(t_main *main)
 
 	n = 0;
 	while (main->cline[n].line)
+	{
+		free(main->cline[n].line);
 		ft_freetab(main->cline[n++].argv);
+	}
 	free(main->line);
 	free(main->cline);
 	return (1);

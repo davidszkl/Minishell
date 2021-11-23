@@ -94,6 +94,8 @@ int	main(int argc, char **argv, char **envp)
 	char	*tmp;
 
 	tmp = getcwd(0, 0);
+	if (!tmp)
+		return (1);
 	main.bindir = ft_strjoin(tmp, "/bin/");
 	free(tmp);
 	if (!main.bindir)
