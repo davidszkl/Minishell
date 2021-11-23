@@ -6,7 +6,7 @@
 #    By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 10:09:38 by dszklarz          #+#    #+#              #
-#    Updated: 2021/11/23 10:10:24 by dszklarz         ###   ########.fr        #
+#    Updated: 2021/11/23 11:47:00 by mlefevre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME	= minishell
@@ -39,7 +39,7 @@ CC		= cc
 
 RM		= rm -f
 
-CFLAGS	= -Wall -Werror -Wextra -g
+CFLAGS	= -Wall -Werror -Wextra
 
 LIB		= -lreadline
 
@@ -90,6 +90,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	utils3.c\
 	utils4.c\
 	utils5.c\
+	print_empty_export.c\
 	)
 
 ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
@@ -109,8 +110,8 @@ ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
 			error2.o\
 			ft_isalnum.o\
 			to_erase.o\
+			print_empty_export.o\
 			)
-
 
 CD_OBJS = $(addprefix $(OBJDIR)/, builtins/cd_main.o\
 			ft_assign.o\
@@ -139,6 +140,7 @@ CD_OBJS = $(addprefix $(OBJDIR)/, builtins/cd_main.o\
 			error2.o\
 			ft_isalnum.o\
 			to_erase.o\
+			print_empty_export.o\
 			)
 
 PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
@@ -158,6 +160,7 @@ PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
 			error2.o\
 			ft_isalnum.o\
 			to_erase.o\
+			print_empty_export.o\
 			)
 
 EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
@@ -175,6 +178,7 @@ EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			error.o\
 			error2.o\
 			to_erase.o\
+			print_empty_export.o\
 			)
 
 ASSIGN_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
@@ -193,6 +197,7 @@ ASSIGN_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			error.o\
 			error2.o\
 			to_erase.o\
+			print_empty_export.o\
 			)
 
 UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
@@ -212,6 +217,7 @@ UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
 			ft_isalnum.o\
 			ft_putstr_fd.o\
 			to_erase.o\
+			print_empty_export.o\
 			)
 
 ENV_OBJS = $(addprefix $(OBJDIR)/, builtins/env_main.o\
@@ -232,6 +238,7 @@ ENV_OBJS = $(addprefix $(OBJDIR)/, builtins/env_main.o\
 			error2.o\
 			ft_isalnum.o\
 			to_erase.o\
+			print_empty_export.o\
 			)
 
 EXIT_OBJS = $(addprefix $(OBJDIR)/, builtins/exit_main.o\
@@ -253,6 +260,7 @@ EXIT_OBJS = $(addprefix $(OBJDIR)/, builtins/exit_main.o\
 			error2.o\
 			ft_isalnum.o\
 			to_erase.o\
+			print_empty_export.o\
 			)
 
 BUILTINS = $(addprefix $(BINDIR)/, $(ECHO)\

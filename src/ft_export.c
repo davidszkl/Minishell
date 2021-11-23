@@ -6,7 +6,7 @@
 /*   By: mlefevre <mlefevre@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 15:05:55 by mlefevre          #+#    #+#             */
-/*   Updated: 2021/11/15 15:49:44 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/23 10:44:12 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*get_name(const char *str);
 char	*get_value(const char *str);
 char	*assign_name(char **name_value, char **argv);
 char	*assign_value(char **name_value, char **argv);
+int		print_empty_export(char **tab, char **argv);
 
 int	envp_append(char *name, char *value, char ***envp)
 {
@@ -78,7 +79,7 @@ int	ft_export(char ***envp, char ***locals, char **argv)
 	char	*name_value[2];
 	int		r;
 
-	r = 0;
+	r = print_empty_export(*envp, argv) * 0;
 	while (*++argv)
 	{
 		if (!is_valid_export_arg(*argv))
