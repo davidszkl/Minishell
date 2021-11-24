@@ -6,7 +6,7 @@
 #    By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 10:09:38 by dszklarz          #+#    #+#              #
-#    Updated: 2021/11/23 11:47:00 by mlefevre         ###   ########.fr        #
+#    Updated: 2021/11/24 10:50:04 by mlefevre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME	= minishell
@@ -39,7 +39,7 @@ CC		= cc
 
 RM		= rm -f
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -g
 
 LIB		= -lreadline
 
@@ -91,6 +91,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	utils4.c\
 	utils5.c\
 	print_empty_export.c\
+	shlvl_init.o\
 	)
 
 ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
@@ -141,6 +142,9 @@ CD_OBJS = $(addprefix $(OBJDIR)/, builtins/cd_main.o\
 			ft_isalnum.o\
 			to_erase.o\
 			print_empty_export.o\
+			expand_variables.o\
+			expand_variables_utils.o\
+			ft_itoa.o\
 			)
 
 PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
