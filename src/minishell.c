@@ -6,13 +6,14 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 12:10:15 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/22 18:00:03 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/24 10:47:23 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
 #include "../inc/minishell.h"
 
 int	ft_mainloop(t_main *main);
+int	shlvl_init(t_main *main);
 
 t_main	*g_glb;
 
@@ -100,6 +101,11 @@ int	main(int argc, char **argv, char **envp)
 	if (!main.bindir)
 		return (1);
 	if (ft_envpinit(&main, envp, argv, argc))
+	{
+		free(main.bindir);
+		return (1);
+	}
+	if (!shlvl_init(&main))
 	{
 		free(main.bindir);
 		return (1);
