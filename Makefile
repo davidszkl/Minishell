@@ -6,7 +6,7 @@
 #    By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 10:09:38 by dszklarz          #+#    #+#              #
-#    Updated: 2021/11/24 10:50:04 by mlefevre         ###   ########.fr        #
+#    Updated: 2021/11/24 11:22:19 by mlefevre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME	= minishell
@@ -39,7 +39,7 @@ CC		= cc
 
 RM		= rm -f
 
-CFLAGS	= -Wall -Werror -Wextra -g
+CFLAGS	= -Wall -Werror -Wextra
 
 LIB		= -lreadline
 
