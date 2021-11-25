@@ -54,5 +54,12 @@ void	init_r_w(t_exec_args *args, t_main *main)
 
 int	wexitstatus(int status)
 {
+	if (WIFSIGNALED(status))
+	{
+		if (WTERMSIG(status) == SIGQUIT)
+			return (131);
+		else if (WTERMSIG(status) == SIGINT)
+			return (130);
+	}
 	return (((*(int *)&(status)) >> 8) & 0x000000ff);
 }

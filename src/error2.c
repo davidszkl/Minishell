@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
+extern t_main	*g_glb;
+
 int	ft_parse_error(t_main *main)
 {
 	char	*str;
@@ -58,18 +60,6 @@ int	ft_tabcheck(t_main *main)
 	return (0);
 }
 
-void	ft_freefiles(t_main *main, int n)
-{
-	int	j;
-
-	j = 0;
-	while (j < main->cline[n].rin)
-		free(main->cline[n].file_in[j++].name);
-	j = 0;
-	while (j < main->cline[n].rout)
-		free(main->cline[n].file_out[j++].name);
-}
-
 int	ft_dpipe_check(t_main *main)
 {
 	int	count;
@@ -90,8 +80,8 @@ int	ft_dpipe_check(t_main *main)
 		}
 		else if (main->line[n - 1] == '|' && count)
 		{
-			ft_putstr_fd("minishell: syntax error near unexpected token \
-`|'\n", 2);
+			g_glb->rval = 258;
+			ft_putstr_fd(SPIPE, 2);
 			return (1);
 		}
 	}
@@ -111,12 +101,12 @@ int	ft_syntax_check(t_main *main, int n, int j)
 					|| ft_is_chev(main->cline[n].argv[j + 1], 0))
 				{
 					ft_putstr_fd(SYNTAX, 2);
+					g_glb->rval = 258;
 					if (!main->cline[n].argv[j + 1])
 						ft_putstr_fd("newline", 2);
 					else
 						ft_putstr_fd(main->cline[n].argv[j + 1], 2);
 					ft_putstr_fd("'\n", 2);
-					main->error = 1;
 					return (1);
 				}
 			}

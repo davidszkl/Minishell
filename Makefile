@@ -54,6 +54,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	error.c\
 	error2.c\
 	error3.c\
+	error4.c\
 	expand_variables.c\
 	expand_variables_utils.c\
 	fill_struct.c\
@@ -108,7 +109,7 @@ ECHO_OBJS = $(addprefix $(OBJDIR)/, builtins/echo_main.o\
 			ft_export_utils_2.o\
 			ft_export_utils_3.o\
 			error.o\
-			error2.o\
+			error4.o\
 			ft_isalnum.o\
 			to_erase.o\
 			print_empty_export.o\
@@ -138,7 +139,7 @@ CD_OBJS = $(addprefix $(OBJDIR)/, builtins/cd_main.o\
 			ft_export_utils_2.o\
 			ft_export_utils_3.o\
 			error.o\
-			error2.o\
+			error4.o\
 			ft_isalnum.o\
 			to_erase.o\
 			print_empty_export.o\
@@ -161,7 +162,7 @@ PWD_OBJS = $(addprefix $(OBJDIR)/, builtins/pwd_main.o\
 			ft_export_utils_2.o\
 			ft_export_utils_3.o\
 			error.o\
-			error2.o\
+			error4.o\
 			ft_isalnum.o\
 			to_erase.o\
 			print_empty_export.o\
@@ -180,7 +181,7 @@ EXPORT_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			utils4.o\
 			utils5.o\
 			error.o\
-			error2.o\
+			error4.o\
 			to_erase.o\
 			print_empty_export.o\
 			)
@@ -199,7 +200,7 @@ ASSIGN_OBJS = $(addprefix $(OBJDIR)/, builtins/export_main.o\
 			utils4.o\
 			utils5.o\
 			error.o\
-			error2.o\
+			error4.o\
 			to_erase.o\
 			print_empty_export.o\
 			)
@@ -217,7 +218,7 @@ UNSET_OBJS = $(addprefix $(OBJDIR)/, builtins/unset_main.o\
 			ft_export_utils_2.o\
 			ft_export_utils_3.o\
 			error.o\
-			error2.o\
+			error4.o\
 			ft_isalnum.o\
 			ft_putstr_fd.o\
 			to_erase.o\
@@ -239,7 +240,7 @@ ENV_OBJS = $(addprefix $(OBJDIR)/, builtins/env_main.o\
 			ft_export_utils_2.o\
 			ft_export_utils_3.o\
 			error.o\
-			error2.o\
+			error4.o\
 			ft_isalnum.o\
 			to_erase.o\
 			print_empty_export.o\
@@ -261,7 +262,7 @@ EXIT_OBJS = $(addprefix $(OBJDIR)/, builtins/exit_main.o\
 			ft_export_utils_2.o\
 			ft_export_utils_3.o\
 			error.o\
-			error2.o\
+			error4.o\
 			ft_isalnum.o\
 			to_erase.o\
 			print_empty_export.o\
@@ -285,28 +286,28 @@ $(OBJDIR)/builtins/%.o: $(SRCDIR)/builtins/%.c
 			$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@           
 
 $(BINDIR)/assign: $(ASSIGN_OBJS)
-	$(CC) $(CFLAGS) -Iinc $^ -o $@
+	$(CC) $(CFLAGS)  -Iinc $^ -o $@
 
 $(BINDIR)/$(ECHO): $(ECHO_OBJS)
-	$(CC) $(CFLAGS) -Iinc $^ -o $@
+	$(CC) $(CFLAGS)  -Iinc $^ -o $@
 
 $(BINDIR)/$(CD): $(CD_OBJS)
-	$(CC) $(CFLAGS) -Iinc $^ -o $@
+	$(CC) $(CFLAGS)  -Iinc $^ -o $@
 
 $(BINDIR)/$(PWD): $(PWD_OBJS)
-	$(CC) $(CFLAGS) -Iinc $^ -o $@
+	$(CC) $(CFLAGS)  -Iinc $^ -o $@
 
 $(BINDIR)/$(EXPORT): $(EXPORT_OBJS)
-	$(CC) $(CFLAGS) -Iinc $^ -o $@
+	$(CC) $(CFLAGS)  -Iinc $^ -o $@
 
 $(BINDIR)/$(UNSET): $(UNSET_OBJS)
-	$(CC) $(CFLAGS) -Iinc $^ -o $@
+	$(CC) $(CFLAGS)  -Iinc $^ -o $@
 
 $(BINDIR)/$(ENV): $(ENV_OBJS)
-	$(CC) $(CFLAGS) -Iinc $^ -o $@
+	$(CC) $(CFLAGS)  -Iinc $^ -o $@
 
 $(BINDIR)/$(EXIT): $(EXIT_OBJS)
-	$(CC) $(CFLAGS) -Iinc $^ -o $@
+	$(CC) $(CFLAGS)  -Iinc $^ -o $@
 
 $(OBJDIR):
 			mkdir -p $(OBJDIR)

@@ -9,7 +9,6 @@
 /*   Updated: 2021/11/22 16:54:04 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include <stddef.h>
 
 void	ft_putstr_fd(const char *s, int fd);

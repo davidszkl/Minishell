@@ -13,33 +13,59 @@
 
 extern t_main	*g_glb;
 
-void	ft_sigint_main(int signbr)
+static void	ft_signal_main2(int signbr)
 {
-	(void)signbr;
-	rl_replace_line("", 0);
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_redisplay();
-}
-
-void	ft_sigquit(int signbr)
-{
-	(void)signbr;
-	rl_on_new_line();
-	rl_redisplay();
+	if (signbr == SIGINT)
+	{
+		g_glb->rval = 1;
+		rl_replace_line("", 0);
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else if (signbr == SIGQUIT)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 void	ft_sigint_exec(int signbr)
 {
-	(void)signbr;
-	write(1, "^C\n", 3);
-	rl_on_new_line();
+	int	n;
+
+	n = -1;
+	if (signbr == SIGINT)
+	{
+		ft_putstr_fd("^C\n", 2);
+		rl_on_new_line();
+		while (g_glb->cline[++n].line)
+			if (g_glb->cline[n].pid)
+				kill(g_glb->cline[n].pid, SIGINT);
+	}
+	else if (signbr == SIGQUIT)
+	{
+		ft_putstr_fd("^", 2);
+		write(2, "\\", 1);
+		ft_putstr_fd("Quit: 3\n", 2);
+		rl_on_new_line();
+		while (g_glb->cline[++n].line)
+			if (g_glb->cline[n].pid)
+				kill(g_glb->cline[n].pid, SIGQUIT);
+	}
 }
 
 int	ft_signal_main(void)
 {
-	signal(SIGINT, ft_sigint_main);
-	signal(SIGQUIT, ft_sigquit);
+	signal(SIGINT, ft_signal_main2);
+	signal(SIGQUIT, ft_signal_main2);
+	return (0);
+}
+
+int	ft_signal_exec(void)
+{	
+	signal(SIGINT, ft_sigint_exec);
+	signal(SIGQUIT, ft_sigint_exec);
 	return (0);
 }
 

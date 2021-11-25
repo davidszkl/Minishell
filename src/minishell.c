@@ -58,6 +58,7 @@ static int	ft_first_check(t_main *main)
 	if (ft_parse_error(main) || ft_single_pipe(main))
 	{
 		ft_putstr_fd(SPIPE, 2);
+		g_glb->rval = 258;
 		return (ft_myfree(main->line));
 	}
 	return (0);
@@ -76,7 +77,8 @@ static int	ft_parse(t_main *main)
 		return (ft_freeshell(main));
 	if (ft_parser(main))
 		return (ft_freeshell(main));
-	if (ft_syntax_check(main, n, j))
+	main->error = ft_syntax_check(main, n, j);
+	if (main->error == 1)
 		return (ft_freeshell_continue(main));
 	if (ft_remquote(main))
 		return (ft_freeshell(main));
@@ -131,7 +133,7 @@ int	ft_mainloop(t_main *main)
 			return (ft_freeshell2(main));
 		if (ft_exit_check(main))
 			continue ;
-		signal(SIGINT, ft_sigint_exec);
+		ft_signal_exec();
 		if (!main->error)
 			main->rval = ft_exec(main);
 		ft_freeshell3(main);

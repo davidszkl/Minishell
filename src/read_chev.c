@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 #include "../inc/minishell.h"
 
+extern t_main	*g_glb;
+
 static int	ft_free(t_main *main)
 {
 	free(main->chev.nbrs);
@@ -51,8 +53,9 @@ static int	ft_read_chev2(t_main *main, char *str)
 
 	if (!str[0])
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected \
-token `newline'\n", 2);
+		ft_putstr_fd(SYNTAX, 2);
+		ft_putstr_fd("newline'\n", 2);
+		g_glb->rval = 258;
 		main->error = 1;
 		ft_myfree(str);
 		return (0);
