@@ -101,4 +101,3 @@ char	**ft_splitq(char *s, char c)
 		return (0);
 	return (r - n2);
 }
-	

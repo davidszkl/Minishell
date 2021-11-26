@@ -49,6 +49,8 @@ static void	ft_get(t_main *main, int n)
 
 static int	ft_read_chev2(t_main *main, char *str)
 {
+	pid_t	pid;
+
 	if (!str[0])
 	{
 		ft_putstr_fd(SYNTAX, 2);
@@ -59,7 +61,7 @@ static int	ft_read_chev2(t_main *main, char *str)
 		return (0);
 	}
 	signal(SIGINT, ft_sigint_heredoc1);
-	pid_t pid = fork();
+	pid = fork();
 	if (pid == -1)
 		return (ft_myfree(str));
 	if (pid == 0)

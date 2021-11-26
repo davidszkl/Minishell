@@ -13,22 +13,20 @@
 
 extern t_main	*g_glb;
 
-int	ft_parse_error(t_main *main)
+int	ft_parse_error(t_main *main, char *str, int n)
 {
-	char	*str;
-	int		n;
-
-	n = 0;
-	str = main->line;
-	while (str[n])
+	while (main->line[n])
 	{
 		str = main->line;
 		if (ft_is_chev(str, n++))
 		{
 			if (str[n] && str[n] == '|' && str[n + 1]
 				&& ft_is_chev(str, n - 1) == 4)
+			{
 				main->line = ft_replace_str(str, n, ft_strlen(str) - n,
 						&str[n + 1]);
+				free(str);
+			}
 			else
 			{
 				while (ft_isspace(str[n]) || (ft_is_chev(str, n - 1) > 0

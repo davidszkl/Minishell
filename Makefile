@@ -30,7 +30,7 @@ PWD = pwd
 ENV = env
 
 EXIT = exit
-
+	
 BINDIR = bin
 
 INCDIR	= inc
@@ -39,7 +39,7 @@ CC		= cc
 
 RM		= rm -f
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -g
 
 LIB		= -lreadline
 

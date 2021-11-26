@@ -44,19 +44,23 @@ static int	ft_envpinit(t_main *main, char **envp, char **argv, int argc)
 
 static int	ft_first_check(t_main *main)
 {
+	char	*str;
+	int		n;
+
+	n = 0;
+	str = 0;
 	if (!*main->line)
 		return (ft_myfree(main->line));
 	if (ft_space_check(main->line))
 		return (ft_myfree(main->line));
 	if (ft_dpipe_check(main))
 		return (ft_myfree(main->line));
-	if (ft_isinquote_now(main->line, ft_strlen(main->line)))
+	if (ft_open_quote(main->line))
 	{
 		ft_putstr_fd("minishell: unclosed quote\n", 2);
 		return (ft_myfree(main->line));
 	}
-	//probleme ici
-	if (ft_parse_error(main) || ft_single_pipe(main))
+	if (ft_parse_error(main, str, n) || ft_single_pipe(main))
 	{
 		ft_putstr_fd(SPIPE, 2);
 		g_glb->rval = 258;

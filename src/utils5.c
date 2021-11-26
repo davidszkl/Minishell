@@ -18,16 +18,16 @@ int	ft_isinquote_now(char *str, int index)
 
 	b = 0;
 	i = -1;
-	while (++i <= index)
+	while (++i <= index && str[i])
 	{
 		if (b != '"' && str[i] == '\'')
-			while (str[++i] != '\'' && i <= index)
+			while (str[++i] && str[i] != '\'' && i <= index)
 				b = '\'';
 		if (i > index)
 			return (b != 0);
 		b = 0;
 		if (b != '\'' && str[i] == '"')
-			while (str[++i] != '"' && i <= index)
+			while (str[++i] && str[i] != '"' && i <= index)
 				b = '"';
 		if (i > index)
 			return (b != 0);
@@ -74,4 +74,32 @@ char	*ft_getword_simple(char *str, int n)
 		new[j++] = str[n++];
 	new[j] = 0;
 	return (new);
+}
+
+int	ft_open_quote(char *str)
+{
+	int	b;
+
+	b = 0;
+	str--;
+	while (*++str)
+	{
+		if (b == '\'' && *str != '\'')
+			continue ;
+		if (b == '"' && *str != '"')
+			continue ;
+		if (b == '\'' && *str == '\'')
+		{
+			b = 0;
+			continue ;
+		}
+		if (b == '"' && *str == '"')
+		{
+			b = 0;
+			continue ;
+		}
+		if (!b && (*str == '\'' || *str == '"'))
+			b = *str;
+	}
+	return (b == '\'' || b == '"');
 }

@@ -101,6 +101,7 @@ char	*ft_remquotestr(char *str);
 int		ft_readline(t_main *main);
 int		ft_remquote(t_main *main);
 int		ft_getcount(t_main *main);
+int		ft_open_quote(char *str);
 int		ft_loop(t_main *main);
 
 /*signals*/
@@ -113,14 +114,13 @@ void	ft_sigquit(int signbr);
 int		ft_signal_main(void);
 int		ft_signal_exec(void);
 
-
 /*errors*/
 
 void	ft_freefiles(t_main *main, int n);
 int		ft_syntax_check(t_main *main, int n, int j);
 int		ft_freeshell_continue(t_main *main);
 int		ft_dpipe_check(t_main *main);
-int		ft_parse_error(t_main *main);
+int		ft_parse_error(t_main *main, char *str, int n);
 int		ft_freefirst(t_main *main);
 int		ft_freeshell(t_main *main);
 int		ft_freeshell2(t_main *main);
