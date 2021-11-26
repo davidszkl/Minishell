@@ -55,6 +55,7 @@ static int	ft_first_check(t_main *main)
 		ft_putstr_fd("minishell: unclosed quote\n", 2);
 		return (ft_myfree(main->line));
 	}
+	//probleme ici
 	if (ft_parse_error(main) || ft_single_pipe(main))
 	{
 		ft_putstr_fd(SPIPE, 2);
