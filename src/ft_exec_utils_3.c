@@ -69,6 +69,8 @@ void	open_pipes(int *pipes, size_t n)
 
 int	is_c_e_u_ass(const char *s)
 {
+	if (!s)
+		return (1);
 	return (!ft_strncmp(s, "cd", -1)
 		|| !ft_strncmp(s, "export", -1)
 		|| !ft_strncmp(s, "unset", -1)
@@ -77,6 +79,8 @@ int	is_c_e_u_ass(const char *s)
 
 int	exec_c_e_u_ass(t_comm comm, char ***envp, char ***locals)
 {
+	if (!comm.argv[0])
+		return (0);
 	open_files(comm.file_in, comm.rin);
 	close_files(comm.file_in, comm.rin);
 	open_files(comm.file_out, comm.rout);

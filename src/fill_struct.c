@@ -66,31 +66,31 @@ static int	ft_getrdircount(t_main *main, int n)
 	return (0);
 }
 
-static int	ft_fillstruct2(t_comm *comm, int n, int j, int size)
+static int	ft_fillstruct2(t_comm *comm, int n, int in, int out)
 {
-	if (!ft_strncmp(comm->argv[n], "<", size))
+	if (!ft_strncmp(comm->argv[n], "<", -1))
 	{
-		comm->file_in[j].flags = O_RDONLY;
-		comm->file_in[j].name = ft_strdup(comm->argv[n + 1]);
-		if (!comm->file_in[j].name)
-			return (2);
+		comm->file_in[in].flags = O_RDONLY;
+		comm->file_in[in].name = ft_strdup(comm->argv[n + 1]);
+		if (!comm->file_in[in].name)
+			return (3);
 		return (1);
 	}
-	if (!ft_strncmp(comm->argv[n], ">", size))
+	if (!ft_strncmp(comm->argv[n], ">", -1))
 	{
-		comm->file_out[j].flags = O_CREAT | O_TRUNC | O_WRONLY;
-		comm->file_out[j].name = ft_strdup(comm->argv[n + 1]);
-		if (!comm->file_out[j].name)
-			return (2);
-		return (1);
+		comm->file_out[out].flags = O_CREAT | O_TRUNC | O_WRONLY;
+		comm->file_out[out].name = ft_strdup(comm->argv[n + 1]);
+		if (!comm->file_out[out].name)
+			return (3);
+		return (2);
 	}
-	if (!ft_strncmp(comm->argv[n], ">>", size))
+	if (!ft_strncmp(comm->argv[n], ">>", -1))
 	{
-		comm->file_out[j].flags = O_CREAT | O_APPEND | O_WRONLY;
-		comm->file_out[j].name = ft_strdup(comm->argv[n + 1]);
-		if (!comm->file_out[j].name)
-			return (2);
-		return (1);
+		comm->file_out[out].flags = O_CREAT | O_APPEND | O_WRONLY;
+		comm->file_out[out].name = ft_strdup(comm->argv[n + 1]);
+		if (!comm->file_out[out].name)
+			return (3);
+		return (2);
 	}
 	return (0);
 }
@@ -98,25 +98,24 @@ static int	ft_fillstruct2(t_comm *comm, int n, int j, int size)
 static int	ft_fillstruct1(t_comm *comm)
 {
 	int	n;
-	int	j;
+	int	in;
+	int	out;
 	int	r;
-	int	size;
 
-	n = 0;
-	j = 0;
-	comm->file_in[j].fd = 0;
-	comm->file_out[j].fd = 1;
-	while (comm->argv[n])
+	n = -1;
+	in = 0;
+	out = 0;
+	comm->file_in[in].fd = 0;
+	comm->file_out[out].fd = 1;
+	while (comm->argv[++n])
 	{
-		size = ft_strlen(comm->argv[n]);
-		if (!size)
-			size = 1;
-		r = ft_fillstruct2(comm, n, j, size);
-		if (r == 2)
+		r = ft_fillstruct2(comm, n, in, out);
+		if (r == 3)
 			return (1);
 		else if (r == 1)
-			j++;
-		n++;
+			in++;
+		else if (r == 2)
+			out++;
 	}
 	return (0);
 }

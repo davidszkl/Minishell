@@ -56,5 +56,5 @@ int	ft_spwordcount(char *str, int n)
 		n++;
 		count++;
 	}
-	return (count + 1);
+	return (count);
 }
