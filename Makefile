@@ -282,7 +282,7 @@ BUILTINS = $(addprefix $(BINDIR)/, $(ECHO)\
 all:	$(NAME) $(BINDIR) $(BUILTINS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/*.h
-			$(CC) $(CFLAGS) -g -I$(INCDIR) $(IREAD) -c $< -o $@
+			$(CC) $(CFLAGS) -I$(INCDIR) $(IREAD) -c $< -o $@
 
 $(OBJDIR)/builtins/%.o: $(SRCDIR)/builtins/%.c
 			$(CC) $(CFLAGS) -I$(INCDIR) -c $< -o $@           
