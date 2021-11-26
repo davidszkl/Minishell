@@ -49,8 +49,6 @@ static void	ft_get(t_main *main, int n)
 
 static int	ft_read_chev2(t_main *main, char *str)
 {
-	int		fd;
-
 	if (!str[0])
 	{
 		ft_putstr_fd(SYNTAX, 2);
@@ -61,26 +59,11 @@ static int	ft_read_chev2(t_main *main, char *str)
 		return (0);
 	}
 	signal(SIGINT, ft_sigint_heredoc1);
-	pid_t pid = fork(); // check si pid == -1
+	pid_t pid = fork();
+	if (pid == -1)
+		return (ft_myfree(str));
 	if (pid == 0)
-	{
-		signal(SIGINT, ft_sigint_heredoc2);
-		fd = open(main->chev.path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-		if (fd < 0)
-			exit((ft_myfree(str)));
-		main->temp = readline("> ");
-		while (ft_strncmp(main->temp, str, ft_strlen(main->temp) + 1))
-		{	
-			ft_putendl_fd(main->temp, fd);
-			free(main->temp);
-			main->temp = readline("> ");
-		}
-	close(fd);
-	free(main->temp);
-	free(str);
-	//free tout pour child process
-	exit(0);
-	}
+		ft_child_doc(main, str);
 	waitpid(pid, 0, 0);
 	free(str);
 	return (0);

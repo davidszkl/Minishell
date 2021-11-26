@@ -94,10 +94,11 @@ int		ft_exec(t_main *main);
 
 /*functions*/
 
-int		ft_readline(t_main *main);
+void	ft_child_doc(t_main *main, char *str);
 char	**init_envp(char **envp);
 char	**init_locals(void);
 char	*ft_remquotestr(char *str);
+int		ft_readline(t_main *main);
 int		ft_remquote(t_main *main);
 int		ft_getcount(t_main *main);
 int		ft_loop(t_main *main);

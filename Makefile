@@ -82,6 +82,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	minishell.c\
 	parser.c\
 	read_chev.c\
+	read_chev2.c\
 	read_lpipe.c\
 	remove_quotes.c\
 	signal.c\
