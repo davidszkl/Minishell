@@ -6,7 +6,7 @@
 /*   By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 11:02:44 by dszklarz          #+#    #+#             */
-/*   Updated: 2021/11/18 13:28:48 by mlefevre         ###   ########.fr       */
+/*   Updated: 2021/11/26 09:46:20 by mlefevre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../inc/minishell.h"
@@ -60,17 +60,26 @@ static int	ft_read_chev2(t_main *main, char *str)
 		ft_myfree(str);
 		return (0);
 	}
-	fd = open(main->chev.path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (fd < 0)
-		return (ft_myfree(str));
-	main->temp = readline("> ");
-	while (ft_strncmp(main->temp, str, ft_strlen(main->temp) + 1))
-	{	
-		ft_putendl_fd(main->temp, fd);
-		free(main->temp);
+	pid_t pid = fork(); // check si pid == -1
+	if (pid == 0)
+	{
+		fd = open(main->chev.path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		if (fd < 0)
+			exit((ft_myfree(str)));
 		main->temp = readline("> ");
-	}
+		while (ft_strncmp(main->temp, str, ft_strlen(main->temp) + 1))
+		{	
+			ft_putendl_fd(main->temp, fd);
+			free(main->temp);
+			main->temp = readline("> ");
+		}
 	close(fd);
+	free(main->temp);
+	free(str);
+	//free tout pour child process
+	exit(0);
+	}
+	waitpid(pid, 0, 0);
 	free(main->temp);
 	free(str);
 	return (0);
