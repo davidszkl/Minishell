@@ -104,12 +104,14 @@ int		ft_loop(t_main *main);
 
 /*signals*/
 
-void	ft_sigint_heredoc(int signbr);
+void	ft_sigint_heredoc1(int signbr);
+void	ft_sigint_heredoc2(int signbr);
 void	ft_sigint_main(int signbr);
 void	ft_sigint_exec(int signbr);
 void	ft_sigquit(int signbr);
 int		ft_signal_main(void);
 int		ft_signal_exec(void);
+
 
 /*errors*/
 

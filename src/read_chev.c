@@ -60,9 +60,11 @@ static int	ft_read_chev2(t_main *main, char *str)
 		ft_myfree(str);
 		return (0);
 	}
+	signal(SIGINT, ft_sigint_heredoc1);
 	pid_t pid = fork(); // check si pid == -1
 	if (pid == 0)
 	{
+		signal(SIGINT, ft_sigint_heredoc2);
 		fd = open(main->chev.path, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 		if (fd < 0)
 			exit((ft_myfree(str)));
@@ -80,7 +82,6 @@ static int	ft_read_chev2(t_main *main, char *str)
 	exit(0);
 	}
 	waitpid(pid, 0, 0);
-	free(main->temp);
 	free(str);
 	return (0);
 }

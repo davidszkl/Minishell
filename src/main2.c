@@ -28,6 +28,8 @@ static int	ft_chevpipe_loop(t_main *main)
 
 int	ft_exit_check(t_main *main)
 {
+	if (!main->cline[0].argv[0])
+		return (0);
 	if (!main->pipecount && !ft_strncmp(main->cline[0].argv[0], "exit", -1))
 	{
 		write(1, "exit\n", 5);
@@ -77,5 +79,6 @@ int	ft_loop(t_main *main)
 	while (ft_check_chevpipe(main->line) == 1)
 		if (ft_chevpipe_loop(main))
 			return (1);
+	if (main->cline[0].argv[0])
 	return (0);
 }

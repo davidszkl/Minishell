@@ -69,11 +69,10 @@ int	ft_signal_exec(void)
 	return (0);
 }
 
-void	ft_sigint_heredoc(int signbr)
+void	ft_sigint_heredoc2(int signbr)
 {
 	(void)signbr;
-	rl_replace_line("", 0);
 	write(1, "\n", 1);
 	rl_on_new_line();
-	rl_redisplay();
+	exit(0);
 }
