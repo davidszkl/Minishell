@@ -27,7 +27,7 @@ int	ft_parse_error(t_main *main)
 		{
 			if (str[n] && str[n] == '|' && str[n + 1]
 				&& ft_is_chev(str, n - 1) == 4)
-				main->line = ft_replace_str(str, n, ft_strlen(str) - n - 1,
+				main->line = ft_replace_str(str, n, ft_strlen(str) - n,
 						&str[n + 1]);
 			else
 			{
