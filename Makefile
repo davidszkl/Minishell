@@ -87,6 +87,7 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	remove_quotes.c\
 	signal.c\
 	signal2.c\
+	signal3.c\
 	to_erase.c\
 	utils.c\
 	utils2.c\
