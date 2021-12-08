@@ -6,7 +6,7 @@
 #    By: dszklarz <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 10:09:38 by dszklarz          #+#    #+#              #
-#    Updated: 2021/11/24 11:22:19 by mlefevre         ###   ########.fr        #
+#    Updated: 2021/12/08 09:04:16 by dszklarz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME	= minishell
@@ -87,7 +87,6 @@ SRCS = $(addprefix $(SRCDIR)/,\
 	remove_quotes.c\
 	signal.c\
 	signal2.c\
-	signal3.c\
 	to_erase.c\
 	utils.c\
 	utils2.c\
